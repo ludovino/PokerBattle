@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: d98120658c5abf443863a68077d360de
+  - enabled: 1
+    path: Assets/Scenes/Battle.unity
+    guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/Map.unity
+    guid: b5a20feb2dfb7bf45acbbb37dc42f4e8
+  - enabled: 1
+    path: Assets/Scenes/DrawDeck.unity
+    guid: a20d57a4e3b9c21469ac3941354daf26
+  - enabled: 1
+    path: Assets/Scenes/Loss.unity
+    guid: bb32739eb7b517b458b84edab285c04c
+  - enabled: 1
+    path: Assets/Scenes/Victory.unity
+    guid: c8b22c9ecb47fb34093617ca067baea4
+  m_configObjects: {}

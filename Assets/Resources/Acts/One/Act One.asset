@@ -1,0 +1,111 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8648d00b02f65747a0f5841ea74c569, type: 3}
+  m_Name: Act One
+  m_EditorClassIdentifier: 
+  levels:
+  - tables:
+    - type: {fileID: 11400000, guid: 395738942cc78114585c6daaff1829b9, type: 2}
+      chance: 1
+    - type: {fileID: 11400000, guid: 395738942cc78114585c6daaff1829b9, type: 2}
+      chance: 1
+    - type: {fileID: 11400000, guid: 395738942cc78114585c6daaff1829b9, type: 2}
+      chance: 1
+    blind: 3
+    isBoss: 0
+  - tables:
+    - type: {fileID: 11400000, guid: 395738942cc78114585c6daaff1829b9, type: 2}
+      chance: 1
+    - type: {fileID: 11400000, guid: 395738942cc78114585c6daaff1829b9, type: 2}
+      chance: 0.5
+    - type: {fileID: 11400000, guid: e39955c4b78910742afaea6ae37b4f60, type: 2}
+      chance: 0.5
+    blind: 5
+    isBoss: 0
+  - tables:
+    - type: {fileID: 11400000, guid: 395738942cc78114585c6daaff1829b9, type: 2}
+      chance: 1
+    - type: {fileID: 11400000, guid: e39955c4b78910742afaea6ae37b4f60, type: 2}
+      chance: 1
+    - type: {fileID: 11400000, guid: e39955c4b78910742afaea6ae37b4f60, type: 2}
+      chance: 0.5
+    blind: 5
+    isBoss: 0
+  - tables:
+    - type: {fileID: 11400000, guid: 395738942cc78114585c6daaff1829b9, type: 2}
+      chance: 1
+    - type: {fileID: 11400000, guid: e39955c4b78910742afaea6ae37b4f60, type: 2}
+      chance: 1
+    - type: {fileID: 11400000, guid: e39955c4b78910742afaea6ae37b4f60, type: 2}
+      chance: 0.5
+    blind: 5
+    isBoss: 0
+  - tables:
+    - type: {fileID: 11400000, guid: 395738942cc78114585c6daaff1829b9, type: 2}
+      chance: 1
+    - type: {fileID: 11400000, guid: e39955c4b78910742afaea6ae37b4f60, type: 2}
+      chance: 1
+    - type: {fileID: 11400000, guid: e39955c4b78910742afaea6ae37b4f60, type: 2}
+      chance: 0.5
+    blind: 10
+    isBoss: 0
+  - tables:
+    - type: {fileID: 11400000, guid: 395738942cc78114585c6daaff1829b9, type: 2}
+      chance: 1
+    - type: {fileID: 11400000, guid: e39955c4b78910742afaea6ae37b4f60, type: 2}
+      chance: 1
+    - type: {fileID: 11400000, guid: e39955c4b78910742afaea6ae37b4f60, type: 2}
+      chance: 1
+    blind: 10
+    isBoss: 0
+  - tables:
+    - type: {fileID: 11400000, guid: 395738942cc78114585c6daaff1829b9, type: 2}
+      chance: 1
+    - type: {fileID: 11400000, guid: e39955c4b78910742afaea6ae37b4f60, type: 2}
+      chance: 1
+    - type: {fileID: 11400000, guid: e39955c4b78910742afaea6ae37b4f60, type: 2}
+      chance: 1
+    blind: 15
+    isBoss: 0
+  - tables:
+    - type: {fileID: 11400000, guid: 395738942cc78114585c6daaff1829b9, type: 2}
+      chance: 1
+    - type: {fileID: 11400000, guid: e39955c4b78910742afaea6ae37b4f60, type: 2}
+      chance: 1
+    - type: {fileID: 11400000, guid: 1d6841d870ac3454e8ff28a00f3d6109, type: 2}
+      chance: 1
+    blind: 15
+    isBoss: 0
+  - tables:
+    - type: {fileID: 11400000, guid: 395738942cc78114585c6daaff1829b9, type: 2}
+      chance: 1
+    - type: {fileID: 11400000, guid: e39955c4b78910742afaea6ae37b4f60, type: 2}
+      chance: 1
+    - type: {fileID: 11400000, guid: 1d6841d870ac3454e8ff28a00f3d6109, type: 2}
+      chance: 1
+    blind: 15
+    isBoss: 0
+  - tables:
+    - type: {fileID: 11400000, guid: 395738942cc78114585c6daaff1829b9, type: 2}
+      chance: 1
+    - type: {fileID: 11400000, guid: e39955c4b78910742afaea6ae37b4f60, type: 2}
+      chance: 1
+    - type: {fileID: 11400000, guid: 1d6841d870ac3454e8ff28a00f3d6109, type: 2}
+      chance: 1
+    blind: 15
+    isBoss: 0
+  - tables:
+    - type: {fileID: 11400000, guid: 407c8f7ae69cbf2419a46a64284ff672, type: 2}
+      chance: 1
+    blind: 25
+    isBoss: 1
+  level: 1

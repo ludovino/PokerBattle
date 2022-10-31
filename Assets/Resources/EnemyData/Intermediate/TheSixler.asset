@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bef32fb3f4731f4a9e77d4a77fcdabe, type: 3}
+  m_Name: TheSixler
+  m_EditorClassIdentifier: 
+  _deckString: '0-;0-;0-;0-;1-;
+
+    1-;2-;2-;3-;4-;
+
+    4-;6H;6C;6D;6S;
+
+    Q-;K-;16-;16-;11-;'
+  _chips: 66
+  _drawBonus: 0
+  _handList: {fileID: 11400000, guid: c07dc61121ce8d0438dbc38fc2d08e99, type: 2}
+  _onChangeChips:
+    m_PersistentCalls:
+      m_Calls: []
+  displayName: The Sixler
+  chipsPerLevel: 6

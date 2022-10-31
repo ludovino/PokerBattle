@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 985267a4397681245811a4abf44da0ea, type: 3}
+  m_Name: Spades
+  m_EditorClassIdentifier: 
+  longName: Spades
+  shortName: S
+  display: S
+  sprite: {fileID: 21300000, guid: 1f4488b4529571c4ea83f28e519cde55, type: 3}
+  _color: {fileID: 11400000, guid: 9229384c0e92d7a45a76bd4e716865a2, type: 2}
+  faceSprites:
+  - face: {fileID: 11400000, guid: 9ff558177451b0040b4f06b0b573aeb9, type: 2}
+    sprite: {fileID: 0}
+  - face: {fileID: 11400000, guid: fcd1aacea6f1a414ba0e6fe38008a0d0, type: 2}
+    sprite: {fileID: 21300000, guid: b48c23ca139fbb2489cddb1f3c238752, type: 3}
+  - face: {fileID: 11400000, guid: 241a46e83c2eeb8418f4275b48d968e5, type: 2}
+    sprite: {fileID: 21300000, guid: 2e3026f48fc3caf40a6c8271612189e3, type: 3}
+  - face: {fileID: 11400000, guid: a7f26412482c96a468a84cf8fce43186, type: 2}
+    sprite: {fileID: 21300000, guid: 2fc9237e51e2b6f47b7d916649032cb7, type: 3}

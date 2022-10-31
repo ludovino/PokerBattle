@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bef32fb3f4731f4a9e77d4a77fcdabe, type: 3}
+  m_Name: TheBoss
+  m_EditorClassIdentifier: 
+  _deckString: '11H;12H;13H;14H;15H;16H;17H;18H;19H;20H;21H;JH;QH;KH;AH;
+
+    11C;12C;13C;14C;15C;16C;17C;18C;19C;20C;21C;JC;QC;KC;AC;
+
+    11S;12S;13S;14S;15S;16S;17S;18S;19S;20S;21S;JS;QS;KS;AS;
+
+    11D;12D;13D;14D;15D;16D;17D;18D;19D;20D;21D;JD;QD;KD;AD;'
+  _chips: 400
+  _drawBonus: 0
+  _handList: {fileID: 11400000, guid: c07dc61121ce8d0438dbc38fc2d08e99, type: 2}
+  _onChangeChips:
+    m_PersistentCalls:
+      m_Calls: []
+  displayName: The Boss
+  chipsPerLevel: 0

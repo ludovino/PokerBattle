@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 985267a4397681245811a4abf44da0ea, type: 3}
+  m_Name: Diamonds
+  m_EditorClassIdentifier: 
+  longName: Diamonds
+  shortName: D
+  display: D
+  sprite: {fileID: 21300000, guid: f99a4b55b00c1874bac4030abbd0f5f6, type: 3}
+  _color: {fileID: 11400000, guid: aeca136274fa3ad448e73d4fde27893a, type: 2}
+  faceSprites:
+  - face: {fileID: 11400000, guid: 9ff558177451b0040b4f06b0b573aeb9, type: 2}
+    sprite: {fileID: 0}
+  - face: {fileID: 11400000, guid: fcd1aacea6f1a414ba0e6fe38008a0d0, type: 2}
+    sprite: {fileID: 21300000, guid: bdca2ee702d6f42469db00af504d11dc, type: 3}
+  - face: {fileID: 11400000, guid: 241a46e83c2eeb8418f4275b48d968e5, type: 2}
+    sprite: {fileID: 21300000, guid: 481d55a1d40ad144280882df6923e290, type: 3}
+  - face: {fileID: 11400000, guid: a7f26412482c96a468a84cf8fce43186, type: 2}
+    sprite: {fileID: 21300000, guid: a13c0decb79ead3408ccc1569315a862, type: 3}
