@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 public class RankedHand : IComparable<RankedHand>
@@ -17,6 +18,8 @@ public class RankedHand : IComparable<RankedHand>
         }
         return 0;
     }
+
+    public List<CardScript> rankingCards => cards.Take(hand.rankingCardsCount).ToList();
 
     public static bool operator > (RankedHand operand1, RankedHand operand2) => operand1.CompareTo(operand2) > 0;
     public static bool operator < (RankedHand operand1, RankedHand operand2) => operand1.CompareTo(operand2) < 0;

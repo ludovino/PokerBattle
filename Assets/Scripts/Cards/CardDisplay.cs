@@ -1,5 +1,6 @@
 using Animancer;
 using DG.Tweening;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
@@ -26,6 +27,12 @@ public class CardDisplay : MonoBehaviour
     private SpriteRenderer _glow;
     [SerializeField]
     private AnimationClip[] _spareAnimations;
+    private CardBackScript _cardBack;
+    public bool FaceUp => _cardBack.faceUp;
+    private void Awake()
+    {
+        _cardBack = GetComponent<CardBackScript>();
+    }
     public void UpdateCardDisplay(ICard card)
     {
         _card = card;
@@ -41,7 +48,7 @@ public class CardDisplay : MonoBehaviour
     {
         SetSprites();
         SetText();
-        if(isActiveAndEnabled) _animancer.Play(GetClip(), 0f);
+        if(isActiveAndEnabled) _animancer.Play(GetClip(_card), 0f);
         GlowOff();
     }
     public void SetAnimationState()
@@ -70,22 +77,23 @@ public class CardDisplay : MonoBehaviour
 
     private void OnEnable()
     {
-        if(_card != null) _animancer.Play(GetClip(), 0f);
+        if(_card != null) _animancer.Play(GetClip(_card), 0f);
     }
     public void AnimateCardDisplay(ICard card)
     {
         _card = card;
+        CoroutineQueue.Defer(CR_AnimateCardDisplay(card));
     }
-    public void AnimateCardDisplay()
+    public IEnumerator CR_AnimateCardDisplay(ICard card)
     {
-        SetSprites();
-        SetText();
-        _animancer.Play(GetClip(), 0.25f);
+        yield return AnimateSprites(card);
+        SetText(card);
+        yield return _animancer.Play(GetClip(card), 0.25f);
     }
 
-    private AnimationClip GetClip()
+    private AnimationClip GetClip(ICard card)
     {
-        return _card.face?.clip ?? _valueAnimations[Mathf.Clamp(_card.highCardRank, 0, 21)];
+        return card.face?.clip ?? _valueAnimations[Mathf.Clamp(card.highCardRank, 0, 21)];
     }
 
     public void SetSprites()
@@ -102,14 +110,37 @@ public class CardDisplay : MonoBehaviour
             _faceSprite.sprite = faceSprite;
         }
     }
-
     public void SetText()
+    {
+        SetText(_card);
+    }
+    public void SetText(ICard card)
     {
         foreach(var text in _numeralText)
         {
-            text.text = _card.numeral;
-            text.font = _card.highCardRank >= 10 ? _narrowFont : _regularFont;
-            text.color = _card.suit?.Color.Value ?? Color.grey;
+            text.text = card.numeral;
+            text.font = card.highCardRank >= 10 ? _narrowFont : _regularFont;
+            text.color = card.suit?.Color.Value ?? Color.grey;
         }
+    }
+    public IEnumerator AnimateSprites(ICard card)
+    {
+        var seq = DOTween.Sequence();
+        foreach (var sprite in _spriteRenderers)
+        {
+            seq.Insert(0, sprite.DOFade(0, 0.1f).OnComplete(() => sprite.sprite = card.suit?.sprite));
+            seq.Insert(0.1f, sprite.DOColor(card.suit?.Color.Value ?? Color.grey, 0.1f));
+        }
+
+        if (card.face != null)
+        {
+            var faceSprite = card.face?.blankSprite;
+            faceSprite = card.suit?.Faces.GetValueOrDefault(card.face) ?? faceSprite;
+
+            seq.Insert(0, _faceSprite.DOFade(0, 0.1f).OnComplete(() => _faceSprite.sprite = faceSprite));
+            seq.Insert(0.1f, _faceSprite.DOFade(1, 0.1f));
+        }
+        seq.Play();
+        yield return seq.WaitForCompletion();
     }
 }

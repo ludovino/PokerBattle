@@ -5,6 +5,7 @@
     string numeral { get; }
     Suit suit { get; }
     Face face { get; }
+    CardEffect effect { get; }
 
     string ToString();
 }

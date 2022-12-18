@@ -16,5 +16,7 @@ MonoBehaviour:
   longName: Jack
   highCardRank: 31
   blackjackValue: 10
+  higher: {fileID: 11400000, guid: a7f26412482c96a468a84cf8fce43186, type: 2}
+  lower: {fileID: 0}
   blankSprite: {fileID: 21300000, guid: bf1ddac3725fb0249b2bdc5e6b484840, type: 3}
   clip: {fileID: 7400000, guid: fac10f0e5355cd143b5fb687303c0ace, type: 2}

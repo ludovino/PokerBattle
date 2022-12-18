@@ -3,11 +3,11 @@ public class CardBackScript : MonoBehaviour
 {
     [SerializeField]
     private SpriteRenderer back;
-
+    public bool faceUp => Vector3.Project(transform.forward, Vector3.forward).z > 0;
     // Update is called once per frame
     void Update()
     {
-        if (Vector3.Project(this.transform.forward, Vector3.forward).z > 0) back.sortingOrder = -1;
+        if (faceUp) back.sortingOrder = -1;
         else back.sortingOrder = 2;
     }
 }

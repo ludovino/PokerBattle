@@ -16,6 +16,9 @@ public class Suit : ScriptableObject
     public CardColor Color => _color;
     [SerializeField]
     private FaceSprite[] faceSprites;
+    [SerializeField]
+    private CardEffect _effect;
+    public CardEffect CardEffect => _effect;
     public IReadOnlyDictionary<Face, Sprite> Faces { get; private set; }
     private void Awake()
     {

@@ -6,6 +6,8 @@ public class Face : ScriptableObject
     public string longName;
     public int highCardRank;
     public int blackjackValue;
+    public Face higher;
+    public Face lower;
     public Sprite blankSprite;
     public AnimationClip clip;
 }

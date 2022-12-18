@@ -26,3 +26,4 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: 587d8214144dccb47bef86ae8fffaf4b, type: 3}
   - face: {fileID: 11400000, guid: a7f26412482c96a468a84cf8fce43186, type: 2}
     sprite: {fileID: 21300000, guid: 2299f70765ed99c4ab9be7369c69005a, type: 3}
+  _effect: {fileID: 11400000, guid: 99a62ab8f35cedf43a216a0ca4a192e4, type: 2}

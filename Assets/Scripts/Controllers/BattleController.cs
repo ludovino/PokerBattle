@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -47,6 +48,13 @@ public class BattleController : MonoBehaviour
 
     }
 
+    public void AddToPot(Entity entity, int amount)
+    {
+        var change = Mathf.Min(amount, entity.chips);
+        entity.ChangeChips(-change);
+        ChangePot(change);
+    }
+
     private void TakePot(Entity taker)
     {
         var startingAmount = pot;
@@ -55,6 +63,19 @@ public class BattleController : MonoBehaviour
         pot = 0;
         onChangePot.Invoke(startingAmount, currentAmount, change);
         taker.ChangeChips(startingAmount);
+    }
+
+    private void SplitPot()
+    {
+        var startingAmount = pot;
+        var currentAmount = 0;
+        var change = -pot;
+        var half = Mathf.FloorToInt(startingAmount * 0.5f);
+        pot = 0;
+        onChangePot.Invoke(startingAmount, currentAmount, change);
+        player.ChangeChips(half);
+        enemy.ChangeChips(half);
+
     }
 
     IEnumerator Start()
@@ -75,7 +96,7 @@ public class BattleController : MonoBehaviour
         _houseCutText.text = $"{houseCut * 100}% house cut";
         _blindText.text = $"{blind} blind";
         StartRound();
-        if(GameController.Instance.currentAct.IsBossLevel)
+        if(GameController.Instance?.currentAct?.IsBossLevel ?? false)
         {
             boss.Invoke();
         }
@@ -105,19 +126,26 @@ public class BattleController : MonoBehaviour
         var playerHand = player.Evaluate();
         var enemyHand = enemy.Evaluate();
         var wld = playerHand.CompareTo(enemyHand);
-        
 
         var eval = new Evaluation(playerHand, enemyHand);
         var winner = eval.result == Result.PlayerWin ? player : eval.result == Result.PlayerLose ? enemy : null;
         var loser = eval.result == Result.PlayerLose ? player : eval.result == Result.PlayerWin ? enemy : null;
-
+        
         Debug.Log(eval.ToString());
-        var loss = Mathf.Min(loser.chips, eval.winningHand.chipCost);
         onEvaluate.Invoke(eval);
-        loser.ChangeChips(-loss);
-        ChangePot(loss);
-        TakeHouseCut();
-        TakePot(winner);
+        
+        if(eval.result == Result.Draw)
+        {
+            TakeHouseCut();
+            SplitPot();
+        }
+        else
+        {
+            AddToPot(loser, eval.winningHand.chipCost);
+            eval.winningHand.rankingCards.ForEach(c => { if (c.effect is IOnWinHand) c.ExecuteEffect(); });
+            TakeHouseCut();
+            TakePot(winner);
+        }
         player.ClearField();
         enemy.ClearField();
         if (player.chips <= 0)
@@ -156,7 +184,9 @@ public class BattleController : MonoBehaviour
     public bool Play(int slotNumber, CardScript card)
     {
         bool played = active.Play(slotNumber, card);
-        if(played) cardsPlayed++;
+        if (!played) return played;
+        cardsPlayed++;
+        card.Play(new PlayContext(this, active, idle, card, slotNumber));
         return played;
     }
     public bool CanEndTurn()
@@ -209,9 +239,10 @@ public class BattleController : MonoBehaviour
             _player = _bc.active;
             _player.Draw();
             var pay = Mathf.Min(_player.blind, _player.chips);
-            _player.ChangeChips(-pay);
+            _bc.idle.OnOpponentTurnStart();
+            _bc.active.OnTurnStart();
+            _bc.AddToPot(_player, pay);
             if (_player.chips <= 0) _player.AllIn();
-            _bc.ChangePot(pay);
             _player.controller.StartTurn();
         }
         public void OnExit()
@@ -223,3 +254,27 @@ public class BattleController : MonoBehaviour
 
 [System.Serializable]
 public class OnEvaluate : UnityEvent<Evaluation>{}
+
+public class PlayContext
+{
+    private BattleController _battle;
+    private Entity _owner;
+    private Entity _opponent;
+    private CardScript _card;
+    private int _playIndex;
+
+    public PlayContext(BattleController battle, Entity owner, Entity opponent, CardScript card, int playIndex)
+    {
+        _battle = battle;
+        _owner = owner;
+        _opponent = opponent;
+        _card = card;
+        _playIndex = playIndex;
+    }
+
+    public Entity Owner => _owner;
+    public Entity Opponent => _opponent;
+    public CardScript Card => _card;
+    public BattleController Battle => _battle;
+    public int PlayIndex  => _playIndex;
+}

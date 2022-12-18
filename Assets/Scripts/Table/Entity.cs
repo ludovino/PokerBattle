@@ -81,6 +81,18 @@ public class Entity : MonoBehaviour
         removePile = new List<CardScript>();
     }
 
+    public void OnTurnStart()
+    {
+        var onStartCards = fieldOfPlay.Where(c => c?.effect is IOnPlayerTurn).ToList();
+        onStartCards.ForEach(c => c.ExecuteEffect());
+    }
+
+    public void OnOpponentTurnStart()
+    {
+        var onStartCards = fieldOfPlay.Where(c => c?.effect is IOnOpponentTurn).ToList();
+        onStartCards.ForEach(c => c.ExecuteEffect());
+    }
+
     public void ChangeChips(int change)
     {
         var startingAmount = chips;

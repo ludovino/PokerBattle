@@ -31,6 +31,30 @@ public class Card : ICard, IEquatable<Card>
 
     public Face face => _face;
 
+    public CardEffect effect => suit?.CardEffect;
+
+    public void Change(int change)
+    {
+        if (change == 0) return;
+        if(_face is null)
+        {
+            _value = Mathf.Clamp(_value + change, 0, 21);
+            return;
+        }
+        if (change > 0 && _face.higher != null)
+        {
+            _face = _face.higher;
+            return;
+        }
+        if(change < 0)
+        {
+            _face = _face.lower;
+        }
+        if (_face is null)
+        {
+            _value = 10;
+        }
+    }
     public override string ToString()
     {
         var numeralName = _face?.numeral ?? _value.ToString();

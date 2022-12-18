@@ -16,5 +16,7 @@ MonoBehaviour:
   longName: King
   highCardRank: 33
   blackjackValue: 10
+  higher: {fileID: 11400000, guid: 9ff558177451b0040b4f06b0b573aeb9, type: 2}
+  lower: {fileID: 11400000, guid: a7f26412482c96a468a84cf8fce43186, type: 2}
   blankSprite: {fileID: 21300000, guid: 3f13b58a1257abd4c80a01ef8a9111c3, type: 3}
   clip: {fileID: 7400000, guid: fac10f0e5355cd143b5fb687303c0ace, type: 2}

@@ -1,6 +1,8 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.Events;
+using TMPro.EditorUtilities;
+using System;
 
 public class CardScript : MonoBehaviour, ICard
 {
@@ -12,6 +14,8 @@ public class CardScript : MonoBehaviour, ICard
     private Card _card;
     private Card _tempCard;
     private Draggable _draggable;
+    private PlayContext _playContext;
+
     public bool Draggable { get { return _draggable.enabled; } set { _draggable.enabled = value; } }
     public void SetCard(Card card)
     {
@@ -25,7 +29,10 @@ public class CardScript : MonoBehaviour, ICard
     public int blackjackValue => card.blackjackValue;
     public string numeral => card.numeral;
     public Suit suit => card.suit;
-    public Face face => _card.face;
+    public Face face => card.face;
+    public CardEffect effect => suit?.CardEffect;
+    public PlayContext playContext => _playContext;
+    public int valueDifference => _tempCard.highCardRank - _card.highCardRank;
 
     void Awake()
     {
@@ -34,17 +41,37 @@ public class CardScript : MonoBehaviour, ICard
         onDiscard = onDiscard ?? new UnityEvent();
         _draggable = GetComponent<Draggable>();
     }
-    public void Play()
+    public void Play(PlayContext context)
     {
+        _playContext = context;
+        if (effect is IOnPlay) ExecuteEffect();
         onPlay.Invoke();
     }
     public void Draw()
     {
+        _playContext = null;
         onDraw.Invoke();
     }
     public void Discard()
     {
+        _playContext = null;
         onDiscard.Invoke();
     }
+    public void ResetCard(bool animate = false)
+    {
+        _tempCard = _card.Clone();
+        if (animate) _cardDisplay.AnimateCardDisplay(_tempCard);
+        else _cardDisplay.UpdateCardDisplay(_tempCard);
+    }
+    public void ChangeValue(int change)
+    {
+        if (change == 0) return;
+        _tempCard.Change(change);
+        _cardDisplay.AnimateCardDisplay(_tempCard);
+    }
 
+    internal void ExecuteEffect()
+    {
+        effect.Execute(_playContext);
+    }
 }
