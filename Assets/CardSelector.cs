@@ -2,6 +2,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.Events;
+using static Animancer.Strings;
 
 public class CardSelector : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class CardSelector : MonoBehaviour
 
     [SerializeField]
     private CardDisplay _cardDisplay;
+    private SimpleTooltip _tooltip;
     private Card _card;
     private bool _selected;
     public Card Card => _card;
@@ -22,6 +24,7 @@ public class CardSelector : MonoBehaviour
     {
         _onSelectCard = OnSelectCard ?? new OnSelectCard();
         _onDeselectCard = _onDeselectCard ?? new OnDeselectCard();
+        _tooltip = GetComponent<SimpleTooltip>();
         _selected = false;
     }
 
@@ -51,6 +54,19 @@ public class CardSelector : MonoBehaviour
     {
         _card = card;
         _cardDisplay.UpdateCardDisplay(_card);
+        SetTooltip();
+    }
+
+
+    private void SetTooltip()
+    {
+        var numeralName = _card.face?.longName ?? (_card.highCardRank > 0 ? _card.highCardRank.ToString() : "Nil");
+        var suitName = _card.suit?.longName ?? "Blank";
+        var name = $"{numeralName} of {suitName}";
+
+        var effectDescription = _card.suit?.CardEffect.Description;
+        _tooltip.infoLeft = $"~{name}" +
+            $"\n@{effectDescription}";
     }
 
     private void OnDestroy()

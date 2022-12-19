@@ -20,13 +20,14 @@ public class CardEffectDisplay : MonoBehaviour
         var spriteColor = suit.Color.Value;
         spriteColor.a = 0;
         _sprite.color = spriteColor;
-        CoroutineQueue.Defer(Animate(soundEffect));
+        CoroutineQueue.Defer(Animate(context, soundEffect));
     }
 
-    private IEnumerator Animate(AudioClip soundEffect)
+    private IEnumerator Animate(PlayContext context, AudioClip soundEffect)
     {
         yield return null;
         _sprite.enabled = true;
+        _effectTransform.position = context.Card.transform.position;
         var seq = DOTween.Sequence();
         seq.Append(_effectTransform.DOPunchScale(_effectTransform.localScale * 1.5f, 0.3f));
         seq.Join(_sprite.DOFade(1f, 0.2f));

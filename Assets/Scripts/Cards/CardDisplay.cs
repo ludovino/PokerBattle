@@ -51,10 +51,6 @@ public class CardDisplay : MonoBehaviour
         if(isActiveAndEnabled) _animancer.Play(GetClip(_card), 0f);
         GlowOff();
     }
-    public void SetAnimationState()
-    {
-
-    }
 
     public void Glow(float intensity, Color color)
     {

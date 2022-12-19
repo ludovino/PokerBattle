@@ -4,6 +4,7 @@ public abstract class CardEffect : ScriptableObject
 {
     [SerializeField]
     private string _description;
+    public string Description => _description;
     [SerializeField]
     private CardEffectDisplay _effectDisplay;
     [SerializeField]

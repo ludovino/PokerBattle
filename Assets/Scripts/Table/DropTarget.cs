@@ -24,13 +24,13 @@ public class DropTarget : MonoBehaviour
     public void OnTriggerEnter2D(Collider2D collider)
     {
         Debug.Log("ENTER");
-        var draggable = collider.GetComponent<Draggable>();
+        var draggable = collider.attachedRigidbody.GetComponent<Draggable>();
         draggable.SetDropTarget(this);
     }
 
     public void OnTriggerExit2D(Collider2D collider)
     {
-        var draggable = collider.GetComponent<Draggable>();
+        var draggable = collider.attachedRigidbody.GetComponent<Draggable>();
         draggable.ClearDropTarget(this);
     }
 

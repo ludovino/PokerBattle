@@ -23,6 +23,7 @@ public class CardScript : MonoBehaviour, ICard
         _tempCard = _card.Clone();
         gameObject.name = card.ToString();
         _cardDisplay.UpdateCardDisplay(this);
+        SetTooltip();
     }
     public Card card => _tempCard ?? _card;
     public int highCardRank => card.highCardRank;
@@ -33,6 +34,7 @@ public class CardScript : MonoBehaviour, ICard
     public CardEffect effect => suit?.CardEffect;
     public PlayContext playContext => _playContext;
     public int valueDifference => _tempCard.highCardRank - _card.highCardRank;
+    private SimpleTooltip _tooltip;
 
     void Awake()
     {
@@ -40,7 +42,14 @@ public class CardScript : MonoBehaviour, ICard
         onDraw = onDraw ?? new UnityEvent();
         onDiscard = onDiscard ?? new UnityEvent();
         _draggable = GetComponent<Draggable>();
+        _tooltip = GetComponent<SimpleTooltip>();
     }
+
+    void LateUpdate()
+    {
+        if (!_cardDisplay.FaceUp) _tooltip.HideTooltip();
+    }
+
     public void Play(PlayContext context)
     {
         _playContext = context;
@@ -73,5 +82,16 @@ public class CardScript : MonoBehaviour, ICard
     internal void ExecuteEffect()
     {
         effect.Execute(_playContext);
+    }
+
+    private void SetTooltip()
+    {
+        var numeralName = face?.longName ?? (highCardRank > 0 ? highCardRank.ToString() : "Nil");
+        var suitName = suit?.longName ?? "Blank";
+        var name = $"{numeralName} of {suitName}";
+
+        var effectDescription = suit?.CardEffect.Description;
+        _tooltip.infoLeft = $"~{name}" +
+            $"\n@{effectDescription}";
     }
 }
