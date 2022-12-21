@@ -16,6 +16,7 @@ MonoBehaviour:
   shortName: C
   display: C
   sprite: {fileID: 21300000, guid: ca84827d671c0884aa1eda69ca5a697b, type: 3}
+  price: 10
   _color: {fileID: 11400000, guid: 9229384c0e92d7a45a76bd4e716865a2, type: 2}
   faceSprites:
   - face: {fileID: 11400000, guid: 9ff558177451b0040b4f06b0b573aeb9, type: 2}

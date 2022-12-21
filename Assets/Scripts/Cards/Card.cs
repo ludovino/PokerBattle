@@ -21,6 +21,7 @@ public class Card : ICard, IEquatable<Card>
     public string numeral => GetNumeral();
     public int highCardRank => _face?.highCardRank ?? _value;
     public int blackjackValue => _face?.blackjackValue ?? Mathf.Max(_value, 1);
+    public int price => (_face?.price ?? _value) + (suit?.price ?? 0);
     private string GetNumeral()
     {
         var numeral = _face?.numeral ?? _value.ToString();

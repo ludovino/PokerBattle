@@ -3,11 +3,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 using TMPro;
 using UnityEngine;
-using static Animancer.Validate;
-using static ChipPile;
 
 public class ChipPile : MonoBehaviour
 {
@@ -36,6 +33,8 @@ public class ChipPile : MonoBehaviour
     private Color _positive;
     [SerializeField]
     private Color _negative;
+    [SerializeField]
+    private EntityData _entityData;
 
     private void Awake()
     {
@@ -46,7 +45,21 @@ public class ChipPile : MonoBehaviour
         _changeText.color = new Color(1, 1, 1, 0);
         _changeTextOrigin = _changeText.transform.position;
         SetValue(0);
+        if(_entityData != null)
+        {
+            _entityData.OnChangeChips.AddListener(SetChips);
+            SetChips(0, _entityData.Chips, _entityData.Chips);
+        }
     }
+
+    private void OnDestroy()
+    {
+        if (_entityData != null)
+        {
+            _entityData.OnChangeChips.RemoveListener(SetChips);
+        }
+    }
+
     private void OnDrawGizmos()
     {
         foreach(var stack in _stacks)

@@ -15,6 +15,8 @@ public class SfxManager : MonoBehaviour
     public AudioClip cheer;
     public AudioClip aww;
     public AudioClip gasp;
+    public float minCardInterval;
+    private bool canCardFlip;
     public static SfxManager Instance 
     { 
         get { return _instance; } 
@@ -25,6 +27,13 @@ public class SfxManager : MonoBehaviour
         sfxVolume = sfx * master;
     }
 
+    public IEnumerator OnCardFlip()
+    {
+        canCardFlip = false;
+        yield return new WaitForSeconds(minCardInterval);
+        canCardFlip = true;
+    }
+
     private void Awake() 
     { 
         thisFrame = new HashSet<AudioClip>();
@@ -33,7 +42,7 @@ public class SfxManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-
+        canCardFlip = true;
         _instance = this;
         DontDestroyOnLoad(gameObject);
     }
@@ -61,6 +70,8 @@ public class SfxManager : MonoBehaviour
     }
     public static void PlayCard(int index)
     {
+        if (!Instance.canCardFlip) return;
+        Instance.StartCoroutine(Instance.OnCardFlip());
         var sounds = Instance.playCard;
         var clip = index >= sounds.Length ? sounds[0] : sounds[index];
         Instance.PlayClip(clip);

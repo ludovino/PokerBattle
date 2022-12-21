@@ -6,10 +6,7 @@ public class EncounterDisplay : MonoBehaviour
 {
     [SerializeField]
     private SpriteRenderer spriteRenderer;
-    public void Start()
-    {
-        _tooltipManager = FindObjectOfType<TooltipManager>();
-    }
+    private SimpleTooltip _tooltip;
     private Action onClick;
     [SerializeField]
     private BeginEncounter _beginEncounter;
@@ -18,6 +15,7 @@ public class EncounterDisplay : MonoBehaviour
     public void Awake()
     {
         _beginEncounter = _beginEncounter ?? new BeginEncounter();
+        _tooltip = GetComponent<SimpleTooltip>();
     }
     public void Init(Encounter encounter)
     {
@@ -25,6 +23,8 @@ public class EncounterDisplay : MonoBehaviour
         onClick = null;
         if (encounter != null)
         {
+            _tooltip.infoLeft = encounter.Tooltip;
+            _tooltip.infoRight = $"`{encounter.EncounterType?.name}";
             spriteRenderer.sprite = encounter.EncounterType?.mapSprite;
             onClick += encounter.BeginEncounter;
         }
@@ -41,17 +41,6 @@ public class EncounterDisplay : MonoBehaviour
             _beginEncounter.Invoke(_encounter);
             onClick.Invoke();
         }
-    }
-
-    private void OnMouseEnter()
-    {
-        if (_encounter != null)
-            _tooltipManager.ShowTooltip(_encounter.Tooltip);
-    }
-    private void OnMouseExit()
-    {
-        if (_encounter != null)
-            _tooltipManager.HideTooltip();
     }
 }
 [Serializable]

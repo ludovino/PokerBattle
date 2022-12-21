@@ -1,28 +1,33 @@
 using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class DrawPile : MonoBehaviour
 {
-    [SerializeField]
-    private Vector3 _cardRotation;
-    public void OnDraw(List<CardScript> drawn)
+    private CardCollection _cards;
+    private void Awake()
     {
-        var cards = drawn.ToList();
-        CoroutineQueue.Defer(CR_OnDraw(cards));
+        _cards = GetComponent<CardCollection>();
     }
 
-    private IEnumerator CR_OnDraw(List<CardScript> drawn)
+    public void Init(List<CardScript> drawPileCards)
     {
-        foreach (var card in drawn)
-        {
-            card.gameObject.SetActive(true);
-            card.transform.position = transform.position;
-            card.transform.rotation = Quaternion.Euler(_cardRotation);
-        }
-        yield return null;
+        var cards = drawPileCards.Select(c => c.gameObject).ToList();
+        _cards.AddCardsImmediate(cards);
+    }
+
+    public void RemoveCards(List<CardScript> drawn)
+    {
+        var cards = drawn.Select(c => c.gameObject).ToList();
+        CoroutineQueue.Defer(_cards.RemoveCards(cards));
+    }
+
+    public void AddCards(List<CardScript> toAdd)
+    {
+        var cards = toAdd.Select(c => c.gameObject).ToList();
+        CoroutineQueue.Defer(_cards.AddCards(cards));
     }
 }

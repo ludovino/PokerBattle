@@ -7,29 +7,22 @@ using UnityEngine;
 
 public class DiscardPile : MonoBehaviour
 {
-    [SerializeField]
-    private Entity _player;
-    void Start(){
-        _player.onDiscard.AddListener(OnDiscard);
+    private CardCollection _cardCollection;
+
+    private void Awake()
+    {
+        _cardCollection = GetComponent<CardCollection>();
     }
 
-    void OnDiscard(List<CardScript> cards)
+    public void AddCards(List<CardScript> toAdd)
     {
-        var discarded = cards.ToList();
-        CoroutineQueue.Defer(CR_Discard(discarded));
+        var cards = toAdd.Select(c => c.gameObject).ToList();
+        CoroutineQueue.Defer(_cardCollection.AddCards(cards));
     }
 
-    private IEnumerator CR_Discard(List<CardScript> cards)
+    public void RemoveCards(List<CardScript> toRemove)
     {
-        var sequence = DOTween.Sequence();
-        foreach (var card in cards)
-        {
-            var pos = card.transform.DOMove(transform.position, 0.15f).SetEase(Ease.OutQuad).OnStart(() => SfxManager.PlayCard(1)).OnComplete(() => card.gameObject.SetActive(false));
-            var rot = card.transform.DORotate(Vector3.zero, 0.15f);
-            var sca = card.transform.DOScale(Vector3.one, 0.15f);
-            sequence.Append(pos).Join(rot).Join(sca);
-        }
-        sequence.Play();
-        yield return sequence.WaitForCompletion();
+        var cards = toRemove.Select(c => c.gameObject).ToList();
+        CoroutineQueue.Defer(_cardCollection.RemoveCards(cards));
     }
 }

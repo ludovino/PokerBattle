@@ -87,7 +87,7 @@ public class CardScript : MonoBehaviour, ICard
     private void SetTooltip()
     {
         var numeralName = face?.longName ?? (highCardRank > 0 ? highCardRank.ToString() : "Nil");
-        var suitName = suit?.longName ?? "Blank";
+        var suitName = suit?.longName ?? "Nothing";
         var name = $"{numeralName} of {suitName}";
 
         var effectDescription = suit?.CardEffect.Description;

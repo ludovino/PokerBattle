@@ -97,6 +97,7 @@ GameObject:
   - component: {fileID: 694683868315740719}
   - component: {fileID: 8380545564061263978}
   - component: {fileID: 4225841682021031078}
+  - component: {fileID: 8778298985174836059}
   m_Layer: 0
   m_Name: Table
   m_TagString: Untagged
@@ -185,6 +186,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 5817809262194744351}
+  _beginEncounter:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!50 &8380545564061263978
 Rigidbody2D:
   serializedVersion: 4
@@ -232,3 +236,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 4.33, y: 4.04}
   m_EdgeRadius: 0
+--- !u!114 &8778298985174836059
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8798318652072970771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99634edca86565b4a96a0b7b261787f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  simpleTooltipStyle: {fileID: 11400000, guid: b60656fad1664684d8fb0085c2c6ccbb, type: 2}
+  infoLeft: '~Empty Table
+
+    @There''s nobody here'
+  infoRight: 
+  delayInSeconds: 0

@@ -10,4 +10,5 @@ public class Face : ScriptableObject
     public Face lower;
     public Sprite blankSprite;
     public AnimationClip clip;
+    public int price;
 }

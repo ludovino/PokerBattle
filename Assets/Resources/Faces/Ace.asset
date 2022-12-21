@@ -20,3 +20,4 @@ MonoBehaviour:
   lower: {fileID: 11400000, guid: 241a46e83c2eeb8418f4275b48d968e5, type: 2}
   blankSprite: {fileID: 0}
   clip: {fileID: 7400000, guid: d1eb3f80fb2de514c8b80bf92204fd57, type: 2}
+  price: 50

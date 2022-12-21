@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System;
 using System.Linq;
 using UnityEngine.Events;
+using Unity.VisualScripting;
 
 public class Entity : MonoBehaviour
 {
@@ -11,10 +12,14 @@ public class Entity : MonoBehaviour
     public int blind;
     public int chips;
     public EntityData entityData;
-    private List<CardScript> _drawPile;
+    [SerializeField]
+    private DrawPile _drawPile;
+    private List<CardScript> _drawPileCards;
     public GameObject cardPrefab;
     public List<CardScript> hand;
-    private List<CardScript> _discardPile;
+    [SerializeField]
+    private DiscardPile _discardPile;
+    private List<CardScript> _discardPileCards;
     public List<CardScript> removePile;
     public CardScript[] fieldOfPlay;
     public OnDraw onDraw;
@@ -52,9 +57,10 @@ public class Entity : MonoBehaviour
         {
             var cardObj = Instantiate(cardPrefab).GetComponent<CardScript>();
             cardObj.SetCard(card);
-            cardObj.gameObject.SetActive(false);
-            _drawPile.Add(cardObj);
+            _drawPileCards.Add(cardObj);
         }
+
+        _drawPile.Init(_drawPileCards);
     }
     internal void Init(EntityData entityData, int blind)
     {
@@ -76,8 +82,8 @@ public class Entity : MonoBehaviour
     private void InitializeCollections()
     {
         fieldOfPlay = new CardScript[5];
-        _drawPile = new List<CardScript>();
-        _discardPile = new List<CardScript>();
+        _drawPileCards = new List<CardScript>();
+        _discardPileCards = new List<CardScript>();
         removePile = new List<CardScript>();
     }
 
@@ -115,8 +121,8 @@ public class Entity : MonoBehaviour
     }
     public int slotsRemaining => fieldOfPlay.Count(c => c == null);
 
-    public IEnumerable<Card> DrawPile => _drawPile.Select(c => c.card);
-    public IEnumerable<Card> DiscardPile => _discardPile.Select(c => c.card);
+    public IEnumerable<Card> DrawPile => _drawPileCards.Select(c => c.card);
+    public IEnumerable<Card> DiscardPile => _discardPileCards.Select(c => c.card);
 
     public void Draw()
     {
@@ -127,33 +133,38 @@ public class Entity : MonoBehaviour
     {
         var toDraw = number;
 
-        if(_drawPile.Count < number)
+        if(_drawPileCards.Count < number)
         {
-            toDraw -= _drawPile.Count;
-            Draw(_drawPile.Count);
-            _drawPile = _discardPile;
-            _discardPile = new List<CardScript>();
-            _drawPile.Shuffle();
+            toDraw -= _drawPileCards.Count;
+            Draw(_drawPileCards.Count);
+            _drawPileCards = _discardPileCards;
+            _drawPile.AddCards(_drawPileCards);
+            _discardPileCards = new List<CardScript>();
+            _drawPileCards.Shuffle();
         }
-        var drawn = _drawPile.Take(toDraw).ToList();
+        var drawn = _drawPileCards.Take(toDraw).ToList();
         foreach(var card in drawn){
             card.Draw();
-            _drawPile.Remove(card);
+            _drawPileCards.Remove(card);
             hand.Add(card);
         }
+        _drawPile.RemoveCards(drawn);
         onDraw.Invoke(drawn);
     }
 
     public void DiscardHand()
     {
-        _discardPile.AddRange(hand);
+        _discardPileCards.AddRange(hand);
+        _discardPile.AddCards(hand);
         onDiscard.Invoke(hand);
         hand.Clear();
     }
     public void ClearField()
     {
         onFieldClear.Invoke(fieldOfPlay);
-        _discardPile.AddRange(fieldOfPlay.Where(c => c != null));
+        var toDiscard = fieldOfPlay.Where(c => c != null).ToList();
+        _discardPileCards.AddRange(toDiscard);
+        _discardPile.AddCards(toDiscard);
         onDiscard.Invoke(fieldOfPlay.ToList());
         fieldOfPlay = new CardScript[5];
     }

@@ -51,9 +51,9 @@ public class BattleEncounter : Encounter
     public override string Name => _enemyData.name;
 
     public override string Tooltip => 
-        $"{_enemyData.displayName}\n" +
-        $"chips: {_enemyData.Chips}\n" +
-        $"blind: {GameController.GetBlind()}\n";
+        $"~{_enemyData.displayName}\n" +
+        $"@chips: {_enemyData.Chips}\n" +
+        $"@blind: {GameController.GetBlind()}\n";
 
     public override EncounterType EncounterType => _encounterType;
     public override void BeginEncounter()

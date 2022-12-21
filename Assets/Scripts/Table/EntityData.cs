@@ -60,6 +60,7 @@ public class EntityData : ScriptableObject, IOnInit
         _cards.Add(card);
         TriggerDeckChange();
     }
+
     public void TriggerDeckChange()
     {
         OnChangeDeck?.Invoke(Cards.OrderBy(c => c.highCardRank).ToList());

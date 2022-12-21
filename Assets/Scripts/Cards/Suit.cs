@@ -11,6 +11,7 @@ public class Suit : ScriptableObject
     public string shortName;
     public string display;
     public Sprite sprite;
+    public int price;
     [SerializeField]
     private CardColor _color;
     public CardColor Color => _color;

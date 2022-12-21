@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class CoroutineQueue : MonoBehaviour
@@ -40,6 +41,7 @@ public class CoroutineQueue : MonoBehaviour
             yield return null;
         }
     }
+
     public static void Defer(IEnumerator coroutine)
     {
         Instance._queue.Enqueue(coroutine);
@@ -63,6 +65,20 @@ public class CoroutineQueue : MonoBehaviour
     {
         _queue.Clear();
         StopCoroutine(_crHandler);
+    }
+
+    private class Parallel
+    {
+        private CoroutineQueue q;
+        public List<IEnumerator> coroutines;
+        IEnumerator Execute()
+        {
+            var crs = coroutines.Select(cr => q.StartCoroutine(cr));
+            foreach(var cr in crs)
+            {
+                yield return cr;
+            }
+        }
     }
 }
 
