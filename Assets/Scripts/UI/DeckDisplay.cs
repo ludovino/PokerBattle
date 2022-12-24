@@ -5,7 +5,7 @@ using UnityEngine;
 public class DeckDisplay : MonoBehaviour
 {
     [SerializeField]
-    private CardDisplay _cardPrefab;
+    private CardScript _cardPrefab;
     private List<Card> _cards;
     [SerializeField]
     private GameObjectGrid _grid;
@@ -18,7 +18,7 @@ public class DeckDisplay : MonoBehaviour
         foreach(var card in cards)
         {
             var cardDisplay = Instantiate(_cardPrefab);
-            cardDisplay.UpdateCardDisplay(card);
+            cardDisplay.SetCard(card);
             _grid.Add(cardDisplay.gameObject);
         }
     }

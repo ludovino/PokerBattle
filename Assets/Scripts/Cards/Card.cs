@@ -69,7 +69,7 @@ public class Card : ICard, IEquatable<Card>
     }
     public bool Equals(Card other)
     {
-        return this.ToString() == other.ToString();
+        return ToString() == (other?.ToString() ?? null);
     }
     public override int GetHashCode()
     {

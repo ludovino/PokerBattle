@@ -154,7 +154,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   simpleTooltipStyle: {fileID: 11400000, guid: b60656fad1664684d8fb0085c2c6ccbb, type: 2}
-  infoLeft: 
+  infoLeft: PlayableCardDefaultTooltip
   infoRight: 
   delayInSeconds: 0.3
 --- !u!61 &1749366785108308325

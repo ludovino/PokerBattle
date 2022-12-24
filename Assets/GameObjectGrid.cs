@@ -6,6 +6,9 @@ public class GameObjectGrid : MonoBehaviour
 {
     [SerializeField]
     private float scaleFactor;
+    [SerializeField]
+    private Transform _objectParent; 
+    private List<Transform> _transforms;
     private List<GameObject> _gameObjects;
     private void Awake()
     {
@@ -15,34 +18,36 @@ public class GameObjectGrid : MonoBehaviour
     private void InitCollections()
     {
         _gameObjects = _gameObjects ?? new List<GameObject>();
+        _transforms = _transforms ?? new List<Transform>();
     }
+
     public void Add(GameObject gameObject)
     {
         var slot = new GameObject("CardSlot", typeof(RectTransform));
         slot.transform.SetParent(transform, false);
-        slot.transform.localScale = Vector3.one * scaleFactor;
-        gameObject.transform.SetParent(slot.transform);
-        gameObject.transform.localPosition = Vector3.zero;
-        gameObject.transform.localScale = Vector3.one;
+        gameObject.transform.localPosition = slot.transform.position - Vector3.forward;
+        gameObject.transform.parent = _objectParent;
+        gameObject.transform.localScale = Vector3.one * scaleFactor;
+        _transforms.Add(slot.transform);
         _gameObjects.Add(gameObject);
     }
-
-    public GameObject Take(GameObject gameObject)
+    private void Update()
     {
-        _gameObjects.Remove(gameObject);
-        var slot = gameObject.transform.parent;
-        gameObject.transform.SetParent(null, true);
-        Destroy(slot.gameObject);
-        return gameObject;
+        for(int i = 0; i < _gameObjects.Count; i++)
+        {
+            _gameObjects[i].transform.position = _transforms[i].position - Vector3.forward;
+            _gameObjects[i].transform.localScale = Vector3.one * scaleFactor;
+        }
     }
-
     public void Clear() 
     {
         InitCollections();
         _gameObjects.Clear();
+        _transforms.Clear();
         for (int i = transform.childCount - 1; i >= 0; i--)
         {
             Destroy(transform.GetChild(i).gameObject);
+            Destroy(_objectParent.GetChild(i).gameObject);
         }
     }
 }

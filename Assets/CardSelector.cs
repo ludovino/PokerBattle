@@ -2,9 +2,9 @@
 using System;
 using UnityEngine;
 using UnityEngine.Events;
-using static Animancer.Strings;
+using UnityEngine.EventSystems;
 
-public class CardSelector : MonoBehaviour
+public class CardSelector : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField]
     private OnSelectCard _onSelectCard;
@@ -13,22 +13,19 @@ public class CardSelector : MonoBehaviour
     private OnDeselectCard _onDeselectCard;
     public OnDeselectCard OnDeselectCard => _onDeselectCard;
 
-    [SerializeField]
-    private CardDisplay _cardDisplay;
-    private SimpleTooltip _tooltip;
-    private Card _card;
+    private CardScript _cardScript;
     private bool _selected;
-    public Card Card => _card;
 
     private void Awake()
     {
         _onSelectCard = OnSelectCard ?? new OnSelectCard();
         _onDeselectCard = _onDeselectCard ?? new OnDeselectCard();
-        _tooltip = GetComponent<SimpleTooltip>();
+        _cardScript = GetComponent<CardScript>();
         _selected = false;
     }
 
-    private void OnMouseDown()
+
+    public void OnPointerClick(PointerEventData eventData)
     {
         if (!_selected) Select();
         else Deselect();
@@ -36,45 +33,30 @@ public class CardSelector : MonoBehaviour
 
     public void Deselect()
     {
-        _onDeselectCard.Invoke(this);
+        _onDeselectCard.Invoke(_cardScript);
         transform.DOScale(Vector3.one, 0.2f);
-        _cardDisplay.GlowOff();
         _selected = false;
     }
 
     public void Select()
     {
-        _onSelectCard.Invoke(this);
+        _onSelectCard.Invoke(_cardScript);
         transform.DOScale(Vector3.one * 1.1f, 0.2f);
-        _cardDisplay.Glow(0.3f, Color.cyan);
         _selected = true;
-    }
-
-    public void SetCard(Card card)
-    {
-        _card = card;
-        _cardDisplay.UpdateCardDisplay(_card);
-        SetTooltip();
-    }
-
-
-    private void SetTooltip()
-    {
-        var numeralName = _card.face?.longName ?? (_card.highCardRank > 0 ? _card.highCardRank.ToString() : "Nil");
-        var suitName = _card.suit?.longName ?? "Blank";
-        var name = $"{numeralName} of {suitName}";
-
-        var effectDescription = _card.suit?.CardEffect.Description;
-        _tooltip.infoLeft = $"~{name}" +
-            $"\n@{effectDescription}";
     }
 
     private void OnDestroy()
     {
         _onSelectCard.RemoveAllListeners();
     }
+
+    internal void SetCard(Card card)
+    {
+        _cardScript.SetCard(card);
+    }
+
 }
 [Serializable]
-public class OnSelectCard : UnityEvent<CardSelector> { }
+public class OnSelectCard : UnityEvent<CardScript> { }
 [Serializable]
-public class OnDeselectCard : UnityEvent<CardSelector> { }
+public class OnDeselectCard : UnityEvent<CardScript> { }

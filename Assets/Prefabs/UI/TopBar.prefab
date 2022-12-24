@@ -1367,6 +1367,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3126573776101231744, guid: 69f9e34a07d8b2f4ca8ed86ca11d1a88, type: 3}
+      propertyPath: _cardPrefab
+      value: 
+      objectReference: {fileID: 7376886455751003658, guid: d81717a4ad3b877449d36ccf1c7840f6, type: 3}
     - target: {fileID: 3984701036889827968, guid: 69f9e34a07d8b2f4ca8ed86ca11d1a88, type: 3}
       propertyPath: m_SortingLayer
       value: 1

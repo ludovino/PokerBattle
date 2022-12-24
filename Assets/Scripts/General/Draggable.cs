@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Draggable : MonoBehaviour
+public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     private Vector3 targetPosition;
     [SerializeField]
@@ -11,21 +11,22 @@ public class Draggable : MonoBehaviour
     [SerializeField]
     private float _returnTime;
     private DropTarget dropTarget;
-    public void OnMouseDown()
+
+
+    public void OnBeginDrag(PointerEventData eventData)
     {
         if (!enabled) return;
         targetPosition = transform.position;
     }
 
-    public void OnMouseDrag()
+    public void OnDrag(PointerEventData eventData)
     {
         if (!enabled) return;
         var pos = Camera.main.ScreenToWorldPoint((Vector2)Input.mousePosition);
         pos.z = 0;
         this.transform.position = pos;
     }
-
-    public void OnMouseUp()
+    public void OnEndDrag(PointerEventData eventData)
     {
         if (!enabled) return;
         if (dropTarget != null)
@@ -37,6 +38,17 @@ public class Draggable : MonoBehaviour
             Return();
         }
     }
+    //public void OnMouseDown()
+    //{
+    //}
+
+    //public void OnMouseDrag()
+    //{
+    //}
+
+    //public void OnMouseUp()
+    //{
+    //}
     public void SetDropTarget(DropTarget target)
     {
         Debug.Log("SetDrop");

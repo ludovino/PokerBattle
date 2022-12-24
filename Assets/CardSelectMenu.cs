@@ -17,7 +17,7 @@ public class CardSelectMenu : MonoBehaviour
 
     private List<CardSelector> _cardSelectors;
     [SerializeField]
-    private List<CardSelector> _selected;
+    private List<CardScript> _selected;
     private int _toSelect;
     private List<Card> _cards;
     private bool _chosen;
@@ -33,16 +33,16 @@ public class CardSelectMenu : MonoBehaviour
     {
         _menu.SetActive(false);
     }
-    private void OnSelectCard(CardSelector selector)
+    private void OnSelectCard(CardScript selector)
     {
         if(_selectionsRemaining == 0)
         {
-            _selected.First().Deselect();
+            _selected.RemoveAt(0);
         }
         _selected.Add(selector);
     }
 
-    private void OnDeselectCard(CardSelector selector)
+    private void OnDeselectCard(CardScript selector)
     {
         _selected.Remove(selector);
     }
@@ -78,7 +78,7 @@ public class CardSelectMenu : MonoBehaviour
 
     public void StartSelect(List<Card> cards, int count)
     {
-        _selected = new List<CardSelector>();
+        _selected = new List<CardScript>();
         _cardSelectors = new List<CardSelector>();
         _toSelect = Mathf.Min(count, cards.Count);
         _cards = cards;
@@ -86,4 +86,4 @@ public class CardSelectMenu : MonoBehaviour
     }
 }
 
-public class OnSelectCards : UnityEvent<List<CardSelector>> { }
+public class OnSelectCards : UnityEvent<List<CardScript>> { }

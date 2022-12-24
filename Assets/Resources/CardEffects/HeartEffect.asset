@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f70e4e05e6f664f46ab511af902b53b4, type: 3}
   m_Name: HeartEffect
   m_EditorClassIdentifier: 
-  _description: If this card's value has been reduced in value, set it back to its
-    original value at the beginning of your turn
+  _description: If this card has been reduced in value, restore its original value
+    at the beginning of your turn
   _effectDisplay: {fileID: 2394122613409878429, guid: f44fabb8ae0573248b6eb4e952a8ab71, type: 3}
   _soundEffect: {fileID: 8300000, guid: ad4b5870ea3b82c4ea3ed6d9435712a2, type: 3}

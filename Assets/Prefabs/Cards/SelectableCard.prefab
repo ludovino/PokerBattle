@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1674840196816025112}
   - component: {fileID: -5277194215217585760}
   - component: {fileID: 6603154143072592914}
+  - component: {fileID: -6956643776178011757}
   m_Layer: 0
   m_Name: SelectableCard
   m_TagString: Untagged
@@ -75,7 +76,6 @@ MonoBehaviour:
   _onDeselectCard:
     m_PersistentCalls:
       m_Calls: []
-  _cardDisplay: {fileID: 6761594044643823967}
 --- !u!114 &-5277194215217585760
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -89,7 +89,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   simpleTooltipStyle: {fileID: 11400000, guid: b60656fad1664684d8fb0085c2c6ccbb, type: 2}
-  infoLeft: 
+  infoLeft: SelectableCardDefaultTooltip
   infoRight: 
   delayInSeconds: 0.3
 --- !u!61 &6603154143072592914
@@ -118,6 +118,28 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.9, y: 1.27}
   m_EdgeRadius: 0
+--- !u!114 &-6956643776178011757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5637046576139670525}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93665f417f295d74ea0e84f34c37ee15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cardDisplay: {fileID: 6761594044643823967}
+  onPlay:
+    m_PersistentCalls:
+      m_Calls: []
+  onDraw:
+    m_PersistentCalls:
+      m_Calls: []
+  onDiscard:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &5746128722675077379
 PrefabInstance:
   m_ObjectHideFlags: 0
