@@ -79,6 +79,13 @@ public class CardScript : MonoBehaviour, ICard
         _cardDisplay.AnimateCardDisplay(_tempCard);
     }
 
+    public void ChangeSuit(Suit suit)
+    {
+        if (suit == this.suit) return;
+        _tempCard.SetSuit(suit);
+        _cardDisplay.AnimateCardDisplay(_tempCard);
+    }
+
     internal void ExecuteEffect()
     {
         effect.Execute(_playContext);

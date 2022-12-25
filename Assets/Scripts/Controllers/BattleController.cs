@@ -184,6 +184,7 @@ public class BattleController : MonoBehaviour
     public bool Play(int slotNumber, CardScript card)
     {
         bool played = active.Play(slotNumber, card);
+        idle.OpponentPlayed(slotNumber);
         if (!played) return played;
         cardsPlayed++;
         card.Play(new PlayContext(this, active, idle, card, slotNumber));

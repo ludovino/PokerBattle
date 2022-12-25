@@ -173,6 +173,16 @@ public class Entity : MonoBehaviour
     {
         allIn.Invoke();
     }
+
+    internal void OpponentPlayed(int slotNumber)
+    {
+        var card = fieldOfPlay[slotNumber];
+        if (card is null) return;
+        if (card.suit?.CardEffect is IAfterOpponentPlay)
+        {
+            card.ExecuteEffect();
+        }
+    }
 }
 [Serializable]
 public class OnPlay : UnityEvent<CardScript, int>{}

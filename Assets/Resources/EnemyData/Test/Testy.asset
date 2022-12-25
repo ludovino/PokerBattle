@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bef32fb3f4731f4a9e77d4a77fcdabe, type: 3}
   m_Name: Testy
   m_EditorClassIdentifier: 
-  _deckString: 0-;0-;0-;0-;0-;0-;0-;0-;0-;
+  _deckString: '10-;9-;8-;4-;3-;
+
+    10-;9-;8-;4-;3-;'
   _chips: 15
   _drawBonus: 0
   _handList: {fileID: 11400000, guid: c07dc61121ce8d0438dbc38fc2d08e99, type: 2}

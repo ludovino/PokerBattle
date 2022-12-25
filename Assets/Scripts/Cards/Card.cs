@@ -56,6 +56,12 @@ public class Card : ICard, IEquatable<Card>
             _value = 10;
         }
     }
+
+    public void SetSuit(Suit suit)
+    {
+        _suit = suit;
+    }
+
     public override string ToString()
     {
         var numeralName = _face?.numeral ?? _value.ToString();

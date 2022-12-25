@@ -13,7 +13,7 @@ public class CardFactory : ScriptableObject
     private List<Face> _faces;
     [SerializeField]
     private int _highestNumeral;
-    void Awake()
+    void OnEnable()
     {
         _suits = Resources.LoadAll<Suit>("Suits").ToList();
         _faces = Resources.LoadAll<Face>("Faces").ToList();

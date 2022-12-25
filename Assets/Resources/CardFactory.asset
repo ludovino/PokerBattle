@@ -16,10 +16,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9fe51d66484359647abc193b757a5fd8, type: 2}
   - {fileID: 11400000, guid: 8e939d01707334042b0b0688499f120b, type: 2}
   - {fileID: 11400000, guid: ca6a8d14bf5afd64792716d9de248d5b, type: 2}
+  - {fileID: 11400000, guid: bb30968a9d9db4e4f8010d8d224da8e5, type: 2}
   - {fileID: 11400000, guid: 4fd153827537f544a913fb8e67cfb83a, type: 2}
+  - {fileID: 11400000, guid: 2e5f01de27574134badbe91c23e184bc, type: 2}
   _faces:
-  - {fileID: 11400000, guid: fcd1aacea6f1a414ba0e6fe38008a0d0, type: 2}
-  - {fileID: 11400000, guid: a7f26412482c96a468a84cf8fce43186, type: 2}
-  - {fileID: 11400000, guid: 241a46e83c2eeb8418f4275b48d968e5, type: 2}
   - {fileID: 11400000, guid: 9ff558177451b0040b4f06b0b573aeb9, type: 2}
+  - {fileID: 11400000, guid: fcd1aacea6f1a414ba0e6fe38008a0d0, type: 2}
+  - {fileID: 11400000, guid: 241a46e83c2eeb8418f4275b48d968e5, type: 2}
+  - {fileID: 11400000, guid: a7f26412482c96a468a84cf8fce43186, type: 2}
   _highestNumeral: 21
