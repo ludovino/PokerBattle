@@ -26,5 +26,5 @@ MonoBehaviour:
   _onChangeChips:
     m_PersistentCalls:
       m_Calls: []
-  displayName: The Boss
+  displayName: Big Terry
   chipsPerLevel: 0

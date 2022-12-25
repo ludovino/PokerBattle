@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: Act1Intermediate
   m_EditorClassIdentifier: 
   mapSprite: {fileID: 21300000, guid: 39f85c66f94a77d48a4c1ee5ab7b1de3, type: 3}
+  DisplayName: Card Shark
   _enemyList:
   - {fileID: 11400000, guid: fc7db9f60ae4ab648849013f5d5dfba9, type: 2}
   - {fileID: 11400000, guid: 942112588a0698e418d37a7945ddc4a1, type: 2}
   - {fileID: 11400000, guid: 91a88aecb4c527849a413b0019851636, type: 2}
   - {fileID: 11400000, guid: faf6f06b5cacc3a438b2134b169f042a, type: 2}
   - {fileID: 11400000, guid: e112077b0391d8c4ca736a3822357635, type: 2}
+  - {fileID: 11400000, guid: 83907dfd535ab2a4bb4a499a5e270818, type: 2}

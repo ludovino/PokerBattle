@@ -24,7 +24,7 @@ public class EncounterDisplay : MonoBehaviour
         if (encounter != null)
         {
             _tooltip.infoLeft = encounter.Tooltip;
-            _tooltip.infoRight = $"`{encounter.EncounterType?.name}";
+            _tooltip.infoRight = $"`{encounter.EncounterType?.DisplayName}";
             spriteRenderer.sprite = encounter.EncounterType?.mapSprite;
             onClick += encounter.BeginEncounter;
         }

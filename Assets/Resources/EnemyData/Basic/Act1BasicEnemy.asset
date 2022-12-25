@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Act1BasicEnemy
   m_EditorClassIdentifier: 
   mapSprite: {fileID: 21300000, guid: 39f85c66f94a77d48a4c1ee5ab7b1de3, type: 3}
+  DisplayName: Amateur
   _enemyList:
   - {fileID: 11400000, guid: a0ae2c5fadda11f42b7e536105652f54, type: 2}
   - {fileID: 11400000, guid: 3e016b041b34945419b61b50edc60adf, type: 2}
