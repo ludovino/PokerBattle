@@ -2,6 +2,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine;
 using System.Linq;
 using System.Collections;
+using System;
 
 public class GameController : MonoBehaviour
 {
@@ -33,6 +34,8 @@ public class GameController : MonoBehaviour
         _sm.RegisterTransition<MainMenu, DrawDeck>();
         _sm.RegisterTransition<DrawDeck, Map>();
         _sm.RegisterTransition<Map, Battle>();
+        _sm.RegisterTransition<Map, Shop>();
+        _sm.RegisterTransition<Shop, Map>();
         _sm.RegisterTransition<Battle, Lose>();
         _sm.RegisterTransition<Battle, Win>();
         _sm.RegisterTransition<Lose, MainMenu>();
@@ -101,6 +104,11 @@ public class GameController : MonoBehaviour
         _sm.MoveToState(new Win());
     }
 
+    internal void OpenShop()
+    {
+        _sm.MoveToState(new Shop());
+    }
+
     // main menu
     public class MainMenu : IState
     {
@@ -142,7 +150,18 @@ public class GameController : MonoBehaviour
             // Save State
         }
     }
+    public class Shop : IState
+    {
+        public void OnEnter()
+        {
+            SceneChanger.Instance.ChangeScene("Shop");
+        }
 
+        public void OnExit()
+        {
+            // Save State
+        }
+    }
     // event
 
     // shop

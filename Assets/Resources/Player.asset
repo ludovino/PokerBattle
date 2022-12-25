@@ -12,16 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31bc3567fe7fb1140a5c6f12995a21ef, type: 3}
   m_Name: Player
   m_EditorClassIdentifier: 
-  _deckString: '2H;3H;4H;5H;
+  _deckString: 'AH;AS;AC;AD;A-;
 
-    2C;3C;4C;KC;AC;
+    AH;AS;AC;AD;A-;
 
-    2S;3S;10S;
+    AH;AS;AC;AD;A-;
 
-    2D;5D;6D;7D;'
+    AH;AS;AC;AD;A-;'
   _chips: 50
   _drawBonus: 0
   _handList: {fileID: 11400000, guid: c07dc61121ce8d0438dbc38fc2d08e99, type: 2}
+  _cardPool: {fileID: 11400000, guid: cdd6b8fe49f8c2e4983b0e6df27e78ca, type: 2}
   _onChangeChips:
     m_PersistentCalls:
       m_Calls: []

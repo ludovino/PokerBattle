@@ -18,7 +18,9 @@ public class EntityData : ScriptableObject, IOnInit
     protected int _drawBonus;
     [SerializeField]
     private HandList _handList;
-    protected CardFactory _factory;
+    [SerializeField]
+    protected CardPool _cardPool;
+    private CardFactory _factory;
     protected List<Card> _cards;
     public int Chips => _currentChips;
     private int _currentChips;

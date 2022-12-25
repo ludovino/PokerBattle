@@ -10,7 +10,7 @@ public class EnemyData : EntityData
     public void LevelUp()
     {
         ChangeChips(chipsPerLevel);
-        var card = _factory.GetRandomCards(1).First();
+        var card = _cardPool.GetWithReplacement(1).First();
         AddCard(card);
     }
 }

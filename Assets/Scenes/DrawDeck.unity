@@ -940,7 +940,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fcc312307ed75b4ebb221226c0cc77f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cardFactory: {fileID: 11400000, guid: cd373071aa9b5a64aae0e83395ac59ba, type: 2}
+  _cardPool: {fileID: 11400000, guid: cdd6b8fe49f8c2e4983b0e6df27e78ca, type: 2}
   player: {fileID: 11400000, guid: ec024013c2feb2e498caea236848969d, type: 2}
   _cardDisplayPrefab: {fileID: 1326407210457350236, guid: 349e7734d511e5648b2cd65705265c6e, type: 3}
   _drawPile: {fileID: 125670332}

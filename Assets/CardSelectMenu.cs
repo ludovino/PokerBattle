@@ -37,7 +37,7 @@ public class CardSelectMenu : MonoBehaviour
     {
         if(_selectionsRemaining == 0)
         {
-            _selected.RemoveAt(0);
+            _selected.First().GetComponent<CardSelector>().Deselect();
         }
         _selected.Add(selector);
     }

@@ -28,7 +28,7 @@ public class BattleController : MonoBehaviour
     [SerializeField]
     private OnChangeChips onChangePot;
     [SerializeField]
-    private CardFactory _cardFactory;
+    private CardPool _cardFactory;
 
     private int cardsPlayed;
     
@@ -158,7 +158,7 @@ public class BattleController : MonoBehaviour
         {
             playerWin.Invoke();
             player.controller.ChooseCards(
-                _cardFactory.GetRandomCards(5), 
+                _cardFactory.GetWithReplacement(5), 
                 1, 
                 cards => {
                     cards.ForEach(card => player.entityData.AddCard(card));

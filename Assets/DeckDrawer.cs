@@ -9,7 +9,7 @@ using UnityEngine.UI;
 public class DeckDrawer : MonoBehaviour
 {
     [SerializeField]
-    private CardFactory _cardFactory;
+    private CardPool _cardPool;
     [SerializeField]
     private EntityData player;
     [SerializeField]
@@ -46,7 +46,7 @@ public class DeckDrawer : MonoBehaviour
         _displays = new List<CardDisplay>();
         DisableButtons();
         var sequence = DOTween.Sequence();
-        var cards = _cardFactory.GetStartingDeck().OrderBy(c => c.highCardRank).ToList();
+        var cards = _cardPool.GetWithoutReplacement(20, false).OrderBy(c => c.highCardRank).ToList();
         for (int i = 0; i < cards.Count; i++)
         {
             Card card = cards[i];

@@ -19,6 +19,7 @@ public class GameObjectGrid : MonoBehaviour
     {
         _gameObjects = _gameObjects ?? new List<GameObject>();
         _transforms = _transforms ?? new List<Transform>();
+        _objectParent.transform.localScale = Vector3.one * scaleFactor;
     }
 
     public void Add(GameObject gameObject)
@@ -27,7 +28,7 @@ public class GameObjectGrid : MonoBehaviour
         slot.transform.SetParent(transform, false);
         gameObject.transform.localPosition = slot.transform.position - Vector3.forward;
         gameObject.transform.parent = _objectParent;
-        gameObject.transform.localScale = Vector3.one * scaleFactor;
+        gameObject.transform.localScale = Vector3.one;
         _transforms.Add(slot.transform);
         _gameObjects.Add(gameObject);
     }
@@ -36,7 +37,6 @@ public class GameObjectGrid : MonoBehaviour
         for(int i = 0; i < _gameObjects.Count; i++)
         {
             _gameObjects[i].transform.position = _transforms[i].position - Vector3.forward;
-            _gameObjects[i].transform.localScale = Vector3.one * scaleFactor;
         }
     }
     public void Clear() 

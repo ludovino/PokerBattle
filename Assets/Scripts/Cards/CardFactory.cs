@@ -52,23 +52,4 @@ public class CardFactory : ScriptableObject
         }
         return cards;
     }
-    public List<Card> GetStartingDeck()
-    {
-        var numerals = Enumerable.Range(0, _highestNumeral + 1).Select(n => n.ToString()).ToList();
-        var lows = Enumerable.Range(0, 11).Select(n => n.ToString()).ToList();
-        var zeros = Enumerable.Range(0, 5).Select(n => "0").ToList();
-        var faceNumerals = _faces.Select(f => f.numeral).ToList();
-        var suitLetters = _suits.Select(s => s.shortName).Append("-").Append("-").ToList();
-        numerals.AddRange(lows);
-        numerals.AddRange(faceNumerals);
-        numerals.AddRange(zeros);
-        var cards = new List<Card>();
-        for (int i = 0; i < 20; i++)
-        {
-            var numeral = numerals[URandom.Range(0, numerals.Count)];
-            var suitLetter = suitLetters[URandom.Range(0, suitLetters.Count)];
-            cards.Add(GetCard(numeral + suitLetter));
-        }
-        return cards;
-    }
 }

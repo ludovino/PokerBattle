@@ -20,6 +20,7 @@ MonoBehaviour:
   _chips: 50
   _drawBonus: 0
   _handList: {fileID: 11400000, guid: c07dc61121ce8d0438dbc38fc2d08e99, type: 2}
+  _cardPool: {fileID: 11400000, guid: f3063282c2031b04db4aee5e0df8aede, type: 2}
   _onChangeChips:
     m_PersistentCalls:
       m_Calls: []

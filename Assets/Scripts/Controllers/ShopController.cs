@@ -12,7 +12,7 @@ public class ShopController : MonoBehaviour
     public TextMeshPro[] prices;
     public int removePrice;
     public TextMeshPro removePriceIndicator;
-    public CardFactory cardFactory;
+    public CardPool cardPool;
     public EntityData playerData;
     public CardSelector selectorPrefab;
     public Transform shopDeckOrigin;
@@ -21,7 +21,7 @@ public class ShopController : MonoBehaviour
 
     private void Start()
     {
-        var cards = cardFactory.GetRandomCards(cardSlots.Length).OrderByDescending(c => c.price).ToList();
+        var cards = cardPool.GetWithoutReplacement(cardSlots.Length, true).OrderByDescending(c => c.price).ToList();
         for (int i = 0; i < cardSlots.Length; i++)
         {
             Transform cardSlot = cardSlots[i];
