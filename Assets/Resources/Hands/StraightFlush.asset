@@ -13,3 +13,6 @@ MonoBehaviour:
   m_Name: StraightFlush
   m_EditorClassIdentifier: 
   _displayName: Straight Flush
+  _rank: 80
+  _rankingCardsCount: 5
+  _straight: {fileID: 11400000, guid: 7b112e6543cda7546b0e84f25545812f, type: 2}

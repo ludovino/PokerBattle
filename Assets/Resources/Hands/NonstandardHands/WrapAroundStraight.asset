@@ -9,9 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06f342d1ca7cc454ea5b927c4b3c7349, type: 3}
-  m_Name: HighCard
+  m_Script: {fileID: 11500000, guid: bf2bbc8600952d54a946b97ecbb36eee, type: 3}
+  m_Name: WrapAroundStraight
   m_EditorClassIdentifier: 
-  _displayName: High Card
-  _rank: 0
-  _rankingCardsCount: 1
+  _displayName: Corner Straight
+  _rank: 39
+  _rankingCardsCount: 5
+  sequences:
+  - J;Q;K;A;2;3;4

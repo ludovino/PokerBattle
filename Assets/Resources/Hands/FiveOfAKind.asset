@@ -13,3 +13,5 @@ MonoBehaviour:
   m_Name: FiveOfAKind
   m_EditorClassIdentifier: 
   _displayName: Five of a Kind
+  _rank: 90
+  _rankingCardsCount: 5

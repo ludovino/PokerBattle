@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyController : EntityController
@@ -11,13 +12,15 @@ public class EnemyController : EntityController
 
     private List<Suit> _flushSuits;
     private List<Card> _straightCards;
+    [SerializeField]
+    private Straight _straight;
     private int _cardsPlayed;
 
     public override void Init()
     {
         var deck = enemy.entityData.CloneDeck;
         _flushSuits = deck.Where(c => c.suit != null).GroupBy(c => c.suit).Where(g => g.Count() >= 5).Select(g => g.Key).ToList();
-        _straightCards = Straight.GetStraightCards(deck);
+        _straightCards = _straight.GetStraightCards(deck);
     }
 
     public override void StartTurn()
@@ -50,7 +53,8 @@ public class EnemyController : EntityController
         yield return new WaitForEndOfFrame();
 
         // fish for sequences and flushes
-        var sequential = enemy.played.Sequential();
+
+        var sequential = _straight.HasStraight(enemy.played.Cast<ICard>().AsReadOnlyCollection(), enemy.played.Count);
         yield return new WaitForEndOfFrame();
 
         var flushSuit = enemy.played.Suited() ? enemy.played.First().suit : null;
@@ -58,7 +62,7 @@ public class EnemyController : EntityController
 
         if (sequential && enemy.played.All(c => _straightCards.Contains(c)))
         {
-            var nextInSequence = Straight.NextSequentialValues(enemy.played);
+            var nextInSequence = _straight.NextSequentialValues(enemy.played.Cast<ICard>().ToList());
             var toPlay = enemy.hand.Where(c => nextInSequence.Contains(c.card));
             Play(toPlay);
         }

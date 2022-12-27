@@ -3,10 +3,6 @@ using System.Linq;
 
 public class TwoPair : PokerHand
 {
-    public override int rank => 20;
-
-    public override int rankingCardsCount => 4;
-
     public override string example => "AS;AC;KH;KD;QC";
 
     public override bool Evaluate(ICollection<ICard> cards) => cards
@@ -15,7 +11,7 @@ public class TwoPair : PokerHand
         .Where(g => g.Count() >= 2)
         .Count() >= 2;
 
-    protected override bool EvaluateRequired(ICollection<ICard> cards, ICollection<ICard> required)
+    public override bool EvaluateRequired(ICollection<ICard> cards, ICollection<ICard> required)
     {
         var all = cards.Concat(required).ToList();
         var pairCards = all
@@ -27,7 +23,7 @@ public class TwoPair : PokerHand
         return pairCards.Count(c => required.Contains(c)) >= required.Count() - 1;
     }
 
-    protected override CardScript[] GetHand(List<CardScript> cardScripts)
+    public override CardScript[] GetHand(List<CardScript> cardScripts)
     {
         var cards = cardScripts.GroupBy(c => c.highCardRank).Where(g => g.Count() > 1).OrderByDescending(g => g.Key).Take(2).SelectMany(g => g.Take(2)).ToList(); // get top 2 pairs
         var kicker = cardScripts.Where(c => !cards.Contains(c)).OrderByDescending(c => c.highCardRank).FirstOrDefault();

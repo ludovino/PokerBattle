@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4c84f8a0c60639f46ab6e50d42d4113e, type: 3}
-  m_Name: BasicHandList
+  m_Name: PlayerHandList
   m_EditorClassIdentifier: 
   hands:
   - {fileID: 11400000, guid: dae9bb9aa9314f84082bfc690ecd8397, type: 2}
@@ -23,3 +23,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4f8d67d414542fe4c855bd32cf1e868e, type: 2}
   - {fileID: 11400000, guid: e1e311cdc6fa2c642b3eeed7274b02e3, type: 2}
   - {fileID: 11400000, guid: aaf1ddf804cd75642aeb70a1b375014d, type: 2}
+  - {fileID: 11400000, guid: 6cef003efe5e9474e8e105d67b82c396, type: 2}
+  - {fileID: 11400000, guid: f0ae45611beeb1648af80a9aca655c9c, type: 2}

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31bc3567fe7fb1140a5c6f12995a21ef, type: 3}
   m_Name: Player
   m_EditorClassIdentifier: 
-  _deckString: "\rAF; KF; QF; JF; 7F; 12F; AF; KF; QF; JF; 7F; 12F;"
+  _deckString: QP;KV;AS;2-;3D;
   _chips: 50
   _drawBonus: 0
   _handList: {fileID: 11400000, guid: c07dc61121ce8d0438dbc38fc2d08e99, type: 2}

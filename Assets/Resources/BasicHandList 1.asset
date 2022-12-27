@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c84f8a0c60639f46ab6e50d42d4113e, type: 3}
+  m_Name: BasicHandList 1
+  m_EditorClassIdentifier: 
+  hands:
+  - {fileID: 11400000, guid: dae9bb9aa9314f84082bfc690ecd8397, type: 2}
+  - {fileID: 11400000, guid: 5c0ebafd5bd99ce4f8e40a2c804688d6, type: 2}
+  - {fileID: 11400000, guid: be2a5cbaf12dbf740b4c1c38841a45d0, type: 2}
+  - {fileID: 11400000, guid: 7b112e6543cda7546b0e84f25545812f, type: 2}
+  - {fileID: 11400000, guid: 93296e2f5f7f1474a9e570c9a2924364, type: 2}
+  - {fileID: 11400000, guid: 3534d626c86b5154a9173b3d15ddfe27, type: 2}
+  - {fileID: 11400000, guid: 4f8d67d414542fe4c855bd32cf1e868e, type: 2}
+  - {fileID: 11400000, guid: 4f8d67d414542fe4c855bd32cf1e868e, type: 2}
+  - {fileID: 11400000, guid: e1e311cdc6fa2c642b3eeed7274b02e3, type: 2}
+  - {fileID: 11400000, guid: aaf1ddf804cd75642aeb70a1b375014d, type: 2}

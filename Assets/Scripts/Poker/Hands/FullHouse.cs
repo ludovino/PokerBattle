@@ -3,10 +3,6 @@ using System.Linq;
 
 internal class FullHouse : PokerHand
 {
-    public override int rank => 60;
-
-    public override int rankingCardsCount => 5;
-
     public override string example => "10H;10C;10D;KD;KS";
 
     public override bool Evaluate(ICollection<ICard> cards)
@@ -15,7 +11,7 @@ internal class FullHouse : PokerHand
         return groups.Count(g => g.Count() >= 3) >= 1 && groups.Count(g => g.Count() >= 2) >= 2;
     }
 
-    protected override bool EvaluateRequired(ICollection<ICard> cards, ICollection<ICard> required)
+    public override bool EvaluateRequired(ICollection<ICard> cards, ICollection<ICard> required)
     {
         var distinctValues = required.Select(r => r.highCardRank).Where(v => v > 0).Distinct().ToList();
         if (distinctValues.Count > 2 || required.Count == 4 && distinctValues.Count == 1) return false;
@@ -25,7 +21,7 @@ internal class FullHouse : PokerHand
        
     }
 
-    protected override CardScript[] GetHand(List<CardScript> cardScripts)
+    public override CardScript[] GetHand(List<CardScript> cardScripts)
     {
         var groups = cardScripts.Where(c => c.highCardRank > 0).GroupBy(c => c.highCardRank).Where(g => g.Count() >= 2).ToList();
         var threeGroup = groups.Where(g => g.Count() >= 3).OrderByDescending(g => g.First().highCardRank).First();

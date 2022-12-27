@@ -9,9 +9,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 525f2da9569c8fa42a02a99f55f0d927, type: 3}
-  m_Name: FullHouse
+  m_Script: {fileID: 11500000, guid: bf2bbc8600952d54a946b97ecbb36eee, type: 3}
+  m_Name: SkipStraight
   m_EditorClassIdentifier: 
-  _displayName: Full House
-  _rank: 60
+  _displayName: Skip Straight
+  _rank: 38
   _rankingCardsCount: 5
+  sequences:
+  - 15;17;19;21;Q;A
+  - 14;16;18;20;J;K
+  - 3;5;7;9;J;K
+  - 4;6;8;10;Q;A;
+  - 3;5;7;9;11;13;15;17;19;21
+  - 2;4;6;8;10;12;14;16;18;20
+  - A;3;5;7;9
+  - 1;3;5;7;9

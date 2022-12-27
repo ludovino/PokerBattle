@@ -13,3 +13,5 @@ MonoBehaviour:
   m_Name: Flush
   m_EditorClassIdentifier: 
   _displayName: Flush
+  _rank: 50
+  _rankingCardsCount: 5

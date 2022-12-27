@@ -13,3 +13,5 @@ MonoBehaviour:
   m_Name: Pair
   m_EditorClassIdentifier: 
   _displayName: Pair
+  _rank: 10
+  _rankingCardsCount: 2

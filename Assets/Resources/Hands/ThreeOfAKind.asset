@@ -13,3 +13,5 @@ MonoBehaviour:
   m_Name: ThreeOfAKind
   m_EditorClassIdentifier: 
   _displayName: Three of a Kind
+  _rank: 30
+  _rankingCardsCount: 3

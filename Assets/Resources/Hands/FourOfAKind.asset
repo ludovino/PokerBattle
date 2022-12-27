@@ -13,3 +13,5 @@ MonoBehaviour:
   m_Name: FourOfAKind
   m_EditorClassIdentifier: 
   _displayName: Four of a Kind
+  _rank: 70
+  _rankingCardsCount: 4

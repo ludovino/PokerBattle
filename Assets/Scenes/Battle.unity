@@ -2282,6 +2282,7 @@ MonoBehaviour:
   battle: {fileID: 1464444206}
   enemy: {fileID: 935539695}
   player: {fileID: 2119824918}
+  _straight: {fileID: 11400000, guid: 7b112e6543cda7546b0e84f25545812f, type: 2}
 --- !u!1 &967553582
 GameObject:
   m_ObjectHideFlags: 0
