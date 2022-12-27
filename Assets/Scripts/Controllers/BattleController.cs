@@ -31,7 +31,10 @@ public class BattleController : MonoBehaviour
     private CardPool _cardFactory;
 
     private int cardsPlayed;
-    
+    private int handCount = 0;
+    private int blindIncreaseThreshold = 3;
+    private int blind;
+
     private void Awake()
     {
         onEvaluate = onEvaluate ?? new OnEvaluate();
@@ -89,7 +92,7 @@ public class BattleController : MonoBehaviour
     }
     public void Init(EntityData playerData, EnemyData enemyData)
     {
-        var blind = GameController.GetBlind();
+        blind = GameController.GetBlind();
         player.Init(playerData, blind);
         enemy.Init(enemyData, blind);
         onChangePot.Invoke(0, 0, 0);
@@ -123,6 +126,11 @@ public class BattleController : MonoBehaviour
 
     private void Evaluate()
     {
+        handCount++;
+        if(handCount % blindIncreaseThreshold == 0)
+        {
+            IncreaseBlinds();
+        }
         var playerHand = player.Evaluate();
         var enemyHand = enemy.Evaluate();
         var wld = playerHand.CompareTo(enemyHand);
@@ -141,7 +149,7 @@ public class BattleController : MonoBehaviour
         }
         else
         {
-            AddToPot(loser, eval.winningHand.chipCost);
+            //AddToPot(loser, eval.winningHand.chipCost);
             eval.winningHand.rankingCards.ForEach(c => { if (c.effect is IOnWinHand) c.ExecuteEffect(); });
             TakeHouseCut();
             TakePot(winner);
@@ -175,6 +183,14 @@ public class BattleController : MonoBehaviour
         StartRound();
     }
 
+    private void IncreaseBlinds()
+    {
+        blind += blind;
+        player.blind = blind;
+        enemy.blind += blind;
+        _blindText.text = $"{blind} blind";
+    }
+
     private void TakeHouseCut()
     {
         var change = pot * houseCut;
@@ -193,9 +209,7 @@ public class BattleController : MonoBehaviour
     public bool CanEndTurn()
     {
         if(player != active) return false;
-        var opponentFull = idle.slotsRemaining == 0;
-        if (opponentFull && active.slotsRemaining == 0) return true;
-        if (cardsPlayed == 0 || opponentFull || active.chips == 0 && active.slotsRemaining > 0)
+        if (cardsPlayed == 0 || active.chips == 0 && active.slotsRemaining > 0)
         {
             return false;
         }
@@ -209,13 +223,20 @@ public class BattleController : MonoBehaviour
             Evaluate();
             return true;
         }
-        if(cardsPlayed == 0 || opponentFull || active.chips == 0 && active.slotsRemaining > 0)
+        if(cardsPlayed == 0 || active.chips == 0 && active.slotsRemaining > 0)
         {
             return false;
         }
-        var swap = active;
-        active = idle;
-        idle = swap;
+
+        active.DiscardHand();
+
+        if (!opponentFull)
+        {
+            var swap = active;
+            active = idle;
+            idle = swap;
+        }
+
         MoveToState(new PlayerTurn(this));
         return true;
     }
@@ -248,7 +269,6 @@ public class BattleController : MonoBehaviour
         }
         public void OnExit()
         {
-            _player.DiscardHand();
         }
     }
 }
