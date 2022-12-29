@@ -1,8 +1,5 @@
 using UnityEngine;
-using TMPro;
 using UnityEngine.Events;
-using TMPro.EditorUtilities;
-using System;
 
 public class CardScript : MonoBehaviour, ICard
 {

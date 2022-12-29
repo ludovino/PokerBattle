@@ -8,7 +8,8 @@ public class CardPool : ScriptableObject
 {
     [SerializeField]
     private CardFactory _cardFactory;
-    public List<Suit> suits;
+    [SerializeField]
+    private List<Suit> _suits;
 
     public List<Card> GetWithReplacement(int count)
     {
@@ -16,7 +17,7 @@ public class CardPool : ScriptableObject
         var numeralList = GetNumerals();
         for(int i = 0; i < count; i++)
         {
-            var suit = suits[URandom.Range(0, suits.Count)];
+            var suit = _suits[URandom.Range(0, _suits.Count)];
             var numeral = numeralList[URandom.Range(0, numeralList.Count)];
             var card = _cardFactory.GetCard(numeral + SuitName(suit));
             cardList.Add(card);
@@ -31,11 +32,11 @@ public class CardPool : ScriptableObject
         var cardList = new List<string>();
         if (eachSuit)
         {
-            cardList = suits.SelectMany(s => numeralList.Select(n => n + SuitName(s))).ToList();
+            cardList = _suits.SelectMany(s => numeralList.Select(n => n + SuitName(s))).ToList();
         }
         else
         {
-            cardList = numeralList.Select(n => n + SuitName(suits[URandom.Range(0, suits.Count)])).ToList();
+            cardList = numeralList.Select(n => n + SuitName(_suits[URandom.Range(0, _suits.Count)])).ToList();
         }
         cardList.Shuffle();
         return cardList.Take(count).Select(s => _cardFactory.GetCard(s)).ToList();
