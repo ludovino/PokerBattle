@@ -9,10 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89626c51b5469954a98674806c01d599, type: 3}
-  m_Name: PoisonEffect
+  m_Script: {fileID: 11500000, guid: c03f3c2bd30f0d64ea4ed07bba062794, type: 3}
+  m_Name: LifeEffect
   m_EditorClassIdentifier: 
-  _description: '@on turn start: `reduce the card opposite by 1'
+  _description: '@on play: `take chips equal to the initial blind'
   _effectDisplay: {fileID: 2394122613409878429, guid: f44fabb8ae0573248b6eb4e952a8ab71, type: 3}
   _soundEffect: {fileID: 8300000, guid: d6ec0c89bf198d54e8b605ccb3518d39, type: 3}
-  damage: 1

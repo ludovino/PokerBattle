@@ -80,12 +80,6 @@ public class DeckDrawer : MonoBehaviour
         CoroutineQueue.Defer(DrawDeck());
     }
 
-    public void Go()
-    {
-        player.SetDeck(_cards);
-        GameController.Instance.DeckChosen();
-    }
-
     private void EnableButtons()
     {
        foreach(var button in _buttons)

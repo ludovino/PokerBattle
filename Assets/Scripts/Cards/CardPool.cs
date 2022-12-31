@@ -63,7 +63,15 @@ public class CardPool : ScriptableObject
         }
         return numeralList;
     }
-
+    public void SetSuits(List<Suit> suits, int suitCount = 5)
+    {
+        _suits.Clear();
+        _suits.AddRange(suits);
+        if(_suits.Count < suitCount)
+        {
+            _suits.AddRange(Enumerable.Repeat<Suit>(null, suitCount - _suits.Count));
+        }
+    }
     public List<NumeralCount> numerals;
     public List<FaceCount> faces;
     [Serializable]

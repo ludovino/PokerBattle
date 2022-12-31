@@ -33,6 +33,8 @@ public class BattleController : MonoBehaviour
     private int cardsPlayed;
     private int handCount = 0;
     private int blindIncreaseThreshold = 3;
+    private int startingBlind;
+    public int StartingBlind => startingBlind;
     private int blind;
 
     private void Awake()
@@ -68,6 +70,16 @@ public class BattleController : MonoBehaviour
         taker.ChangeChips(startingAmount);
     }
 
+    public void TakeFromPot(Entity taker, int amount)
+    {
+        var startingAmount = pot;
+        var currentAmount = pot - amount;
+        var change = -amount;
+        pot = currentAmount;
+        onChangePot.Invoke(startingAmount, currentAmount, change);
+        taker.ChangeChips(amount);
+    }
+
     private void SplitPot()
     {
         var startingAmount = pot;
@@ -92,7 +104,8 @@ public class BattleController : MonoBehaviour
     }
     public void Init(EntityData playerData, EnemyData enemyData)
     {
-        blind = GameController.GetBlind();
+        startingBlind = GameController.GetBlind();
+        blind = startingBlind;
         player.Init(playerData, blind);
         enemy.Init(enemyData, blind);
         onChangePot.Invoke(0, 0, 0);
@@ -187,7 +200,7 @@ public class BattleController : MonoBehaviour
     {
         blind += blind;
         player.blind = blind;
-        enemy.blind += blind;
+        enemy.blind = blind;
         _blindText.text = $"{blind} blind";
     }
 

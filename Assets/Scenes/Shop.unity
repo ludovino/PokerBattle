@@ -2798,7 +2798,8 @@ MonoBehaviour:
   prices: []
   removePrice: 20
   removePriceIndicator: {fileID: 0}
-  cardPool: {fileID: 11400000, guid: 0ea848f8d6016614296c7d082f3e679b, type: 2}
+  playerCardPool: {fileID: 11400000, guid: cdd6b8fe49f8c2e4983b0e6df27e78ca, type: 2}
+  shopCardPool: {fileID: 11400000, guid: 0ea848f8d6016614296c7d082f3e679b, type: 2}
   playerData: {fileID: 11400000, guid: ec024013c2feb2e498caea236848969d, type: 2}
   selectorPrefab: {fileID: 1674840196816025112, guid: 4e2cb71d6ec9ad24e99774f681555e4a, type: 3}
   shopDeckOrigin: {fileID: 1992562092}

@@ -10,21 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 985267a4397681245811a4abf44da0ea, type: 3}
-  m_Name: Poison
+  m_Name: Blood
   m_EditorClassIdentifier: 
-  longName: Poison
-  shortName: P
-  display: P
-  sprite: {fileID: 21300000, guid: 1b0c9f229deadc442a7b38753d5adeec, type: 3}
-  price: 10
-  _color: {fileID: 11400000, guid: 30cc302c68a48b449915005287fadeae, type: 2}
+  longName: Blood
+  shortName: B
+  display: B
+  sprite: {fileID: 21300000, guid: 074f3bfc1651c694bba727f952f4178a, type: 3}
+  price: 20
+  _color: {fileID: 11400000, guid: aeca136274fa3ad448e73d4fde27893a, type: 2}
   faceSprites:
   - face: {fileID: 11400000, guid: 9ff558177451b0040b4f06b0b573aeb9, type: 2}
     sprite: {fileID: 0}
   - face: {fileID: 11400000, guid: fcd1aacea6f1a414ba0e6fe38008a0d0, type: 2}
-    sprite: {fileID: 21300000, guid: bf1ddac3725fb0249b2bdc5e6b484840, type: 3}
+    sprite: {fileID: 21300000, guid: 39ee9124ace213446b727c999f8023ad, type: 3}
   - face: {fileID: 11400000, guid: 241a46e83c2eeb8418f4275b48d968e5, type: 2}
-    sprite: {fileID: 21300000, guid: 3f13b58a1257abd4c80a01ef8a9111c3, type: 3}
+    sprite: {fileID: 21300000, guid: 587d8214144dccb47bef86ae8fffaf4b, type: 3}
   - face: {fileID: 11400000, guid: a7f26412482c96a468a84cf8fce43186, type: 2}
-    sprite: {fileID: 21300000, guid: bfacbf5a571d02c4492e2b1dbdfc1783, type: 3}
-  _effect: {fileID: 11400000, guid: 89f18276e672c2b44884a92cb5a9f9e0, type: 2}
+    sprite: {fileID: 21300000, guid: 2299f70765ed99c4ab9be7369c69005a, type: 3}
+  _effect: {fileID: 11400000, guid: 7d8b14f1f091f4e408bc359bf3585743, type: 2}

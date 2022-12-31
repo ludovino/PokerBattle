@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c7177b724b1bf74f8f66d4621cfec65, type: 3}
   m_Name: SpadeEffect
   m_EditorClassIdentifier: 
-  _description: Reduce the value of card opposite by 1 rank
+  _description: '@on play: `reduce the value of card opposite by 1 rank'
   _effectDisplay: {fileID: 2394122613409878429, guid: f44fabb8ae0573248b6eb4e952a8ab71, type: 3}
   _soundEffect: {fileID: 8300000, guid: c3a4bfcc96421d84bab524328c60411b, type: 3}
   damage: 1

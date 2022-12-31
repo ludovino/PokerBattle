@@ -12,7 +12,8 @@ public class ShopController : MonoBehaviour
     public TextMeshPro[] prices;
     public int removePrice;
     public TextMeshPro removePriceIndicator;
-    public CardPool cardPool;
+    public CardPool playerCardPool;
+    public CardPool shopCardPool;
     public EntityData playerData;
     public CardSelector selectorPrefab;
     public Transform shopDeckOrigin;
@@ -21,7 +22,8 @@ public class ShopController : MonoBehaviour
 
     private void Start()
     {
-        var cards = cardPool.GetWithoutReplacement(cardSlots.Length, true).OrderByDescending(c => c.price).ToList();
+        var cards = playerCardPool.GetWithoutReplacement(5, true).OrderByDescending(c => c.price).ToList();
+        cards.AddRange(shopCardPool.GetWithoutReplacement(5, true).OrderByDescending(c => c.price));
         for (int i = 0; i < cardSlots.Length; i++)
         {
             Transform cardSlot = cardSlots[i];

@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6091e7aaa122ee04c9e373a602ce52c0, type: 3}
   m_Name: FishEffect
   m_EditorClassIdentifier: 
-  _description: Draw an extra card at the start of your turn
+  _description: '@on play: `draw a card'
   _effectDisplay: {fileID: 2394122613409878429, guid: f44fabb8ae0573248b6eb4e952a8ab71, type: 3}
   _soundEffect: {fileID: 8300000, guid: 1fe250ec1951cba47b75849e8da3c2f3, type: 3}

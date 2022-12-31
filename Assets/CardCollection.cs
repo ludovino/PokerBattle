@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using static HandResultDisplay;
 
 public class CardCollection : MonoBehaviour
 {
@@ -81,6 +80,11 @@ public class CardCollection : MonoBehaviour
             card.transform.rotation = Quaternion.Euler(0, yRotation, 0);
             card.transform.localScale = Vector3.one * _scale;
         }
+    }
+
+    public void Clear()
+    {
+        _cards.Clear();
     }
 
     public IEnumerator AddCards(IReadOnlyList<GameObject> cards)
