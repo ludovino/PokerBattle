@@ -72,12 +72,12 @@ public class BattleController : MonoBehaviour
 
     public void TakeFromPot(Entity taker, int amount)
     {
+        var change = Mathf.Min(amount, pot);
         var startingAmount = pot;
         var currentAmount = pot - amount;
-        var change = -amount;
         pot = currentAmount;
-        onChangePot.Invoke(startingAmount, currentAmount, change);
-        taker.ChangeChips(amount);
+        onChangePot.Invoke(startingAmount, currentAmount, -change);
+        taker.ChangeChips(change);
     }
 
     private void SplitPot()

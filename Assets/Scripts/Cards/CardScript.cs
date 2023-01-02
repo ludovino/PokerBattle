@@ -61,6 +61,7 @@ public class CardScript : MonoBehaviour, ICard
     public void Discard()
     {
         _playContext = null;
+        ResetCard(true);
         onDiscard.Invoke();
     }
     public void ResetCard(bool animate = false)
@@ -93,7 +94,7 @@ public class CardScript : MonoBehaviour, ICard
         var numeralName = face?.longName ?? (highCardRank > 0 ? highCardRank.ToString() : "Nil");
         var suitName = suit?.longName ?? "Nothing";
         var name = $"{numeralName} of {suitName}";
-
+        if (highCardRank == 0 && suit == null) name = "blank";
         var effectDescription = suit?.CardEffect.Description;
         _tooltip.infoLeft = $"~{name}" +
             $"\n@{effectDescription}";

@@ -2821,7 +2821,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 2119824918}
   enemy: {fileID: 935539695}
-  houseCut: 0.2
+  houseCut: 0.1
   _houseCutText: {fileID: 802978126}
   _blindText: {fileID: 845144476}
   onEvaluate:
