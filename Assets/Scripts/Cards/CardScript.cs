@@ -11,15 +11,16 @@ public class CardScript : MonoBehaviour, ICard
     private Card _card;
     private Card _tempCard;
     private Draggable _draggable;
-    private PlayContext _playContext;
-
+    private CardEffectContext _playContext;
+    private EntityData _owner;
     public bool Draggable { get { return _draggable.enabled; } set { _draggable.enabled = value; } }
-    public void SetCard(Card card)
+    public void SetCard(Card card, EntityData owner)
     {
         _card = card;
         _tempCard = _card.Clone();
         gameObject.name = card.ToString();
         _cardDisplay.UpdateCardDisplay(this);
+        _owner = owner;
         SetTooltip();
     }
     public Card card => _tempCard ?? _card;
@@ -28,8 +29,7 @@ public class CardScript : MonoBehaviour, ICard
     public string numeral => card.numeral;
     public Suit suit => card.suit;
     public Face face => card.face;
-    public CardEffect effect => suit?.CardEffect;
-    public PlayContext playContext => _playContext;
+    public CardEffectContext playContext => _playContext;
     public int valueDifference => _tempCard.highCardRank - _card.highCardRank;
     private SimpleTooltip _tooltip;
 
@@ -47,15 +47,14 @@ public class CardScript : MonoBehaviour, ICard
         if (!_cardDisplay.FaceUp) _tooltip.HideTooltip();
     }
 
-    public void Play(PlayContext context)
+    public void Play(CardEffectContext context)
     {
         _playContext = context;
-        if (effect is IOnPlay) ExecuteEffect();
         onPlay.Invoke();
     }
-    public void Draw()
+    public void Draw(CardEffectContext context)
     {
-        _playContext = null;
+        _playContext = context;
         onDraw.Invoke();
     }
     public void Discard()
@@ -84,10 +83,6 @@ public class CardScript : MonoBehaviour, ICard
         _cardDisplay.AnimateCardDisplay(_tempCard);
     }
 
-    internal void ExecuteEffect()
-    {
-        effect.Execute(_playContext);
-    }
 
     private void SetTooltip()
     {
@@ -95,7 +90,7 @@ public class CardScript : MonoBehaviour, ICard
         var suitName = suit?.longName ?? "Nothing";
         var name = $"{numeralName} of {suitName}";
         if (highCardRank == 0 && suit == null) name = "blank";
-        var effectDescription = suit?.CardEffect.Description;
+        var effectDescription = _owner.EffectList.CardEffectDescription(this);
         _tooltip.infoLeft = $"~{name}" +
             $"\n@{effectDescription}";
     }

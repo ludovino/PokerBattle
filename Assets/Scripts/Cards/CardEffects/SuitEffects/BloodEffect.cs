@@ -1,7 +1,8 @@
-﻿internal class BloodEffect : CardEffect, IOnPlay
+﻿internal class BloodEffect : SuitEffect, IOnPlay
 {
     public int damage;
-    public override void Execute(PlayContext context)
+
+    public override void Execute(CardEffectContext context)
     {
         var enemyCard = context.Opponent.fieldOfPlay[context.PlayIndex];
         if (enemyCard is null || enemyCard.highCardRank == 0) return;

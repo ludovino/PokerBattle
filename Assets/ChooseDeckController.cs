@@ -89,7 +89,7 @@ public class ChooseDeckController : MonoBehaviour
         foreach(var card in _cards)
         {
             var cardObj = Instantiate(_cardPrefab, _drawOrigin.position, Quaternion.identity);
-            cardObj.SetCard(card);
+            cardObj.SetCard(card, _player);
             _cardObjects.Add(cardObj.gameObject);
         }
 

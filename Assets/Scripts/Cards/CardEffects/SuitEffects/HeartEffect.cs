@@ -1,6 +1,6 @@
-﻿public class HeartEffect : CardEffect, IOnPlayerTurn
+﻿public class HeartEffect : SuitEffect, IOnPlayerTurn
 {
-    public override void Execute(PlayContext context)
+    public override void Execute(CardEffectContext context)
     {
         if (context.Card.valueDifference >= 0) return;
         DoEffect(context);

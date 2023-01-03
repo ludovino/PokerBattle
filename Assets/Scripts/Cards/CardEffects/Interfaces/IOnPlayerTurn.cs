@@ -1,3 +1,1 @@
-﻿internal interface IOnPlayerTurn
-{
-}
+﻿internal interface IOnPlayerTurn : ICardEffect {}

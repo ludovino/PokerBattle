@@ -1,3 +1,1 @@
-﻿public interface IOnPlay
-{
-}
+﻿public interface IOnPlay : ICardEffect {}

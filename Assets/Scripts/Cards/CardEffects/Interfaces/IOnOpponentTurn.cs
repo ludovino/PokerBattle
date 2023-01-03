@@ -1,3 +1,1 @@
-﻿public interface IOnOpponentTurn
-{
-}
+﻿public interface IOnOpponentTurn : ICardEffect {}

@@ -1,3 +1,1 @@
-﻿public interface IOnWinHand
-{
-}
+﻿public interface IOnWinHand : ICardEffect {}

@@ -9,9 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f70e4e05e6f664f46ab511af902b53b4, type: 3}
-  m_Name: HeartEffect
+  m_Script: {fileID: 11500000, guid: c03f3c2bd30f0d64ea4ed07bba062794, type: 3}
+  m_Name: LifeEffect
   m_EditorClassIdentifier: 
-  _description: '@on turn start: `regain any value this card has lost'
+  _description: '@on play: `take chips equal to the initial blind'
+  Suit: {fileID: 11400000, guid: 9bee05c9d2a3a544fa22e53d78245666, type: 2}
   _effectDisplay: {fileID: 2394122613409878429, guid: f44fabb8ae0573248b6eb4e952a8ab71, type: 3}
-  _soundEffect: {fileID: 8300000, guid: ad4b5870ea3b82c4ea3ed6d9435712a2, type: 3}
+  _soundEffect: {fileID: 8300000, guid: d6ec0c89bf198d54e8b605ccb3518d39, type: 3}

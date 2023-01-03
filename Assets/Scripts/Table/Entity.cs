@@ -29,13 +29,17 @@ public class Entity : MonoBehaviour
     public OnChangeChips onChangeChips;
     public UnityEvent allIn;
     public List<Card> played => fieldOfPlay.Where(c => c != null).Select(c => c.card).ToList();
+    private BattleController _battleController;
 
     public void Awake()
     {
         InitializeCollections();
         InitializeEvents();
     }
-
+    public void Start()
+    {
+        _battleController = FindObjectOfType<BattleController>();
+    }
     private void InitializeEvents()
     {
         onDraw = onDraw ?? new OnDraw();
@@ -56,7 +60,7 @@ public class Entity : MonoBehaviour
         foreach (var card in decklist)
         {
             var cardObj = Instantiate(cardPrefab).GetComponent<CardScript>();
-            cardObj.SetCard(card);
+            cardObj.SetCard(card, entityData);
             _drawPileCards.Add(cardObj);
         }
 
@@ -89,14 +93,20 @@ public class Entity : MonoBehaviour
 
     public void OnTurnStart()
     {
-        var onStartCards = fieldOfPlay.Where(c => c?.effect is IOnPlayerTurn).ToList();
-        onStartCards.ForEach(c => c.ExecuteEffect());
+        var onStartCards = fieldOfPlay.Where(c => c != null);
+        foreach (var card in onStartCards)
+        {
+            entityData.EffectList.DoCardEffects<IOnPlayerTurn>(card, card.playContext);
+        }
     }
 
     public void OnOpponentTurnStart()
     {
-        var onStartCards = fieldOfPlay.Where(c => c?.effect is IOnOpponentTurn).ToList();
-        onStartCards.ForEach(c => c.ExecuteEffect());
+        var onStartCards = fieldOfPlay.Where(c => c != null);
+        foreach (var card in onStartCards)
+        {
+            entityData.EffectList.DoCardEffects<IOnOpponentTurn>(card, card.playContext);
+        }
     }
 
     public void ChangeChips(int change)
@@ -144,7 +154,7 @@ public class Entity : MonoBehaviour
         }
         var drawn = _drawPileCards.Take(toDraw).ToList();
         foreach(var card in drawn){
-            card.Draw();
+            card.Draw(new CardEffectContext(_battleController, this, null, card));
             _drawPileCards.Remove(card);
             hand.Add(card);
         }
@@ -178,10 +188,7 @@ public class Entity : MonoBehaviour
     {
         var card = fieldOfPlay[slotNumber];
         if (card is null) return;
-        if (card.suit?.CardEffect is IAfterOpponentPlay)
-        {
-            card.ExecuteEffect();
-        }
+        entityData.EffectList.DoCardEffects<IAfterOpponentPlay>(card, card.playContext);
     }
 }
 [Serializable]
@@ -194,3 +201,19 @@ public class OnDiscard : UnityEvent<List<CardScript>>{}
 public class OnFieldClear : UnityEvent<CardScript[]>{}
 [Serializable]
 public class OnChangeChips : UnityEvent<int, int, int>{}
+
+public class DrawContext
+{
+    private Entity _entity;
+    private CardScript _card;
+    private BattleController _battle;
+    public Entity Entity => _entity;
+    public CardScript Card => _card;
+    public BattleController Battle => _battle;
+    public DrawContext(BattleController battle, Entity entity, CardScript card)
+    {
+        _entity = entity;
+        _card = card;
+        _battle = battle;
+    }
+}

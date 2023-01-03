@@ -13,7 +13,7 @@ public class CardEffectDisplay : MonoBehaviour
         _sprite.enabled = false;
     }
 
-    public void Init(PlayContext context, AudioClip soundEffect)
+    public void Init(CardEffectContext context, AudioClip soundEffect)
     {
         var suit = context.Card.suit;
         _sprite.sprite = suit.sprite;
@@ -23,7 +23,7 @@ public class CardEffectDisplay : MonoBehaviour
         CoroutineQueue.Defer(Animate(context, soundEffect));
     }
 
-    private IEnumerator Animate(PlayContext context, AudioClip soundEffect)
+    private IEnumerator Animate(CardEffectContext context, AudioClip soundEffect)
     {
         yield return null;
         _sprite.enabled = true;

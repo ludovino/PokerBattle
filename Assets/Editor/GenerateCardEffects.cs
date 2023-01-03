@@ -15,7 +15,7 @@ internal class GenerateCardEffects : MonoBehaviour
     private static void Generate()
     {
         var cardEffects = AppDomain.CurrentDomain.GetAssemblies().SelectMany(a => a.GetTypes())
-        .Where(type => type.IsSubclassOf(typeof(CardEffect)))
+        .Where(type => type.IsSubclassOf(typeof(SuitEffect)))
         .Where(type => !AssetDatabase.FindAssets($"t:{type.Name}", new string[] { FILE_PATH }).Any())
         .ToList();
 

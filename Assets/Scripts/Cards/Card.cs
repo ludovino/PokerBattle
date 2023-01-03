@@ -32,8 +32,6 @@ public class Card : ICard, IEquatable<Card>
 
     public Face face => _face;
 
-    public CardEffect effect => suit?.CardEffect;
-
     public void Change(int change)
     {
         if (change == 0) return;

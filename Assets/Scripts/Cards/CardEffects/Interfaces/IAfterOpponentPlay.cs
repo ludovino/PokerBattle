@@ -1,3 +1,1 @@
-﻿public interface IAfterOpponentPlay
-{
-}
+﻿public interface IAfterOpponentPlay : ICardEffect{}

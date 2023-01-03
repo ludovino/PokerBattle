@@ -330,6 +330,7 @@ MonoBehaviour:
 
     @Suitless cards have no suit effects and do not count
     towards flushes'
+  _effectList: {fileID: 11400000, guid: e2e7a2da6b0a7084d9f5275336063444, type: 2}
 --- !u!1 &596702305535349584
 GameObject:
   m_ObjectHideFlags: 0

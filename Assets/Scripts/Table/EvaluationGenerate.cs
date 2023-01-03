@@ -17,7 +17,8 @@ public class EvaluationGenerate : MonoBehaviour
     Transform _enemyHandPosition;
     [SerializeField]
     CardScript _cardPrefab;
-
+    [SerializeField]
+    EntityData _entityData;
     [SerializeField]
     OnEvaluate _onEvaluate;
 
@@ -54,7 +55,7 @@ public class EvaluationGenerate : MonoBehaviour
         {
             Card card = cards[i];
             var cardScript = Instantiate(_cardPrefab);
-            cardScript.SetCard(card);
+            cardScript.SetCard(card, _entityData);
             cardScript.transform.position = position + new Vector3(positions[i], 0, 0);
             cardScript.gameObject.SetActive(true);
             cardScripts.Add(cardScript);

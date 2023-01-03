@@ -1,7 +1,7 @@
 ﻿
-public class DiamondEffect : CardEffect, IOnOpponentTurn
+public class DiamondEffect : SuitEffect, IOnOpponentTurn
 {
-    public override void Execute(PlayContext context)
+    public override void Execute(CardEffectContext context)
     {
         if (context.Opponent.chips <= 0) return;
         DoEffect(context);

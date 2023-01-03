@@ -50,9 +50,9 @@ public class CardSelector : MonoBehaviour, IPointerClickHandler
         _onSelectCard.RemoveAllListeners();
     }
 
-    internal void SetCard(Card card)
+    internal void SetCard(Card card, EntityData owner)
     {
-        _cardScript.SetCard(card);
+        _cardScript.SetCard(card, owner);
     }
 
 }

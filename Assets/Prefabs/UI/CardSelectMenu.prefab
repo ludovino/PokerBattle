@@ -476,6 +476,7 @@ MonoBehaviour:
   _menu: {fileID: 5881647150238862471}
   _cardSelectionPrefab: {fileID: 1674840196816025112, guid: 4e2cb71d6ec9ad24e99774f681555e4a, type: 3}
   _grid: {fileID: 7328452190122325570}
+  _owner: {fileID: 11400000, guid: ec024013c2feb2e498caea236848969d, type: 2}
   _selected: []
 --- !u!1 &4554450436701321702
 GameObject:

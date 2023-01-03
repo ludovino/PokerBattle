@@ -14,6 +14,8 @@ public class CardSelectMenu : MonoBehaviour
     private GameObjectGrid _grid;
     [SerializeField]
     private OnSelectCards _onSelect;
+    [SerializeField]
+    private EntityData _owner;
 
     private List<CardSelector> _cardSelectors;
     [SerializeField]
@@ -68,7 +70,7 @@ public class CardSelectMenu : MonoBehaviour
             var cardSelector = Instantiate(_cardSelectionPrefab);
             cardSelector.OnSelectCard.AddListener(OnSelectCard);
             cardSelector.OnDeselectCard.AddListener(OnDeselectCard);
-            cardSelector.SetCard(card);
+            cardSelector.SetCard(card, _owner);
             _grid.Add(cardSelector.gameObject);
             _cardSelectors.Add(cardSelector);
         }

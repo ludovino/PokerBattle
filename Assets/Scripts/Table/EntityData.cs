@@ -18,6 +18,8 @@ public class EntityData : ScriptableObject, IOnInit
     protected int _drawBonus;
     [SerializeField]
     private HandList _handList;
+    [SerializeField] 
+    CardEffectList _effectList;
     [SerializeField]
     protected CardPool _cardPool;
     private CardFactory _factory;
@@ -26,6 +28,7 @@ public class EntityData : ScriptableObject, IOnInit
     private int _currentChips;
     public int DrawBonus => _drawBonus;
     public HandList HandList => _handList;
+    public CardEffectList EffectList => _effectList;
     public IReadOnlyList<Card> Cards => _cards;
     public List<Card> CloneDeck => _cards.Select(c => c.Clone()).ToList();
 

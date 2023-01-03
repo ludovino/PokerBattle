@@ -9,10 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2831123820273348a04fd37b5c66897, type: 3}
-  m_Name: ClubEffect
+  m_Script: {fileID: 11500000, guid: 04d9b7a1d9e3eb243bcdc3cc849c9f91, type: 3}
+  m_Name: BloodEffect
   m_EditorClassIdentifier: 
-  _description: '@on hand complete: `if this card is in the winning hand, the loser
-    adds additonal chips to the pot'
+  _description: '@on play: `drain 1 value from card opposite'
+  Suit: {fileID: 11400000, guid: 3f3da35bafeadcb4a80db22a8dd88a55, type: 2}
   _effectDisplay: {fileID: 2394122613409878429, guid: f44fabb8ae0573248b6eb4e952a8ab71, type: 3}
-  _soundEffect: {fileID: 8300000, guid: 903623483e9dcdf45b9834c933f634c7, type: 3}
+  _soundEffect: {fileID: 8300000, guid: 47d4d5b12b0a12042875459cfad2ad79, type: 3}
+  damage: 1

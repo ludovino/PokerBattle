@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04d9b7a1d9e3eb243bcdc3cc849c9f91, type: 3}
-  m_Name: BloodEffect
+  m_Script: {fileID: 11500000, guid: f70e4e05e6f664f46ab511af902b53b4, type: 3}
+  m_Name: HeartEffect
   m_EditorClassIdentifier: 
-  _description: '@on play: `drain 1 value from card opposite'
+  _description: '@on turn start: `regain any value this card has lost'
+  Suit: {fileID: 11400000, guid: ca6a8d14bf5afd64792716d9de248d5b, type: 2}
   _effectDisplay: {fileID: 2394122613409878429, guid: f44fabb8ae0573248b6eb4e952a8ab71, type: 3}
-  _soundEffect: {fileID: 8300000, guid: 47d4d5b12b0a12042875459cfad2ad79, type: 3}
-  damage: 1
+  _soundEffect: {fileID: 8300000, guid: ad4b5870ea3b82c4ea3ed6d9435712a2, type: 3}

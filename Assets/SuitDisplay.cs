@@ -15,6 +15,8 @@ public class SuitDisplay : MonoBehaviour
     [TextArea(3,6)]
     private string _blankText;
     private Image _background;
+    [SerializeField]
+    private CardEffectList _effectList;
 
     private void Awake()
     {
@@ -34,7 +36,7 @@ public class SuitDisplay : MonoBehaviour
         _suitImage.enabled = true;
         _suitImage.sprite = suit.sprite;
         _suitImage.color = suit.Color.Value;
-        _text.text = $"~{suit.longName}" + "\n@" + _suit.CardEffect.Description;
+        _text.text = $"~{suit.longName}" + "\n@" + _effectList.SuitEffectDescription(_suit);
         _style.Apply(_text);
         _style.Apply(_background);
     }

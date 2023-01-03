@@ -9,6 +9,8 @@ public class DeckDisplay : MonoBehaviour
     private List<Card> _cards;
     [SerializeField]
     private GameObjectGrid _grid;
+    [SerializeField]
+    private EntityData _entityData;
 
     public void SetCards(IEnumerable<Card> cards)
     {
@@ -18,7 +20,7 @@ public class DeckDisplay : MonoBehaviour
         foreach(var card in cards)
         {
             var cardDisplay = Instantiate(_cardPrefab);
-            cardDisplay.SetCard(card);
+            cardDisplay.SetCard(card, _entityData);
             _grid.Add(cardDisplay.gameObject);
         }
     }

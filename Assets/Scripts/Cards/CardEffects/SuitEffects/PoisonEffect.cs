@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 
-public class PoisonEffect : CardEffect, IOnOpponentTurn
+public class PoisonEffect : SuitEffect, IOnOpponentTurn
 {
     [SerializeField]
     private int damage;
-    public override void Execute(PlayContext context)
+    public override void Execute(CardEffectContext context)
     {
         var enemyCard = context.Opponent.fieldOfPlay[context.PlayIndex];
         if (enemyCard is null) return;

@@ -1,7 +1,7 @@
 ﻿
-public class LifeEffect : CardEffect, IOnPlay
+public class LifeEffect : SuitEffect, IOnPlay
 {
-    public override void Execute(PlayContext context)
+    public override void Execute(CardEffectContext context)
     {
         context.Battle.TakeFromPot(context.Owner, context.Battle.StartingBlind);
     }

@@ -1,6 +1,6 @@
-﻿public class ClubEffect : CardEffect, IOnWinHand
+﻿public class ClubEffect : SuitEffect, IOnWinHand
 {
-    public override void Execute(PlayContext context)
+    public override void Execute(CardEffectContext context)
     {
         if (context.Opponent.chips <= 0) return;
         DoEffect(context);

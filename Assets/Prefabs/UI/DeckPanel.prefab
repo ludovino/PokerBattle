@@ -60,6 +60,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cardPrefab: {fileID: 0}
   _grid: {fileID: 700811192697915429}
+  _entityData: {fileID: 11400000, guid: ec024013c2feb2e498caea236848969d, type: 2}
 --- !u!1 &552621367660185605
 GameObject:
   m_ObjectHideFlags: 0

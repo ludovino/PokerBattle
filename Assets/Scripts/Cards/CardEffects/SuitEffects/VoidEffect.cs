@@ -1,10 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
-public class VoidEffect : CardEffect, IAfterOpponentPlay
+public class VoidEffect : SuitEffect, IAfterOpponentPlay
 {
-    public override void Execute(PlayContext context)
+    public override void Execute(CardEffectContext context)
     {
         var card = context.Opponent.fieldOfPlay[context.PlayIndex];
         if (card.suit is null) return;

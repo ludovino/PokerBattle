@@ -163,7 +163,7 @@ public class BattleController : MonoBehaviour
         else
         {
             //AddToPot(loser, eval.winningHand.chipCost);
-            eval.winningHand.rankingCards.ForEach(c => { if (c.effect is IOnWinHand) c.ExecuteEffect(); });
+            eval.winningHand.rankingCards.ForEach(c =>  winner.entityData.EffectList.DoCardEffects<IOnWinHand>(c, c.playContext));
             TakeHouseCut();
             TakePot(winner);
         }
@@ -216,7 +216,8 @@ public class BattleController : MonoBehaviour
         idle.OpponentPlayed(slotNumber);
         if (!played) return played;
         cardsPlayed++;
-        card.Play(new PlayContext(this, active, idle, card, slotNumber));
+        card.Play(new CardEffectContext(this, active, idle, card, slotNumber));
+        active.entityData.EffectList.DoCardEffects<IOnPlay>(card, card.playContext);
         return played;
     }
     public bool CanEndTurn()
@@ -289,7 +290,7 @@ public class BattleController : MonoBehaviour
 [System.Serializable]
 public class OnEvaluate : UnityEvent<Evaluation>{}
 
-public class PlayContext
+public class CardEffectContext
 {
     private BattleController _battle;
     private Entity _owner;
@@ -297,7 +298,7 @@ public class PlayContext
     private CardScript _card;
     private int _playIndex;
 
-    public PlayContext(BattleController battle, Entity owner, Entity opponent, CardScript card, int playIndex)
+    public CardEffectContext(BattleController battle, Entity owner, Entity opponent, CardScript card, int playIndex = -1)
     {
         _battle = battle;
         _owner = owner;
