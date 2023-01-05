@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: FishEffect
   m_EditorClassIdentifier: 
   _description: '@on play: `draw a card'
-  Suit: {fileID: 11400000, guid: 100a5f6be90975d49aa60ac021f1ce26, type: 2}
+  _suit: {fileID: 11400000, guid: 100a5f6be90975d49aa60ac021f1ce26, type: 2}
   _effectDisplay: {fileID: 2394122613409878429, guid: f44fabb8ae0573248b6eb4e952a8ab71, type: 3}
   _soundEffect: {fileID: 8300000, guid: 1fe250ec1951cba47b75849e8da3c2f3, type: 3}

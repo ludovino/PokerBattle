@@ -93,17 +93,13 @@ public class BattleController : MonoBehaviour
 
     }
 
-    IEnumerator Start()
+    
+    public void Init(EntityData playerData, EnemyData enemyData)
     {
-        yield return new WaitForSeconds(0.1f);
         _sm = new StateMachine(new StartBattle());
         _sm.RegisterTransition<StartBattle, PlayerTurn>();
         _sm.RegisterTransition<PlayerTurn, PlayerTurn>();
-        
-        Init(GameController.Instance?.PlayerData ?? player.entityData, GameController.Instance?.NextBattle ?? (EnemyData)enemy.entityData);
-    }
-    public void Init(EntityData playerData, EnemyData enemyData)
-    {
+
         startingBlind = GameController.GetBlind();
         blind = startingBlind;
         player.Init(playerData, blind);

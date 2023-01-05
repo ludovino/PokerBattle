@@ -9,13 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31bc3567fe7fb1140a5c6f12995a21ef, type: 3}
+  m_Script: {fileID: 11500000, guid: 2ed59579b70a2a04db53028828cfe9f4, type: 3}
   m_Name: Player
   m_EditorClassIdentifier: 
   _deckString: QP;KV;AS;2-;3D;
   _chips: 50
   _drawBonus: 0
   _handList: {fileID: 11400000, guid: c07dc61121ce8d0438dbc38fc2d08e99, type: 2}
+  _effectList: {fileID: 11400000, guid: 210111800a699cb40857c40577026901, type: 2}
   _cardPool: {fileID: 11400000, guid: cdd6b8fe49f8c2e4983b0e6df27e78ca, type: 2}
   _onChangeChips:
     m_PersistentCalls:

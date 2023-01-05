@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: HeartEffect
   m_EditorClassIdentifier: 
   _description: '@on turn start: `regain any value this card has lost'
-  Suit: {fileID: 11400000, guid: ca6a8d14bf5afd64792716d9de248d5b, type: 2}
+  _suit: {fileID: 11400000, guid: ca6a8d14bf5afd64792716d9de248d5b, type: 2}
   _effectDisplay: {fileID: 2394122613409878429, guid: f44fabb8ae0573248b6eb4e952a8ab71, type: 3}
   _soundEffect: {fileID: 8300000, guid: ad4b5870ea3b82c4ea3ed6d9435712a2, type: 3}

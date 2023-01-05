@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using URandom = UnityEngine.Random;
-[CreateAssetMenu(menuName = "Act")]
+[CreateAssetMenu(menuName = "Level/Act")]
 public class ActConfiguration : ScriptableObject
 {
     public List<LevelConfiguration> levels;

@@ -1,5 +1,5 @@
 using UnityEngine;
-[CreateAssetMenu(menuName = "Face")]
+[CreateAssetMenu(menuName = "Card/Face")]
 public class Face : ScriptableObject
 {
     public string numeral;

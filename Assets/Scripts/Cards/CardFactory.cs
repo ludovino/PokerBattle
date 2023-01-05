@@ -6,17 +6,24 @@ using System.Linq;
 [CreateAssetMenu(menuName = "CardFactory")]
 public class CardFactory : ScriptableObject
 {
-
+    private static CardFactory _instance;
+    public static CardFactory Instance => _instance != null ? _instance : SetInstance();
     [SerializeField]
     private List<Suit> _suits;
     [SerializeField]
     private List<Face> _faces;
     [SerializeField]
     private int _highestNumeral;
+
     void OnEnable()
     {
         _suits = Resources.LoadAll<Suit>("Suits").ToList();
         _faces = Resources.LoadAll<Face>("Faces").ToList();
+        SetInstance();
+    }
+    private static CardFactory SetInstance()
+    {
+        return _instance = Resources.Load<CardFactory>("CardFactory");
     }
     public Card GetCard(string cardString)
     {

@@ -12,13 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5135d6f583d4cfb4a8bdfe26ae06c7ef, type: 3}
   m_Name: PlayerDrawPool
   m_EditorClassIdentifier: 
-  _cardFactory: {fileID: 11400000, guid: cd373071aa9b5a64aae0e83395ac59ba, type: 2}
-  _suits:
-  - {fileID: 11400000, guid: 9fe51d66484359647abc193b757a5fd8, type: 2}
-  - {fileID: 11400000, guid: 8e939d01707334042b0b0688499f120b, type: 2}
-  - {fileID: 11400000, guid: ca6a8d14bf5afd64792716d9de248d5b, type: 2}
-  - {fileID: 11400000, guid: 4fd153827537f544a913fb8e67cfb83a, type: 2}
-  - {fileID: 0}
+  _suits: {fileID: 11400000, guid: 2e5c78850dd67a84ead601f17c7846b4, type: 2}
   numerals:
   - first: 0
     last: 6

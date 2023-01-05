@@ -3,27 +3,35 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using URandom = UnityEngine.Random;
-[CreateAssetMenu(menuName = "CardPool")]
+[CreateAssetMenu(menuName = "Card/Pool")]
 public class CardPool : ScriptableObject
 {
+    private IReadOnlyList<Suit> suits => _suits.Suits;
     [SerializeField]
-    private CardFactory _cardFactory;
-    [SerializeField]
-    private List<Suit> _suits;
-
+    private SuitList _suits;
     public List<Card> GetWithReplacement(int count)
     {
         var cardList = new List<Card>();
         var numeralList = GetNumerals();
         for(int i = 0; i < count; i++)
         {
-            var suit = _suits[URandom.Range(0, _suits.Count)];
+            var suit = suits[URandom.Range(0, suits.Count)];
             var numeral = numeralList[URandom.Range(0, numeralList.Count)];
-            var card = _cardFactory.GetCard(numeral + SuitName(suit));
+            var card = CardFactory.Instance.GetCard(numeral + SuitName(suit));
             cardList.Add(card);
         }
         return cardList;
     }
+
+    public Card GetOne()
+    {
+        var numeralList = GetNumerals(); 
+        var suit = suits[URandom.Range(0, suits.Count)];
+        var numeral = numeralList[URandom.Range(0, numeralList.Count)];
+        var card = CardFactory.Instance.GetCard(numeral + SuitName(suit));
+        return card;
+    }
+
     private string SuitName(Suit suit) => suit?.shortName ?? "-";
     
     public List<Card> GetWithoutReplacement(int count, bool eachSuit)
@@ -32,14 +40,14 @@ public class CardPool : ScriptableObject
         var cardList = new List<string>();
         if (eachSuit)
         {
-            cardList = _suits.SelectMany(s => numeralList.Select(n => n + SuitName(s))).ToList();
+            cardList = suits.SelectMany(s => numeralList.Select(n => n + SuitName(s))).ToList();
         }
         else
         {
-            cardList = numeralList.Select(n => n + SuitName(_suits[URandom.Range(0, _suits.Count)])).ToList();
+            cardList = numeralList.Select(n => n + SuitName(suits[URandom.Range(0, suits.Count)])).ToList();
         }
         cardList.Shuffle();
-        return cardList.Take(count).Select(s => _cardFactory.GetCard(s)).ToList();
+        return cardList.Take(count).Select(s => CardFactory.Instance.GetCard(s)).ToList();
     }
 
     private List<string> GetNumerals()
@@ -63,15 +71,7 @@ public class CardPool : ScriptableObject
         }
         return numeralList;
     }
-    public void SetSuits(List<Suit> suits, int suitCount = 5)
-    {
-        _suits.Clear();
-        _suits.AddRange(suits);
-        if(_suits.Count < suitCount)
-        {
-            _suits.AddRange(Enumerable.Repeat<Suit>(null, suitCount - _suits.Count));
-        }
-    }
+    
     public List<NumeralCount> numerals;
     public List<FaceCount> faces;
     [Serializable]

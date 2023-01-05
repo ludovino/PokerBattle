@@ -23,14 +23,15 @@ public class SceneChanger : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
     }
-    public void ChangeScene(string sceneName)
+    public void ChangeScene(string sceneName, System.Action onComplete = null)
     {
-        image.DOColor(new Color(0, 0, 0, 1), fadeTime).OnComplete(() => LoadScene(sceneName));
+        image.DOColor(new Color(0, 0, 0, 1), fadeTime).OnComplete(() => LoadScene(sceneName, onComplete));
     }
 
-    private void LoadScene(string sceneName)
+    private void LoadScene(string sceneName, System.Action onComplete = null)
     {
-        SceneManager.LoadScene(sceneName);
-        image.DOColor(new Color(0, 0, 0, 0), fadeTime).SetDelay(0.2f);
+        var operation = SceneManager.LoadSceneAsync(sceneName);
+        if(onComplete != null) operation.completed += (op) => onComplete();
+        operation.completed += (op) => image.DOColor(new Color(0, 0, 0, 0), fadeTime).SetDelay(0.2f);
     }
 }

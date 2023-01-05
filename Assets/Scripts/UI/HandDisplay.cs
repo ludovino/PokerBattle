@@ -11,11 +11,6 @@ public class HandDisplay : MonoBehaviour
     private TextMeshProUGUI _handName;
     [SerializeField]
     private PokerHand _hand;
-    private CardFactory _cardFactory;
-    public void Awake()
-    {
-        _cardFactory = Resources.Load<CardFactory>("CardFactory");
-    }
     public void Start()
     {
         UpdateDisplays();
@@ -30,7 +25,7 @@ public class HandDisplay : MonoBehaviour
     public void UpdateDisplays()
     {
         _handName.text = _hand.DisplayName;
-        var cards = _cardFactory.GetCards(_hand.example);
+        var cards = CardFactory.Instance.GetCards(_hand.example);
         for(var i = 0; i < 5; i++)
         {
             _cardDisplays[i].UpdateCardDisplay(cards[i]);

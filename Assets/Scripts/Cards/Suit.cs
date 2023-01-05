@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
-[CreateAssetMenu(menuName = "Suit")]
+[CreateAssetMenu(menuName = "Card/Suit")]
 public class Suit : ScriptableObject
 {
     public string longName;

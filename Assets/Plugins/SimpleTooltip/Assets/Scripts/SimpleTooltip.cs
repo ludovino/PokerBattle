@@ -54,6 +54,15 @@ public class SimpleTooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         HideTooltip();
     }
 
+    public void OnDisable()
+    {
+        HideTooltip();
+    }
+    public void OnDestroy()
+    {
+        HideTooltip();
+    }
+
     public void ShowTooltip()
     {
         showing = true;

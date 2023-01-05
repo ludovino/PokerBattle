@@ -1,12 +1,10 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
-[CreateAssetMenu(menuName = "EntityData")]
+[CreateAssetMenu(menuName = "Entities/EntityData")]
 public class EntityData : ScriptableObject, IOnInit
 {
     [TextArea(4, 10)]
@@ -22,7 +20,6 @@ public class EntityData : ScriptableObject, IOnInit
     CardEffectList _effectList;
     [SerializeField]
     protected CardPool _cardPool;
-    private CardFactory _factory;
     protected List<Card> _cards;
     public int Chips => _currentChips;
     private int _currentChips;
@@ -48,7 +45,6 @@ public class EntityData : ScriptableObject, IOnInit
 
     void OnEnable()
     {
-        _factory = Resources.Load<CardFactory>("CardFactory");
         Init();
     }
 
@@ -57,7 +53,7 @@ public class EntityData : ScriptableObject, IOnInit
         _onChangeChips = _onChangeChips ?? new OnChangeChips();
         _onChangeDeck = _onChangeDeck ?? new OnChangeDeck();
         _currentChips = _chips;
-        _cards = _factory.GetCards(_deckString);
+        _cards = CardFactory.Instance.GetCards(_deckString);
         TriggerDeckChange();
     }
     public void AddCard(Card card)

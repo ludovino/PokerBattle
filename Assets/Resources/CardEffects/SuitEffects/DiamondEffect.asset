@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: DiamondEffect
   m_EditorClassIdentifier: 
   _description: '@on opponent draw: `the opponent pays an additional blind'
-  Suit: {fileID: 11400000, guid: 8e939d01707334042b0b0688499f120b, type: 2}
+  _suit: {fileID: 11400000, guid: 8e939d01707334042b0b0688499f120b, type: 2}
   _effectDisplay: {fileID: 2394122613409878429, guid: f44fabb8ae0573248b6eb4e952a8ab71, type: 3}
   _soundEffect: {fileID: 8300000, guid: 2114d0e47de33d5468b42d41ecf477af, type: 3}

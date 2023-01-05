@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: VoidEffect
   m_EditorClassIdentifier: 
   _description: '@on enemy play: `removes the suit of any card played opposite'
-  Suit: {fileID: 11400000, guid: 2e5f01de27574134badbe91c23e184bc, type: 2}
+  _suit: {fileID: 11400000, guid: 2e5f01de27574134badbe91c23e184bc, type: 2}
   _effectDisplay: {fileID: 2394122613409878429, guid: f44fabb8ae0573248b6eb4e952a8ab71, type: 3}
   _soundEffect: {fileID: 8300000, guid: f6af3613f8ac28243ae791006524d3f4, type: 3}

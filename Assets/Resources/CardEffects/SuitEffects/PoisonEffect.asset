@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PoisonEffect
   m_EditorClassIdentifier: 
   _description: '@on turn start: `reduce the card opposite by 1'
-  Suit: {fileID: 11400000, guid: bb30968a9d9db4e4f8010d8d224da8e5, type: 2}
+  _suit: {fileID: 11400000, guid: bb30968a9d9db4e4f8010d8d224da8e5, type: 2}
   _effectDisplay: {fileID: 2394122613409878429, guid: f44fabb8ae0573248b6eb4e952a8ab71, type: 3}
   _soundEffect: {fileID: 8300000, guid: d6ec0c89bf198d54e8b605ccb3518d39, type: 3}
   damage: 1

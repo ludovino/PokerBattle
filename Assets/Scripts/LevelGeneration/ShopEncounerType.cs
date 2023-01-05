@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-[CreateAssetMenu(menuName ="ShopEncounterType")]
+[CreateAssetMenu(menuName ="Level/ShopEncounterType")]
 public class ShopEncounerType : EncounterType
 {
     public override Encounter GetEncounter()

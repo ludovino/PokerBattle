@@ -6,8 +6,6 @@ using UnityEngine;
 public class EvaluationGenerate : MonoBehaviour
 {
     [SerializeField]
-    CardFactory _cardFactory;
-    [SerializeField]
     PokerHand _playerHand; 
     [SerializeField]
     Transform _playerHandPosition;
@@ -47,7 +45,7 @@ public class EvaluationGenerate : MonoBehaviour
 
     public List<CardScript> GetCardInstances(PokerHand hand, Vector3 position)
     {
-        var cards = _cardFactory.GetCards(hand.example);
+        var cards = CardFactory.Instance.GetCards(hand.example);
         var cardScripts = new List<CardScript>();
         var positions = Enumerable.Range(-2, 5).ToList();
         positions.Shuffle();

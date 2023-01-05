@@ -31,6 +31,12 @@ public class CardSelectMenu : MonoBehaviour
     {
         _onSelect = _onSelect ?? new OnSelectCards();
     }
+
+    private void OnDestroy()
+    {
+        _onSelect?.RemoveAllListeners();
+    }
+
     private void Start()
     {
         _menu.SetActive(false);
@@ -76,6 +82,7 @@ public class CardSelectMenu : MonoBehaviour
         }
 
         yield return new WaitUntil(() => _chosen);
+        // animate card selection
     }
 
     public void StartSelect(List<Card> cards, int count)

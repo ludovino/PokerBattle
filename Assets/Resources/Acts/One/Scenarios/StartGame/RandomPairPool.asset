@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5135d6f583d4cfb4a8bdfe26ae06c7ef, type: 3}
+  m_Name: RandomPairPool
+  m_EditorClassIdentifier: 
+  _suits: {fileID: 11400000, guid: 2e5c78850dd67a84ead601f17c7846b4, type: 2}
+  numerals:
+  - first: 1
+    last: 9
+    Count: 1
+  faces: []

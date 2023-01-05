@@ -21,6 +21,8 @@ public class ChooseDeckController : MonoBehaviour
     [SerializeField]
     private CardPool _playerCardPool;
     [SerializeField]
+    private SuitList _playerSuitList;
+    [SerializeField]
     private EntityData _player;
 
     [SerializeField]
@@ -48,7 +50,7 @@ public class ChooseDeckController : MonoBehaviour
             _suitToggles.Add(toggle);
         }
         DisplaySuits();
-        _playerCardPool.SetSuits(_selectedSuits, 5);
+        _playerSuitList.SetSuits(_selectedSuits, 5);
     }
     private void AddSuit(Suit suit)
     {
@@ -69,7 +71,7 @@ public class ChooseDeckController : MonoBehaviour
         else RemoveSuit(toggle.Suit);
         
         DisplaySuits();
-        _playerCardPool.SetSuits(_selectedSuits, 5);
+        _playerSuitList.SetSuits(_selectedSuits, 5);
     }
 
     private void DisplaySuits()

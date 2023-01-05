@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _description: '@on hand complete: `if this card is in the winning hand, the loser
     adds additonal chips to the pot'
-  Suit: {fileID: 11400000, guid: 9fe51d66484359647abc193b757a5fd8, type: 2}
+  _suit: {fileID: 11400000, guid: 9fe51d66484359647abc193b757a5fd8, type: 2}
   _effectDisplay: {fileID: 2394122613409878429, guid: f44fabb8ae0573248b6eb4e952a8ab71, type: 3}
   _soundEffect: {fileID: 8300000, guid: 903623483e9dcdf45b9834c933f634c7, type: 3}

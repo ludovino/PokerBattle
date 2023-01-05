@@ -67,7 +67,7 @@ public class GameController : MonoBehaviour
     {
         NextBattle = enemy;
         if (currentAct.IsBossLevel) music.Boss();
-        _sm.MoveToState(new Battle());
+        _sm.MoveToState(new Battle(_playerData, enemy));
     }
     public void GoToNextLevel()
     {
@@ -164,16 +164,26 @@ public class GameController : MonoBehaviour
     }
     // event
 
-    // shop
-
     // battle
     public class Battle : IState
     {
-        public void OnEnter()
+        private EnemyData _enemy;
+        EntityData _player;
+
+        public Battle(EntityData playerData, EnemyData enemy)
         {
-            SceneChanger.Instance.ChangeScene("Battle");
+            _enemy = enemy;
+            _player = playerData;
         }
 
+        public void OnEnter()
+        {
+            SceneChanger.Instance.ChangeScene("Battle", StartBattle);
+        }
+        void StartBattle()
+        {
+            FindObjectOfType<BattleController>().Init(_player, _enemy);
+        }
         public void OnExit()
         {}
     }

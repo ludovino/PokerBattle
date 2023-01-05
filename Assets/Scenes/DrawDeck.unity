@@ -367,7 +367,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 596702304098241559, guid: ff860d2643830fa469493d3f768f64e2, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 102.015
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 596702304098241559, guid: ff860d2643830fa469493d3f768f64e2, type: 3}
       propertyPath: m_SizeDelta.y
@@ -739,6 +739,7 @@ MonoBehaviour:
   _togglePrefab: {fileID: 6200541945434508265, guid: 87db8e5f501a5a94f85fc6011c3f7d1a, type: 3}
   _toggleParent: {fileID: 2136577357}
   _playerCardPool: {fileID: 11400000, guid: cdd6b8fe49f8c2e4983b0e6df27e78ca, type: 2}
+  _playerSuitList: {fileID: 11400000, guid: 2e5c78850dd67a84ead601f17c7846b4, type: 2}
   _player: {fileID: 11400000, guid: ec024013c2feb2e498caea236848969d, type: 2}
   _cardPrefab: {fileID: 7376886455751003658, guid: d81717a4ad3b877449d36ccf1c7840f6, type: 3}
   _suitDisplays:
@@ -1211,7 +1212,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 596702304098241559, guid: ff860d2643830fa469493d3f768f64e2, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 102.015
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 596702304098241559, guid: ff860d2643830fa469493d3f768f64e2, type: 3}
       propertyPath: m_SizeDelta.y
@@ -1713,7 +1714,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 596702304098241559, guid: ff860d2643830fa469493d3f768f64e2, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 102.015
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 596702304098241559, guid: ff860d2643830fa469493d3f768f64e2, type: 3}
       propertyPath: m_SizeDelta.y
@@ -2310,7 +2311,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 596702304098241559, guid: ff860d2643830fa469493d3f768f64e2, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 102.015
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 596702304098241559, guid: ff860d2643830fa469493d3f768f64e2, type: 3}
       propertyPath: m_SizeDelta.y

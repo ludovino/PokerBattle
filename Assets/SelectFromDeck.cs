@@ -9,7 +9,12 @@ public class SelectFromDeck : MonoBehaviour
     public OnSelectCard onSelectCard;
     private void Awake()
     {
-        onSelectCard = onSelectCard ?? new OnSelectCard();
+        onSelectCard ??= new OnSelectCard();
+    }
+
+    private void OnDestroy()
+    {
+        onSelectCard?.RemoveAllListeners();
     }
     public void ChooseFromDeck(List<Card> deck)
     {

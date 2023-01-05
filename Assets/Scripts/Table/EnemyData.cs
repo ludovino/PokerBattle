@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "EnemyData")]
+[CreateAssetMenu(menuName = "Entities/EnemyData")]
 public class EnemyData : EntityData
 {
     public string displayName;

@@ -2,7 +2,7 @@
 using System.Linq;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "BattleEncounterType")]
+[CreateAssetMenu(menuName = "Level/BattleEncounterType")]
 public class BattleEncounterType : EncounterType, IOnInit
 {
     [SerializeField]

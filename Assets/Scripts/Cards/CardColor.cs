@@ -1,5 +1,5 @@
 using UnityEngine;
-[CreateAssetMenu(menuName = "CardColor")]
+[CreateAssetMenu(menuName = "Card/Color")]
 public class CardColor : ScriptableObject
 {
     [SerializeField]
