@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -21,5 +22,16 @@ public class HandList : ScriptableObject
             if(hand.Evaluate(cardScripts.Cast<ICard>().ToList())) return hand.GetRankedHand(cardScripts);
         }
         return fallback.GetRankedHand(cardScripts);
+    }
+
+    public void AddHands(List<PokerHand> pokerHands)
+    {
+        hands.AddRange(pokerHands.Except(hands));
+    }
+
+    internal void Replace(PokerHand toRemove, PokerHand toAdd)
+    {
+        hands.Remove(toRemove);
+        hands.Add(toAdd);
     }
 }
