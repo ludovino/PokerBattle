@@ -44,7 +44,6 @@ public class ChipPile : MonoBehaviour
     {
         _changeText.color = new Color(1, 1, 1, 0);
         _changeTextOrigin = _changeText.transform.position;
-        SetValue(0);
         if(_entityData != null)
         {
             _entityData.OnChangeChips.AddListener(SetChips);

@@ -758,6 +758,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 34
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &338571575 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1289144067100731680, guid: 2bbe30a901c31ad4dabac3cff564c72f, type: 3}
+  m_PrefabInstance: {fileID: 2024931375957341603}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1739e4353e4dd64c8576ac5d5156a32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &359726518
 GameObject:
   m_ObjectHideFlags: 0
@@ -2757,17 +2768,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dcb6d737a98f2d342a698a56e932f8b7, type: 3}
---- !u!114 &1313342732 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2024931376791482543, guid: 2bbe30a901c31ad4dabac3cff564c72f, type: 3}
-  m_PrefabInstance: {fileID: 2024931375957341603}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1739e4353e4dd64c8576ac5d5156a32, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1422144218 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5106232846309844970, guid: dcb6d737a98f2d342a698a56e932f8b7, type: 3}
@@ -4595,7 +4595,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   battle: {fileID: 1464444206}
-  _cardSelect: {fileID: 1313342732}
+  _cardSelect: {fileID: 338571575}
   _endTurnButton: {fileID: 489482952}
 --- !u!114 &2119824921
 MonoBehaviour:

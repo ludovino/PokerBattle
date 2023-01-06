@@ -2550,7 +2550,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _Animator: {fileID: 7198054386931252146}
-  _ActionOnDisable: 1
+  _ActionOnDisable: 2
 --- !u!1 &7198054387024548251
 GameObject:
   m_ObjectHideFlags: 0

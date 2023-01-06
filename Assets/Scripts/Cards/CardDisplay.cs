@@ -82,9 +82,10 @@ public class CardDisplay : MonoBehaviour
     }
     public IEnumerator CR_AnimateCardDisplay(ICard card)
     {
-        yield return AnimateSprites(card);
+        if (!FaceUp) SetSprites();
+        else yield return AnimateSprites(card);
         SetText(card);
-        yield return _animancer.Play(GetClip(card), 0.25f);
+        yield return _animancer.Play(GetClip(card), FaceUp ? 0.25f : 0f);
     }
 
     private AnimationClip GetClip(ICard card)

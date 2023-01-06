@@ -4,6 +4,7 @@ using System;
 using System.Linq;
 using UnityEngine.Events;
 using Unity.VisualScripting;
+using UnityEngine.XR;
 
 public class Entity : MonoBehaviour
 {
@@ -166,6 +167,10 @@ public class Entity : MonoBehaviour
     {
         _discardPileCards.AddRange(hand);
         _discardPile.AddCards(hand);
+        foreach(var card in hand)
+        {
+            card.Discard();
+        }
         onDiscard.Invoke(hand);
         hand.Clear();
     }
@@ -174,7 +179,11 @@ public class Entity : MonoBehaviour
         onFieldClear.Invoke(fieldOfPlay);
         var toDiscard = fieldOfPlay.Where(c => c != null).ToList();
         _discardPileCards.AddRange(toDiscard);
-        _discardPile.AddCards(toDiscard);
+        _discardPile.AddCards(toDiscard); 
+        foreach (var card in toDiscard)
+        {
+            card.Discard();
+        }
         onDiscard.Invoke(fieldOfPlay.ToList());
         fieldOfPlay = new CardScript[5];
     }

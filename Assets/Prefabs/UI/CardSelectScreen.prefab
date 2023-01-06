@@ -447,7 +447,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1289144067100731680}
         m_TargetAssemblyTypeName: CardSelectMenu, Assembly-CSharp
         m_MethodName: Confirm
         m_Mode: 1
