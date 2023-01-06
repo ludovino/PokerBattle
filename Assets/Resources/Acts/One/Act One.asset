@@ -36,8 +36,8 @@ MonoBehaviour:
       chance: 1
     - type: {fileID: 11400000, guid: e39955c4b78910742afaea6ae37b4f60, type: 2}
       chance: 1
-    - type: {fileID: 11400000, guid: e39955c4b78910742afaea6ae37b4f60, type: 2}
-      chance: 0.5
+    - type: {fileID: 11400000, guid: 1f2dc2725edaccb4fb10d03856b0df0a, type: 2}
+      chance: 1
     - type: {fileID: 11400000, guid: 576487e980792a443aef596282eb8f7c, type: 2}
       chance: 0.5
     blind: 5
@@ -116,4 +116,4 @@ MonoBehaviour:
       chance: 1
     blind: 25
     isBoss: 1
-  level: 1
+  level: -1

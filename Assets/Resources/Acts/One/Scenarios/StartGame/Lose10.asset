@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 613b2f84598beea479f1de40ae17436a, type: 3}
   m_Name: Lose10
   m_EditorClassIdentifier: 
-  _description: Lose 10 chips
+  _description: --Lose 10 chips
   _value: 1
   _amount: -10

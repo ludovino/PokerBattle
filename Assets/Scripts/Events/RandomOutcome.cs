@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using URandom = UnityEngine.Random;
@@ -7,6 +8,7 @@ using URandom = UnityEngine.Random;
 [CreateAssetMenu(menuName = "Event/Outcome/Random")]
 public class RandomOutcome : Outcome, IMultipleOutcome
 {
+    [SerializeField]
     List<OutcomeChance> _outcomeChances;
     
     public override void Execute()
@@ -27,18 +29,18 @@ public class RandomOutcome : Outcome, IMultipleOutcome
     public override string Description => GetDescription();
     private string GetDescription()
     {
-        if(_outcomeChances.Count == 2)
+        if(string.IsNullOrEmpty(base.Description) &&_outcomeChances.Count == 2)
         {
             return string.Join(", ", _outcomeChances.Select(oc => oc.Description));
         }
         return base.Description;
     }
-
+    [Serializable]
     public class OutcomeChance
     {
         public Outcome outcome;
         public float chance;
-
-        public string Description => $"{chance * 100}% {outcome.Description}";
+        public bool showChance;
+        public string Description => showChance ? $"{chance * 100}% {outcome.Description}" : outcome.Description;
     }
 }

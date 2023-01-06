@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 613b2f84598beea479f1de40ae17436a, type: 3}
   m_Name: Gain50
   m_EditorClassIdentifier: 
-  _description: Gain 50 chips
+  _description: ++Gain 50 chips
   _value: 0
   _amount: 50

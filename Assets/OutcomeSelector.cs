@@ -46,6 +46,7 @@ public class OutcomeSelector : MonoBehaviour
             _style.Apply(ref desc);
             text.text = desc;
             button.onClick.AddListener(outcome.Execute);
+            button.onClick.AddListener(OptionSelected);
             _buttons.Add(button);
         }
     }
@@ -54,8 +55,9 @@ public class OutcomeSelector : MonoBehaviour
     {
         foreach(var button in _buttons)
         {
-            button.interactable = false;
+            //button.interactable = false;
             button.onClick.RemoveAllListeners();
         }
+        _onOptionSelected.Invoke();
     }
 }

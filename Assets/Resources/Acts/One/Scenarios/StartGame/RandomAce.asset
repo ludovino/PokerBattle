@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfd90c3f71c842b45a00c01461b9389b, type: 3}
   m_Name: RandomAce
   m_EditorClassIdentifier: 
-  _description: Gain a random Ace
+  _description: ++Gain a random Ace
   _value: 0
   _cardPool: {fileID: 11400000, guid: 3d2a6793a805bc145afec23c7aacdca8, type: 2}
   _setCount: 1

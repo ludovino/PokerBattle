@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00b7b0603c4263a4895fd10617f1a510, type: 3}
+  m_Name: Higher
+  m_EditorClassIdentifier: 
+  _description: +=Higher!
+  _value: 2
+  _outcomeChances:
+  - outcome: {fileID: 11400000, guid: 9efbde20e3942c54b98865fa3952b7c6, type: 2}
+    chance: 0.5
+    showChance: 0
+  - outcome: {fileID: 11400000, guid: 47e3e6f7ed1c4bb41b71439492afc2c9, type: 2}
+    chance: 0.5
+    showChance: 0

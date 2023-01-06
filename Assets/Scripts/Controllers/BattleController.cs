@@ -140,6 +140,8 @@ public class BattleController : MonoBehaviour
         {
             IncreaseBlinds();
         }
+        player.DiscardHand();
+        enemy.DiscardHand();
         var playerHand = player.Evaluate();
         var enemyHand = enemy.Evaluate();
         var wld = playerHand.CompareTo(enemyHand);

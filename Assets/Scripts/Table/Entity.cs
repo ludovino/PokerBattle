@@ -165,6 +165,7 @@ public class Entity : MonoBehaviour
 
     public void DiscardHand()
     {
+        if (!hand.Any()) return;
         _discardPileCards.AddRange(hand);
         _discardPile.AddCards(hand);
         foreach(var card in hand)

@@ -12721,6 +12721,7 @@ MonoBehaviour:
   music: {fileID: 1315510214}
   currentAct: {fileID: 11400000, guid: 398b8e190c4b15f448653452db52a6b1, type: 2}
   _playerData: {fileID: 11400000, guid: ec024013c2feb2e498caea236848969d, type: 2}
+  _startingScenario: {fileID: 11400000, guid: f40e0cf860a11a041b4498429ff48810, type: 2}
 --- !u!4 &1491015248
 Transform:
   m_ObjectHideFlags: 0

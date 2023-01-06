@@ -2204,6 +2204,26 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 286515037}
+    - target: {fileID: 966494550403546582, guid: 8f1f15bbabaf8c84b91cab42c9cda538, type: 3}
+      propertyPath: m_Spacing.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 966494550403546582, guid: 8f1f15bbabaf8c84b91cab42c9cda538, type: 3}
+      propertyPath: m_Spacing.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 966494550403546582, guid: 8f1f15bbabaf8c84b91cab42c9cda538, type: 3}
+      propertyPath: m_CellSize.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 966494550403546582, guid: 8f1f15bbabaf8c84b91cab42c9cda538, type: 3}
+      propertyPath: m_CellSize.y
+      value: 140
+      objectReference: {fileID: 0}
+    - target: {fileID: 966494550403546582, guid: 8f1f15bbabaf8c84b91cab42c9cda538, type: 3}
+      propertyPath: m_Constraint
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1364420126479603222, guid: 8f1f15bbabaf8c84b91cab42c9cda538, type: 3}
       propertyPath: m_Name
       value: TopBar

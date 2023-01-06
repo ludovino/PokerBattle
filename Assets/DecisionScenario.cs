@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-public class ScenarioPopup : MonoBehaviour
+public class DecisionScenario : MonoBehaviour
 {
     [SerializeField]
     private Scenario _scenario;

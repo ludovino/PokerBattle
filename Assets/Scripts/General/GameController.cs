@@ -2,7 +2,6 @@ using UnityEngine.SceneManagement;
 using UnityEngine;
 using System.Linq;
 using System.Collections;
-using System;
 
 public class GameController : MonoBehaviour
 {
@@ -11,10 +10,10 @@ public class GameController : MonoBehaviour
     [SerializeField]
     private MusicManager music;
     public ActConfiguration currentAct;
-    public EnemyData NextBattle { get; private set; }
     [SerializeField]
     private EntityData _playerData;
     public EntityData PlayerData => _playerData;
+    public Scenario _startingScenario;
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -32,7 +31,9 @@ public class GameController : MonoBehaviour
     {
         _sm = new StateMachine(new MainMenu());
         _sm.RegisterTransition<MainMenu, DrawDeck>();
-        _sm.RegisterTransition<DrawDeck, Map>();
+        _sm.RegisterTransition<DrawDeck, MapEvent>();
+        _sm.RegisterTransition<Map, MapEvent>();
+        _sm.RegisterTransition<MapEvent, Map>();
         _sm.RegisterTransition<Map, Battle>();
         _sm.RegisterTransition<Map, Shop>();
         _sm.RegisterTransition<Shop, Map>();
@@ -45,7 +46,7 @@ public class GameController : MonoBehaviour
     public void BeginGame()
     {
         InitObjects();
-        currentAct.level = 0;
+        currentAct.level = -1;
         _sm.MoveToState(new DrawDeck());
     }
 
@@ -61,11 +62,10 @@ public class GameController : MonoBehaviour
     public void DeckChosen()
     {
         music.Game();
-        _sm.MoveToState(new Map());
+        _sm.MoveToState(new MapEvent(_startingScenario));
     }
     public void BeginBattle(EnemyData enemy)
     {
-        NextBattle = enemy;
         if (currentAct.IsBossLevel) music.Boss();
         _sm.MoveToState(new Battle(_playerData, enemy));
     }
@@ -107,6 +107,11 @@ public class GameController : MonoBehaviour
     internal void OpenShop()
     {
         _sm.MoveToState(new Shop());
+    }
+
+    internal void BeginScenario(Scenario scenario)
+    {
+        _sm.MoveToState(new MapEvent(scenario));
     }
 
     // main menu
@@ -212,6 +217,29 @@ public class GameController : MonoBehaviour
         public void OnExit()
         {
 
+        }
+    }
+
+    private class MapEvent : IState
+    {
+        private Scenario _scenario;
+
+        public void OnEnter()
+        {
+            SceneChanger.Instance.ChangeScene("Event", StartScenario);
+        }
+        private void StartScenario()
+        {
+            FindObjectOfType<DecisionScenario>().Init(_scenario);
+        }
+        public MapEvent(Scenario scenario)
+        {
+            _scenario = scenario;
+        }
+
+        public void OnExit()
+        {
+            
         }
     }
 }
