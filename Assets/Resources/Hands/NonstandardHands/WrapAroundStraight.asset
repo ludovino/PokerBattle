@@ -15,5 +15,6 @@ MonoBehaviour:
   _displayName: Corner Straight
   _rank: 39
   _rankingCardsCount: 5
+  _example: QH;KC;AS;2D;3-
   sequences:
   - J;Q;K;A;2;3;4

@@ -2,14 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ReplaceHands : Relic, IOnCollect
+[CreateAssetMenu(menuName = "Relic/HandReplace")]
+public class ReplaceHands : Relic, IOnCollect, IOnChangeHandList
 {
     [SerializeField]
     private List<Replacement> _replacements;
 
+    public void OnChangeHandList()
+    {
+        Replace();
+    }
+
     public void OnCollect()
     {
-        foreach(var replacement in _replacements)
+        Replace();
+    }
+
+    
+    private void Replace()
+    {
+        foreach (var replacement in _replacements)
         {
             PlayerData.Instance.HandList.Replace(replacement.toRemove, replacement.toAdd);
         }

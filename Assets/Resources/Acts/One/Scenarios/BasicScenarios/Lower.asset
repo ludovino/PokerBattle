@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00b7b0603c4263a4895fd10617f1a510, type: 3}
   m_Name: Lower
   m_EditorClassIdentifier: 
-  _description: +=Lower!
+  _description: +-Lower!
   _value: 2
   _outcomeChances:
   - outcome: {fileID: 11400000, guid: 9efbde20e3942c54b98865fa3952b7c6, type: 2}

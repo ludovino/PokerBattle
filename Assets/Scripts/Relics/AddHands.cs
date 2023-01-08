@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(menuName ="Relic/HandAdd")]
 public class AddHands : Relic, IOnCollect
 {
     [SerializeField]

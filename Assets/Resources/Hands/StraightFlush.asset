@@ -15,4 +15,6 @@ MonoBehaviour:
   _displayName: Straight Flush
   _rank: 80
   _rankingCardsCount: 5
+  _example: 5H;6H;7H;8H;9H
   _straight: {fileID: 11400000, guid: 7b112e6543cda7546b0e84f25545812f, type: 2}
+  flushComparer: {fileID: 11400000, guid: 6113d7782ecd3f34987f3649b8902b9f, type: 2}

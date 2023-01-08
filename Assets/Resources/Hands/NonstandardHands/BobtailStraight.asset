@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf2bbc8600952d54a946b97ecbb36eee, type: 3}
+  m_Name: BobtailStraight
+  m_EditorClassIdentifier: 
+  _displayName: Bobtail Straight
+  _rank: 15
+  _rankingCardsCount: 4
+  _example: 10-;J-;Q-;K-;A-
+  sequences:
+  - 19;20;21;J;Q;K;A
+  - 8;9;10;J;Q;K;A
+  - 2;3;4;5;6;7;8;9;10;11;12;13;14;15;16;17;18;19;20;21
+  - A;2;3;4
+  - 1;2;3;4

@@ -9,9 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 525f2da9569c8fa42a02a99f55f0d927, type: 3}
+  m_Script: {fileID: 11500000, guid: 3e1eeb222b83a6a42a5b270b6cfac7c2, type: 3}
   m_Name: FullHouse
   m_EditorClassIdentifier: 
   _displayName: Full House
   _rank: 60
   _rankingCardsCount: 5
+  _example: AH;AC;QS;QD;Q-
+  setComparer: {fileID: 11400000, guid: e661c3b2c06bea346b63aca747a0b25d, type: 2}

@@ -34,6 +34,9 @@ public class EntityData : ScriptableObject, IOnInit
     private OnChangeDeck _onChangeDeck;
     public OnChangeChips OnChangeChips => _onChangeChips;
     public OnChangeDeck OnChangeDeck => _onChangeDeck;
+
+    private List<Relic> _relics;
+    public IReadOnlyList<Relic> Relics => _relics;
     
 
     void OnValidate()
@@ -54,6 +57,7 @@ public class EntityData : ScriptableObject, IOnInit
         _onChangeDeck = _onChangeDeck ?? new OnChangeDeck();
         _currentChips = _chips;
         _cards = CardFactory.Instance.GetCards(_deckString);
+
         TriggerDeckChange();
     }
     public void AddCard(Card card)

@@ -9,9 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d35630314c3cc64ab2a259f932998db, type: 3}
+  m_Script: {fileID: 11500000, guid: a6dca94e7c1821d479cce181e12dc0af, type: 3}
   m_Name: FourOfAKind
   m_EditorClassIdentifier: 
-  _displayName: Four of a Kind
+  _displayName: Pair
   _rank: 70
   _rankingCardsCount: 4
+  _example: AH;AS;AC;AD;0-;
+  setComparer: {fileID: 11400000, guid: e661c3b2c06bea346b63aca747a0b25d, type: 2}

@@ -12,19 +12,13 @@ public abstract class PokerHand : ScriptableObject
 
     [SerializeField]
     private int _rankingCardsCount;
+    [SerializeField]
+    private string _example;
     public string DisplayName => _displayName;
     public int rank => _rank;
     public int rankingCardsCount => _rankingCardsCount;
-    public abstract string example { get; }
+    public string example => _example;
     public abstract bool Evaluate(ICollection<ICard> cards);
-    public bool Evaluate(ICollection<ICard> cards, ICollection<ICard> required)
-    {
-        if (required.Count >= 5) return Evaluate(required);
-        if (required.Count == 0) return Evaluate(cards);
-        return EvaluateRequired(cards, required);
-    }
-
-    public abstract bool EvaluateRequired(ICollection<ICard> cards, ICollection<ICard> required);
 
     public RankedHand GetRankedHand(List<CardScript> cardScripts)
     {

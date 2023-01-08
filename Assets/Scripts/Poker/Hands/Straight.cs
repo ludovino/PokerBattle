@@ -2,9 +2,9 @@
 using System.Linq;
 using UnityEngine;
 
+[CreateAssetMenu(menuName = "PokerHand/Straight")]
 public class Straight : PokerHand
 {
-    public override string example => "19H;20C;21D;JS;QH";
     
     [SerializeField]
     private string[] sequences;
@@ -43,7 +43,7 @@ public class Straight : PokerHand
         return straightSequences.Any(s => HasStraight(numerals, s, length));
     }
 
-    private static List<string> HighestStraight(HashSet<string> numerals, IReadOnlyList<string> sequence)
+    private static List<string> HighestStraight(HashSet<string> numerals, IReadOnlyList<string> sequence, int length = 5)
     {
         var result = new List<string>();
         for (int i = sequence.Count() - 1; i >= 0; i--)
@@ -51,7 +51,7 @@ public class Straight : PokerHand
             var current = sequence[i];
             if (numerals.Contains(current)) result.Add(current);
             else result.Clear();
-            if (result.Count == 5) return result;
+            if (result.Count == length) return result;
         }
         return null;
     }
@@ -66,7 +66,7 @@ public class Straight : PokerHand
             {
                 var current = sequence[i];
                 if (numerals.Contains(current)) result.Add(current);
-                else if (result.Count >= 5)
+                else if (result.Count >= rankingCardsCount)
                 {
                     results.Add(result);
                     result = new List<string>();
@@ -129,25 +129,8 @@ public class Straight : PokerHand
     public override CardScript[] GetHand(List<CardScript> cardScripts)
     {
         var numerals = GetNumerals(cardScripts);
-        var straightNumerals = straightSequences.Select(s => HighestStraight(numerals, s)).First(s => s != null);
-        return cardScripts.GroupBy(c => c.card.numeral).Select(g => g.First()).Where(c => straightNumerals.Contains(c.card.numeral)).Take(5).ToArray();
-    }
-
-    public override bool EvaluateRequired(ICollection<ICard> cards, ICollection<ICard> required)
-    {
-        var requiredNumerals = required.Select(c => c.numeral).Distinct().ToList();
-        if (requiredNumerals.Count < required.Count) return false;
-        var allNumerals = GetNumerals(cards.Concat(required).ToList());
-        var sequences = GetStraightSequences(allNumerals);
-        if (sequences.Count == 0) return false;
-        foreach (var sequence in sequences)
-        {
-            var indicies = requiredNumerals.Select(r => sequence.IndexOf(r));
-            var highest = indicies.Max();
-            var lowest = indicies.Min();
-            if (highest - lowest <= 5 && lowest >= 0) return true;
-        }
-        return false;
+        var straightNumerals = straightSequences.Select(s => HighestStraight(numerals, s, rankingCardsCount)).First(s => s != null);
+        return cardScripts.GroupBy(c => c.card.numeral).Select(g => g.First()).Where(c => straightNumerals.Contains(c.card.numeral)).Take(rankingCardsCount).ToArray();
     }
 }
 

@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _description: +-Give a card
   _value: 2
-  _selectFromDeckPrefab: {fileID: 0}
+  _selectFromDeckPrefab: {fileID: 2668089816807094871, guid: fd35b41f1e538b343afb28e73e82ed4a, type: 3}

@@ -31,7 +31,6 @@ public class HandList : ScriptableObject
 
     internal void Replace(PokerHand toRemove, PokerHand toAdd)
     {
-        hands.Remove(toRemove);
-        hands.Add(toAdd);
+        if(hands.Remove(toRemove)) hands.Add(toAdd);
     }
 }

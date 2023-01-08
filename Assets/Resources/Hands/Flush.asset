@@ -15,3 +15,4 @@ MonoBehaviour:
   _displayName: Flush
   _rank: 50
   _rankingCardsCount: 5
+  _example: AH;3H;4H;7H;KH;

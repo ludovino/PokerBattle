@@ -13,13 +13,12 @@ MonoBehaviour:
   m_Name: PlayerHandList
   m_EditorClassIdentifier: 
   hands:
-  - {fileID: 11400000, guid: dae9bb9aa9314f84082bfc690ecd8397, type: 2}
-  - {fileID: 11400000, guid: 5c0ebafd5bd99ce4f8e40a2c804688d6, type: 2}
-  - {fileID: 11400000, guid: be2a5cbaf12dbf740b4c1c38841a45d0, type: 2}
+  - {fileID: 11400000, guid: faf1d7513a6fe2b449c1a8ca69b67082, type: 2}
+  - {fileID: 11400000, guid: 01591dc893635f9428dbf1bc9955b7e9, type: 2}
+  - {fileID: 11400000, guid: 5d59b97f161574a4f95020234ef8ad3e, type: 2}
   - {fileID: 11400000, guid: 7b112e6543cda7546b0e84f25545812f, type: 2}
   - {fileID: 11400000, guid: 93296e2f5f7f1474a9e570c9a2924364, type: 2}
-  - {fileID: 11400000, guid: 3534d626c86b5154a9173b3d15ddfe27, type: 2}
-  - {fileID: 11400000, guid: 4f8d67d414542fe4c855bd32cf1e868e, type: 2}
-  - {fileID: 11400000, guid: 4f8d67d414542fe4c855bd32cf1e868e, type: 2}
+  - {fileID: 11400000, guid: 12443be4be05653408cb4b49d0e648bd, type: 2}
+  - {fileID: 11400000, guid: f53ced5383e82b8468137852575a7886, type: 2}
   - {fileID: 11400000, guid: e1e311cdc6fa2c642b3eeed7274b02e3, type: 2}
-  - {fileID: 11400000, guid: aaf1ddf804cd75642aeb70a1b375014d, type: 2}
+  - {fileID: 11400000, guid: 34fa3e14cc880974b82d5cc19f9dbc63, type: 2}
