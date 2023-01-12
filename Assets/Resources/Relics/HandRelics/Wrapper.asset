@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 468fbb929d164b146adb219b29738118, type: 3}
   m_Name: Wrapper
   m_EditorClassIdentifier: 
-  _displayName: 
-  _description: 
-  _pokerHands: []
+  _displayName: Wrapper
+  _description: Wrapped straights beat three of a kind
+  _sprite: {fileID: 21300000, guid: 575e38f15f7c3d6489ccd89eabc71399, type: 3}
+  _pokerHands:
+  - {fileID: 11400000, guid: f0ae45611beeb1648af80a9aca655c9c, type: 2}

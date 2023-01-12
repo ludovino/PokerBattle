@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -55,7 +54,6 @@ public class OutcomeSelector : MonoBehaviour
     {
         foreach(var button in _buttons)
         {
-            //button.interactable = false;
             button.onClick.RemoveAllListeners();
         }
         _onOptionSelected.Invoke();

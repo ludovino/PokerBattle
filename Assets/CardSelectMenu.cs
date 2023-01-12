@@ -39,7 +39,7 @@ public class CardSelectMenu : MonoBehaviour
 
     private void Start()
     {
-        _menu.SetActive(false);
+        gameObject.SetActive(false);
     }
     private void OnSelectCard(CardScript selector)
     {
@@ -63,14 +63,14 @@ public class CardSelectMenu : MonoBehaviour
         }
         _onSelect.Invoke(_selected);
         _onSelect.RemoveAllListeners();
-        _menu.SetActive(false);
+        gameObject.SetActive(false);
         _chosen = true;
     }
 
     private IEnumerator CR_Open()
     {
         _chosen = false;
-        _menu.SetActive(true);
+        gameObject.SetActive(true);
         foreach (var card in _cards)
         {
             var cardSelector = Instantiate(_cardSelectionPrefab);
@@ -87,6 +87,11 @@ public class CardSelectMenu : MonoBehaviour
 
     public void StartSelect(List<Card> cards, int count)
     {
+        if (cards == _cards)
+        {
+            gameObject.SetActive(true);
+            return;
+        }
         _selected = new List<CardScript>();
         _cardSelectors = new List<CardSelector>();
         _toSelect = Mathf.Min(count, cards.Count);

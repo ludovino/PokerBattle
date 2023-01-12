@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 619fa7ce1a176334788d81fa33e78f14, type: 3}
+  m_Name: RelicReward
+  m_EditorClassIdentifier: 
+  relics:
+  - {fileID: 11400000, guid: 1c3b51e9a04c46341862318bee67d3d4, type: 2}
+  - {fileID: 11400000, guid: 6d394f494b36b2a4192bdf6e1b3219ec, type: 2}
+  - {fileID: 11400000, guid: d4ba8d6340e17d641a27dc420142a4bc, type: 2}
+  - {fileID: 11400000, guid: 79d673a26b3d44449bb6cfdf97d36397, type: 2}
+  - {fileID: 11400000, guid: 63149fe1e770998468ebfcdcd676db24, type: 2}
+  - {fileID: 11400000, guid: 1806caf4e6567fb4784412dbe4ab5b83, type: 2}
+  - {fileID: 11400000, guid: e20be7d51f09c0f4f831b97c36b8e18a, type: 2}
+  - {fileID: 11400000, guid: fb5bf98cc93b60d4fab26a457a9bd8ee, type: 2}

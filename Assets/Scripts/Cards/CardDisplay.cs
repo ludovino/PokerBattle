@@ -24,8 +24,6 @@ public class CardDisplay : MonoBehaviour
     [SerializeField]
     private SpriteRenderer _faceSprite;
     [SerializeField]
-    private SpriteRenderer _glow;
-    [SerializeField]
     private AnimationClip[] _spareAnimations;
     private CardBackScript _cardBack;
     public bool FaceUp => _cardBack.faceUp;
@@ -49,26 +47,6 @@ public class CardDisplay : MonoBehaviour
         SetSprites();
         SetText();
         if(isActiveAndEnabled) _animancer.Play(GetClip(_card), 0f);
-        GlowOff();
-    }
-
-    public void Glow(float intensity, Color color)
-    {
-        if (intensity == 0)
-        {
-            GlowOff();
-            return;
-        }
-        _glow.enabled = true;
-        var targetColor = new Color(color.r, color.g, color.b, intensity);
-        _glow.DOColor(targetColor, 0.2f);
-        _glow.transform.DOScale(Vector3.one, 0.2f);
-    }
-
-    public void GlowOff()
-    {
-        _glow.DOColor(new Color(0, 0, 0, 0), 0.2f);
-        _glow.transform.DOScale(new Vector3(0.5f, 0.5f, 0.5f), 0.2f).OnComplete(() => _glow.enabled = false);
     }
 
     private void OnEnable()

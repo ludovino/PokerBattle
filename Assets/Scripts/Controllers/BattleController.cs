@@ -93,7 +93,11 @@ public class BattleController : MonoBehaviour
 
     }
 
-    
+    public void Init()
+    {
+        Init(player.entityData, (EnemyData)enemy.entityData);
+    }
+
     public void Init(EntityData playerData, EnemyData enemyData)
     {
         _sm = new StateMachine(new StartBattle());

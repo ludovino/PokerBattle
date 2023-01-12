@@ -32,8 +32,10 @@ public class EntityData : ScriptableObject, IOnInit
     [SerializeField]
     private OnChangeChips _onChangeChips;
     private OnChangeDeck _onChangeDeck;
+    private OnAddRelic _onAddRelic;
     public OnChangeChips OnChangeChips => _onChangeChips;
     public OnChangeDeck OnChangeDeck => _onChangeDeck;
+    public OnAddRelic OnAddRelic => _onAddRelic;
 
     private List<Relic> _relics;
     public IReadOnlyList<Relic> Relics => _relics;
@@ -53,8 +55,9 @@ public class EntityData : ScriptableObject, IOnInit
 
     public void Init()
     {
-        _onChangeChips = _onChangeChips ?? new OnChangeChips();
-        _onChangeDeck = _onChangeDeck ?? new OnChangeDeck();
+        _onChangeChips ??= new OnChangeChips();
+        _onChangeDeck ??= new OnChangeDeck();
+        _onAddRelic ??= new OnAddRelic();
         _currentChips = _chips;
         _cards = CardFactory.Instance.GetCards(_deckString);
 
@@ -92,6 +95,13 @@ public class EntityData : ScriptableObject, IOnInit
         return true;
     }
 
+    internal void AddRelic(Relic relic)
+    {
+        _relics.Add(relic);
+        if (relic is IOnCollect r) r.OnCollect();
+    }
+
 }
 
 public class OnChangeDeck : UnityEvent<IReadOnlyList<Card>> { }
+public class OnAddRelic : UnityEvent<IReadOnlyList<Relic>> { }

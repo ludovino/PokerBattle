@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -26,9 +27,13 @@ public class TopBar : MonoBehaviour
 
     private void UpdateChips(int _, int current, int __)
     {
-        _chipCount.text = current.ToString();
+        CoroutineQueue.Defer(CR_UpdateChips(current));
     }
-
+    private IEnumerator CR_UpdateChips(int current)
+    {
+        _chipCount.text = current.ToString();
+        yield return null;
+    }
     private void UpdateDeck(IReadOnlyCollection<Card> cards)
     {
         _deckDisplay.SetCards(cards);

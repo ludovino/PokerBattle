@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _displayName: Set of Suits
   _description: Your suited sets beat opposing sets
+  _sprite: {fileID: 21300000, guid: 6f0ffa66bdbf5824880a3b51ab911584, type: 3}
   _pokerHands:
   - {fileID: 11400000, guid: 6864d9e46d2829047a86a943a88a2fa9, type: 2}
   - {fileID: 11400000, guid: a48e8736744b5ab46b1f55ce4da227fb, type: 2}

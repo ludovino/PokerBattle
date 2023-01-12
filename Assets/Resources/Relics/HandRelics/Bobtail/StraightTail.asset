@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 468fbb929d164b146adb219b29738118, type: 3}
   m_Name: StraightTail
   m_EditorClassIdentifier: 
-  _displayName: Straight Tail
+  _displayName: Straight Bobtail
   _description: your 4 card straights beat a pair
+  _sprite: {fileID: 21300000, guid: f7a91f7a6882c9a4e8e1984129a686ef, type: 3}
   _pokerHands:
   - {fileID: 11400000, guid: a875c96ebe0b01845a75ea369d17836d, type: 2}

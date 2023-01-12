@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _displayName: Rainbow
   _description: Five different suited cards beat a two pair
+  _sprite: {fileID: 21300000, guid: b5ce7efb22b75874087c4141dddaaa9a, type: 3}
   _pokerHands:
   - {fileID: 11400000, guid: 59f7f1a75d61af94283573f97859a162, type: 2}

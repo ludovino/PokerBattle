@@ -6,8 +6,8 @@ using UnityEngine;
 public class CardEffectList : ScriptableObject
 {
     [SerializeField]
-    private List<SuitEffect> _initialCardEffects;
-    private List<SuitEffect> _cardEffects;
+    private List<CardEffect> _initialCardEffects;
+    private List<CardEffect> _cardEffects;
     public void DoCardEffects<T>(ICard card, CardEffectContext context) where T : ICardEffect
     {
         var effects = _cardEffects.OfType<T>().Where(c => c.Condition(card));
@@ -31,7 +31,7 @@ public class CardEffectList : ScriptableObject
 
     public string SuitEffectDescription(Suit suit)
     {
-        var descriptions = _initialCardEffects.Where(e => e.Suit == suit).Select(e => e.Description).ToList();
+        var descriptions = _initialCardEffects.OfType<SuitEffect>().Where(e => e.Suit == suit).Select(e => e.Description).ToList();
         return string.Join("\n", descriptions);
     }
 }

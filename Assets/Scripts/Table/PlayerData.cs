@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 [CreateAssetMenu(menuName = "Entities/PlayerData")]
 public class PlayerData : EntityData
@@ -8,6 +9,7 @@ public class PlayerData : EntityData
 
     void OnEnable()
     {
+        Init();
         SetInstance();
     }
 
