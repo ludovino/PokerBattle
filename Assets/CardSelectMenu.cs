@@ -11,7 +11,7 @@ public class CardSelectMenu : MonoBehaviour
     [SerializeField]
     private CardSelector _cardSelectionPrefab;
     [SerializeField]
-    private GameObjectGrid _grid;
+    private Transform _grid;
     [SerializeField]
     private OnSelectCards _onSelect;
     [SerializeField]
@@ -73,11 +73,10 @@ public class CardSelectMenu : MonoBehaviour
         gameObject.SetActive(true);
         foreach (var card in _cards)
         {
-            var cardSelector = Instantiate(_cardSelectionPrefab);
+            var cardSelector = Instantiate(_cardSelectionPrefab, _grid);
             cardSelector.OnSelectCard.AddListener(OnSelectCard);
             cardSelector.OnDeselectCard.AddListener(OnDeselectCard);
             cardSelector.SetCard(card, _owner);
-            _grid.Add(cardSelector.gameObject);
             _cardSelectors.Add(cardSelector);
         }
 

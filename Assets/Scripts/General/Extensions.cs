@@ -22,4 +22,12 @@ public static class Extensions
     {
         return sWhitespace.Replace(input, string.Empty);
     }
+
+    public static void DestroyChildren(this Transform transform, float secondsDelay = 0)
+    {
+        for(int i = transform.childCount - 1; i >=0; i--)
+        {
+            Object.Destroy(transform.GetChild(i).gameObject, secondsDelay);
+        }
+    }
 }

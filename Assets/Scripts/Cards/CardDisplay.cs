@@ -1,10 +1,12 @@
 using Animancer;
 using DG.Tweening;
+using Mono.Cecil;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CardDisplay : MonoBehaviour
 {
@@ -14,7 +16,11 @@ public class CardDisplay : MonoBehaviour
     [SerializeField]
     private TextMeshPro[] _numeralText;
     [SerializeField]
-    private SpriteRenderer[] _spriteRenderers;
+    private TextMeshProUGUI[] _canvasNumeralText;
+    [SerializeField]
+    private SpriteRenderer[] _spriteRenderers; 
+    [SerializeField]
+    private Image[] _canvasPips;
     [SerializeField]
     private TMP_FontAsset _regularFont; 
     [SerializeField]
@@ -24,9 +30,11 @@ public class CardDisplay : MonoBehaviour
     [SerializeField]
     private SpriteRenderer _faceSprite;
     [SerializeField]
+    private Image _canvasFace;
+    [SerializeField]
     private AnimationClip[] _spareAnimations;
     private CardBackScript _cardBack;
-    public bool FaceUp => _cardBack.faceUp;
+    public bool FaceUp => _cardBack?.faceUp ?? true;
     private void Awake()
     {
         _cardBack = GetComponent<CardBackScript>();
@@ -78,11 +86,19 @@ public class CardDisplay : MonoBehaviour
             sprite.sprite = _card.suit?.sprite;
             sprite.color = _card.suit?.Color.Value ?? Color.grey;
         }
+
+        foreach(var image in _canvasPips)
+        {
+            image.sprite = _card.suit?.sprite;
+            image.color = _card.suit?.Color.Value ?? Color.white;
+        }
+
         if(_card.face != null)
         {
             var faceSprite = _card.face?.blankSprite;
             faceSprite = _card.suit?.Faces.GetValueOrDefault(_card.face) ?? faceSprite;
-            _faceSprite.sprite = faceSprite;
+            if(_faceSprite) _faceSprite.sprite = faceSprite;
+            if(_canvasFace) _canvasFace.sprite = faceSprite;
         }
     }
     public void SetText()
@@ -92,6 +108,13 @@ public class CardDisplay : MonoBehaviour
     public void SetText(ICard card)
     {
         foreach(var text in _numeralText)
+        {
+            text.text = card.numeral;
+            text.font = card.highCardRank >= 10 ? _narrowFont : _regularFont;
+            text.color = card.suit?.Color.Value ?? Color.grey;
+        }
+
+        foreach (var text in _canvasNumeralText)
         {
             text.text = card.numeral;
             text.font = card.highCardRank >= 10 ? _narrowFont : _regularFont;
@@ -107,13 +130,21 @@ public class CardDisplay : MonoBehaviour
             seq.Insert(0.1f, sprite.DOColor(card.suit?.Color.Value ?? Color.grey, 0.1f));
         }
 
-        if (card.face != null)
+        if (card.face != null && _faceSprite)
         {
             var faceSprite = card.face?.blankSprite;
             faceSprite = card.suit?.Faces.GetValueOrDefault(card.face) ?? faceSprite;
 
             seq.Insert(0, _faceSprite.DOFade(0, 0.1f).OnComplete(() => _faceSprite.sprite = faceSprite));
             seq.Insert(0.1f, _faceSprite.DOFade(1, 0.1f));
+        }
+        if (card.face != null && _canvasFace)
+        {
+            var faceSprite = card.face?.blankSprite;
+            faceSprite = card.suit?.Faces.GetValueOrDefault(card.face) ?? faceSprite;
+
+            seq.Insert(0, _canvasFace.DOFade(0, 0.1f).OnComplete(() => _canvasFace.sprite = faceSprite));
+            seq.Insert(0.1f, _canvasFace.DOFade(1, 0.1f));
         }
         seq.Play();
         yield return seq.WaitForCompletion();

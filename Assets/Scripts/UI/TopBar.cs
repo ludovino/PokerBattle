@@ -20,8 +20,8 @@ public class TopBar : MonoBehaviour
     {
         _player.OnChangeChips.AddListener(UpdateChips);
         _player.OnChangeDeck.AddListener(UpdateDeck);
-        _player.ChangeChips(0);
-        _player.TriggerDeckChange();
+        UpdateChips(0, _player.Chips, 0);
+        UpdateDeck(_player.Cards);
 
     }
 

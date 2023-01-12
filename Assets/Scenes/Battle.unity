@@ -4714,6 +4714,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: TopBar
       objectReference: {fileID: 0}
+    - target: {fileID: 2464066604455334940, guid: 8f1f15bbabaf8c84b91cab42c9cda538, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2464066604455334940, guid: 8f1f15bbabaf8c84b91cab42c9cda538, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2464066604455334940, guid: 8f1f15bbabaf8c84b91cab42c9cda538, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2464066604455334940, guid: 8f1f15bbabaf8c84b91cab42c9cda538, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2464066604455334940, guid: 8f1f15bbabaf8c84b91cab42c9cda538, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2787334824455116456, guid: 8f1f15bbabaf8c84b91cab42c9cda538, type: 3}
       propertyPath: m_Camera
       value: 

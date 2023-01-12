@@ -5042,10 +5042,62 @@ PrefabInstance:
       propertyPath: m_Name
       value: ChooseFromDeck
       objectReference: {fileID: 0}
+    - target: {fileID: 2749597774690211373, guid: fd35b41f1e538b343afb28e73e82ed4a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3454828820630040665, guid: fd35b41f1e538b343afb28e73e82ed4a, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3454828820630040665, guid: fd35b41f1e538b343afb28e73e82ed4a, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3454828820630040665, guid: fd35b41f1e538b343afb28e73e82ed4a, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3454828820630040665, guid: fd35b41f1e538b343afb28e73e82ed4a, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5196817999348380877, guid: fd35b41f1e538b343afb28e73e82ed4a, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 519420031}
     - target: {fileID: 8106079036732441183, guid: fd35b41f1e538b343afb28e73e82ed4a, type: 3}
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 519420031}
+    - target: {fileID: 8912724886210231027, guid: fd35b41f1e538b343afb28e73e82ed4a, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8912724886210231027, guid: fd35b41f1e538b343afb28e73e82ed4a, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8912724886210231027, guid: fd35b41f1e538b343afb28e73e82ed4a, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8912724886210231027, guid: fd35b41f1e538b343afb28e73e82ed4a, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8912724886210231027, guid: fd35b41f1e538b343afb28e73e82ed4a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8912724886210231027, guid: fd35b41f1e538b343afb28e73e82ed4a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8912724886210231027, guid: fd35b41f1e538b343afb28e73e82ed4a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fd35b41f1e538b343afb28e73e82ed4a, type: 3}
 --- !u!1001 &2787334823940557356
@@ -5070,6 +5122,26 @@ PrefabInstance:
     - target: {fileID: 1364420126479603222, guid: 8f1f15bbabaf8c84b91cab42c9cda538, type: 3}
       propertyPath: m_Name
       value: TopBar
+      objectReference: {fileID: 0}
+    - target: {fileID: 2464066604455334940, guid: 8f1f15bbabaf8c84b91cab42c9cda538, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2464066604455334940, guid: 8f1f15bbabaf8c84b91cab42c9cda538, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2464066604455334940, guid: 8f1f15bbabaf8c84b91cab42c9cda538, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2464066604455334940, guid: 8f1f15bbabaf8c84b91cab42c9cda538, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2464066604455334940, guid: 8f1f15bbabaf8c84b91cab42c9cda538, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2787334824455116456, guid: 8f1f15bbabaf8c84b91cab42c9cda538, type: 3}
       propertyPath: m_Camera

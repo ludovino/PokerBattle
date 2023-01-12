@@ -145,7 +145,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3198702054759011673}
   - component: {fileID: 7505210437459217225}
-  - component: {fileID: 7328452190122325570}
   m_Layer: 5
   m_Name: grid
   m_TagString: Untagged
@@ -194,23 +193,9 @@ MonoBehaviour:
   m_StartCorner: 0
   m_StartAxis: 0
   m_CellSize: {x: 200, y: 280}
-  m_Spacing: {x: 0, y: 0}
+  m_Spacing: {x: 20, y: 20}
   m_Constraint: 1
   m_ConstraintCount: 5
---- !u!114 &7328452190122325570
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4080984794664487647}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ab248ffb45cfee449b01df713ebaf14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scaleFactor: 1.21
-  _objectParent: {fileID: 109291361394086848}
 --- !u!1 &4339596568085555011
 GameObject:
   m_ObjectHideFlags: 0
@@ -585,8 +570,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _menu: {fileID: 5881647150238862471}
-  _cardSelectionPrefab: {fileID: 1674840196816025112, guid: 4e2cb71d6ec9ad24e99774f681555e4a, type: 3}
-  _grid: {fileID: 7328452190122325570}
+  _cardSelectionPrefab: {fileID: 307010927463062090, guid: a0f688caf9909a64f881ed2801856f1d, type: 3}
+  _grid: {fileID: 3198702054759011673}
   _owner: {fileID: 11400000, guid: ec024013c2feb2e498caea236848969d, type: 2}
   _selected: []
 --- !u!1 &8474094954364286564
