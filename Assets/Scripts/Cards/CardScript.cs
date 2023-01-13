@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -69,12 +70,17 @@ public class CardScript : MonoBehaviour, ICard
         _tempCard = _card.Clone();
         if (animate) _cardDisplay.AnimateCardDisplay(_tempCard);
         else _cardDisplay.UpdateCardDisplay(_tempCard);
+        if (animate)
+            CoroutineQueue.Defer(CR_SetTooltip());
+        else
+            SetTooltip();
     }
     public void ChangeValue(int change)
     {
         if (change == 0) return;
         _tempCard.Change(change);
         _cardDisplay.AnimateCardDisplay(_tempCard);
+        CoroutineQueue.Defer(CR_SetTooltip());
     }
 
     public void ChangeSuit(Suit suit)
@@ -82,8 +88,14 @@ public class CardScript : MonoBehaviour, ICard
         if (suit == this.suit) return;
         _tempCard.SetSuit(suit);
         _cardDisplay.AnimateCardDisplay(_tempCard);
+        CoroutineQueue.Defer(CR_SetTooltip());
     }
 
+    private IEnumerator CR_SetTooltip()
+    {
+        yield return null;
+        SetTooltip();
+    }
 
     private void SetTooltip()
     {

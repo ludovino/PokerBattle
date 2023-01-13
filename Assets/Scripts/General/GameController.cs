@@ -2,6 +2,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine;
 using System.Linq;
 using System.Collections;
+using System.Collections.Generic;
 
 public class GameController : MonoBehaviour
 {
@@ -64,10 +65,10 @@ public class GameController : MonoBehaviour
         music.Game();
         _sm.MoveToState(new MapEvent(_startingScenario));
     }
-    public void BeginBattle(EnemyData enemy)
+    public void BeginBattle(EnemyData enemy, List<RewardGenerator> rewardGenerators)
     {
         if (currentAct.IsBossLevel) music.Boss();
-        _sm.MoveToState(new Battle(_playerData, enemy));
+        _sm.MoveToState(new Battle(_playerData, enemy, rewardGenerators));
     }
     public void GoToNextLevel()
     {
@@ -173,21 +174,23 @@ public class GameController : MonoBehaviour
     public class Battle : IState
     {
         private EnemyData _enemy;
-        EntityData _player;
-
-        public Battle(EntityData playerData, EnemyData enemy)
+        private EntityData _player;
+        private List<RewardGenerator> _rewardGenerator;
+        public Battle(EntityData playerData, EnemyData enemy, List<RewardGenerator> rewardGenerators)
         {
             _enemy = enemy;
             _player = playerData;
+            _rewardGenerator = rewardGenerators;
         }
 
         public void OnEnter()
         {
             SceneChanger.Instance.ChangeScene("Battle", StartBattle);
         }
+
         void StartBattle()
         {
-            FindObjectOfType<BattleController>().Init(_player, _enemy);
+            FindObjectOfType<BattleController>().Init(_player, _enemy, _rewardGenerator);
         }
         public void OnExit()
         {}

@@ -1,4 +1,4 @@
-using JetBrains.Annotations;
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +17,7 @@ public class RewardScreen : MonoBehaviour
     private List<Button> _buttons;
     [SerializeField]
     private Transform _buttonListTransform;
-
+    private CanvasGroup _canvas;
     [SerializeField]
     private UnityEvent _onComplete;
     public UnityEvent OnComplete => _onComplete;
@@ -27,6 +27,7 @@ public class RewardScreen : MonoBehaviour
         _rewardGenerators ??= new List<RewardGenerator>();
         _buttons ??= new List<Button>();
         _rewards ??= new List<IReward>();
+        _canvas = GetComponent<CanvasGroup>();
     }
 
     public void Start()
@@ -40,6 +41,10 @@ public class RewardScreen : MonoBehaviour
         {
             Destroy(_buttonListTransform.GetChild(i).gameObject);
         }
+
+        _canvas.interactable = false;
+        _canvas.blocksRaycasts = false;
+        _canvas.alpha = 0;
 
         _rewardGenerators = rewardGenerators;
         foreach (var rewardGenerator in _rewardGenerators)
@@ -60,6 +65,23 @@ public class RewardScreen : MonoBehaviour
         }
     }
 
+    public void Open()
+    {
+        CoroutineQueue.Defer(CR_Open());
+    }
+
+    private IEnumerator CR_Open()
+    {
+        yield return _canvas.DOFade(1, 0.2f);
+        _canvas.interactable = true;
+        _canvas.blocksRaycasts = true;
+    }
+    private IEnumerator CR_Close()
+    {
+        yield return _canvas.DOFade(0f, 0.2f);
+        _canvas.interactable = false;
+        _canvas.blocksRaycasts = false;
+    }
     public void RewardClaimed()
     {
         if (_rewards.All(r => r.Complete)) EndRewardScreen();
@@ -68,12 +90,16 @@ public class RewardScreen : MonoBehaviour
             _buttons[i].gameObject.SetActive(!_rewards[i].Complete);
         }
     }
+
     public void EndRewardScreen()
     {
         foreach (var button in _buttons)
         {
             button.onClick.RemoveAllListeners();
         }
+        _onComplete.Invoke();
+
+        CoroutineQueue.Defer(CR_Close());
     }
 }
 

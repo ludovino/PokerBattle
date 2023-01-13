@@ -16,6 +16,9 @@ MonoBehaviour:
   DisplayName: Amateur
   _enemyList:
   - {fileID: 11400000, guid: a0ae2c5fadda11f42b7e536105652f54, type: 2}
-  - {fileID: 11400000, guid: 3e016b041b34945419b61b50edc60adf, type: 2}
+  - {fileID: 11400000, guid: faf6f06b5cacc3a438b2134b169f042a, type: 2}
   - {fileID: 11400000, guid: 9aa3272d395628746b1f46b9489f42ef, type: 2}
   - {fileID: 11400000, guid: 6dbeba453837b3d4ea63d4cd7172b3d2, type: 2}
+  _rewardChances:
+  - rewardGenerator: {fileID: 11400000, guid: 7f644b72d0de0a346a9e301ec28bb00e, type: 2}
+    chance: 1

@@ -16,3 +16,6 @@ MonoBehaviour:
   DisplayName: Pit Boss
   _enemyList:
   - {fileID: 11400000, guid: 17f27e55d7d06a445b9b71f292fa5448, type: 2}
+  _rewardChances:
+  - rewardGenerator: {fileID: 11400000, guid: 7f644b72d0de0a346a9e301ec28bb00e, type: 2}
+    chance: 1

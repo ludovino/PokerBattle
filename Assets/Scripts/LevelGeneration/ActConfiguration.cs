@@ -8,6 +8,7 @@ public class ActConfiguration : ScriptableObject
 {
     public List<LevelConfiguration> levels;
     public int level;
+    public int pointsForWinning;
     public bool IsBossLevel => levels[level].isBoss;
 
     public List<Encounter> GetEncounters()

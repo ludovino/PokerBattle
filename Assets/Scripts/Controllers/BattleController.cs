@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
@@ -29,6 +30,11 @@ public class BattleController : MonoBehaviour
     private OnChangeChips onChangePot;
     [SerializeField]
     private CardPool _cardFactory;
+    
+    [SerializeField]
+    private RewardScreen _rewardScreen;
+    [SerializeField]
+    private RewardGenerator _rewardGenerator;
 
     private int cardsPlayed;
     private int handCount = 0;
@@ -95,16 +101,19 @@ public class BattleController : MonoBehaviour
 
     public void Init()
     {
-        Init(player.entityData, (EnemyData)enemy.entityData);
+        Init(player.entityData, (EnemyData)enemy.entityData, new List<RewardGenerator>() { _rewardGenerator });
     }
 
-    public void Init(EntityData playerData, EnemyData enemyData)
+    public void Init(EntityData playerData, EnemyData enemyData, List<RewardGenerator> rewards)
     {
         _sm = new StateMachine(new StartBattle());
         _sm.RegisterTransition<StartBattle, PlayerTurn>();
         _sm.RegisterTransition<PlayerTurn, PlayerTurn>();
 
+        _rewardScreen.Init(rewards);
+
         startingBlind = GameController.GetBlind();
+
         blind = startingBlind;
         player.Init(playerData, blind);
         enemy.Init(enemyData, blind);
@@ -173,29 +182,35 @@ public class BattleController : MonoBehaviour
         enemy.ClearField();
         if (player.chips <= 0)
         {
-            playerLose.Invoke();
-            GameController.Instance.GameOver();
+            Lose();
             return;
         }
         if (enemy.chips <= 0)
         {
-            playerWin.Invoke();
-            player.controller.ChooseCards(
-                _cardFactory.GetWithReplacement(5), 
-                1, 
-                cards => {
-                    cards.ForEach(card => player.entityData.AddCard(card));
-                    if (GameController.Instance.currentAct.IsBossLevel)
-                    {
-                        GameController.Instance.PlayerWins();
-                        return;
-                    }
-                    GameController.Instance.GoToNextLevel();
-                });
-            
+            ShowRewards();
             return;
         }
         StartRound();
+    }
+    public void ShowRewards()
+    {
+        _rewardScreen.Open();
+    }
+
+    public void Win()
+    {
+        if (GameController.Instance.currentAct.IsBossLevel)
+        {
+            GameController.Instance.PlayerWins();
+            return;
+        }
+        GameController.Instance.GoToNextLevel();
+    }
+
+    public void Lose()
+    {
+        playerLose.Invoke();
+        GameController.Instance.GameOver();
     }
 
     private void IncreaseBlinds()

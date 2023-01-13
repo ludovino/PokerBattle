@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5135d6f583d4cfb4a8bdfe26ae06c7ef, type: 3}
   m_Name: ShopPool
   m_EditorClassIdentifier: 
-  _suits: {fileID: 11400000, guid: 70c103d5986c3fd4cbd7369c5e07dfcf, type: 2}
+  _suits: {fileID: 11400000, guid: acd4de4e227542442952a166f0c3df05, type: 2}
+  _except: {fileID: 11400000, guid: 2e5c78850dd67a84ead601f17c7846b4, type: 2}
   numerals:
   - first: 0
     last: 10

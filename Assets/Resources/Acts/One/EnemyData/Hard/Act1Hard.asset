@@ -18,3 +18,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2b9e7551a24162a439ac28b5ea1c7bb2, type: 2}
   - {fileID: 11400000, guid: 7ab9c966d24802b4ab3f1d14757c8bc7, type: 2}
   - {fileID: 11400000, guid: 367b65ceee9e8174db9660138e175673, type: 2}
+  _rewardChances:
+  - rewardGenerator: {fileID: 11400000, guid: 7f644b72d0de0a346a9e301ec28bb00e, type: 2}
+    chance: 1
+  - rewardGenerator: {fileID: 11400000, guid: e241658782eec5e44ba6b9b00a244d45, type: 2}
+    chance: 1

@@ -16,10 +16,10 @@ MonoBehaviour:
 
     1-;2-;2-;3-;4-;
 
-    4-;6H;6C;6D;6S;
+    4-;6H;6C;6D;7S;
 
-    Q-;K-;16C;16D;16H;'
-  _chips: 75
+    Q-;K-;16C;8D;9H;'
+  _chips: 50
   _drawBonus: 0
   _handList: {fileID: 11400000, guid: c07dc61121ce8d0438dbc38fc2d08e99, type: 2}
   _effectList: {fileID: 11400000, guid: e2e7a2da6b0a7084d9f5275336063444, type: 2}
@@ -27,5 +27,6 @@ MonoBehaviour:
   _onChangeChips:
     m_PersistentCalls:
       m_Calls: []
+  _relics: []
   displayName: The Sixler
   chipsPerLevel: 5

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -18,6 +19,6 @@ internal class CombinedComparer : CardComparer
 
     public override int GetHashCode(ICard obj)
     {
-        return comparers.Sum(c => c.GetHashCode(obj));
+        return comparers.Aggregate(0, (int hash, CardComparer comparer) => HashCode.Combine(comparer, hash));
     }
 }

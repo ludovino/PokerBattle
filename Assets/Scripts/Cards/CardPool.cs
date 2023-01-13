@@ -6,9 +6,30 @@ using URandom = UnityEngine.Random;
 [CreateAssetMenu(menuName = "Card/Pool")]
 public class CardPool : ScriptableObject
 {
-    private IReadOnlyList<Suit> suits => _suits.Suits;
+    private List<Suit> _suitList;
+    private IReadOnlyList<Suit> suits => GetSuits();
     [SerializeField]
     private SuitList _suits;
+    [SerializeField]
+    private SuitList _except;
+
+    private IReadOnlyList<Suit> GetSuits()
+    {
+        if (_except is null || _except.Suits.Count == 0) return _suits.Suits;
+        if (_suitList is null) _suitList = new List<Suit>();
+        var suitsExcept = _suits.Suits.Except(_except.Suits).ToList();
+        if (!_suitList.SequenceEqual(suitsExcept))
+        {
+            _suitList.Clear();
+            _suitList.AddRange(suitsExcept);
+        }
+        return _suitList;
+    }
+    private void OnEnable()
+    {
+        GetSuits();
+    }
+
     public List<Card> GetWithReplacement(int count)
     {
         var cardList = new List<Card>();
