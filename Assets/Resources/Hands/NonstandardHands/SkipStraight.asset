@@ -16,6 +16,7 @@ MonoBehaviour:
   _rank: 38
   _rankingCardsCount: 5
   _example: 2H;4H;6H;8H;10H
+  _score: 7
   sequences:
   - 15;17;19;21;Q;A
   - 14;16;18;20;J;K

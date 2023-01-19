@@ -16,4 +16,5 @@ MonoBehaviour:
   _rank: 20
   _rankingCardsCount: 4
   _example: AH;AC;QS;QD;0-
+  _score: 8
   setComparer: {fileID: 11400000, guid: e661c3b2c06bea346b63aca747a0b25d, type: 2}

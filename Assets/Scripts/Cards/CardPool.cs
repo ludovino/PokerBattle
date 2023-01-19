@@ -15,9 +15,9 @@ public class CardPool : ScriptableObject
 
     private IReadOnlyList<Suit> GetSuits()
     {
-        if (_except is null || _except.Suits.Count == 0) return _suits.Suits;
+        if (_except is null || _except.Count == 0) return _suits;
         if (_suitList is null) _suitList = new List<Suit>();
-        var suitsExcept = _suits.Suits.Except(_except.Suits).ToList();
+        var suitsExcept = _suits.Except(_except).ToList();
         if (!_suitList.SequenceEqual(suitsExcept))
         {
             _suitList.Clear();

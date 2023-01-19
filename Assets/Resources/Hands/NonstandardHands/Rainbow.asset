@@ -16,3 +16,4 @@ MonoBehaviour:
   _rank: 25
   _rankingCardsCount: 5
   _example: AH;4C;5F;8D;10S;
+  _score: 5

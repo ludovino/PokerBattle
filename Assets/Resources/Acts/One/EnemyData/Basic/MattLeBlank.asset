@@ -21,11 +21,12 @@ MonoBehaviour:
     9C;0D;10D;JH;AH;'
   _chips: 50
   _drawBonus: 0
-  _handList: {fileID: 11400000, guid: c07dc61121ce8d0438dbc38fc2d08e99, type: 2}
-  _effectList: {fileID: 11400000, guid: e2e7a2da6b0a7084d9f5275336063444, type: 2}
+  _handList: {fileID: 11400000, guid: 6bd6b922ef5cc2d498e7b16494fd3cf2, type: 2}
+  _effectList: {fileID: 11400000, guid: 45b45b5fbf4f3c0449caa55c28f2a2ce, type: 2}
   _cardPool: {fileID: 11400000, guid: f3063282c2031b04db4aee5e0df8aede, type: 2}
   _onChangeChips:
     m_PersistentCalls:
       m_Calls: []
+  _relics: []
   displayName: Matt Le Blank
   chipsPerLevel: 5

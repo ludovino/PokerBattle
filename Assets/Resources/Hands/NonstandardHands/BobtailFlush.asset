@@ -16,4 +16,5 @@ MonoBehaviour:
   _rank: 17
   _rankingCardsCount: 4
   _example: AH;3H;4H;7H;KH;
+  _score: 4
   flushComparer: {fileID: 11400000, guid: 6113d7782ecd3f34987f3649b8902b9f, type: 2}

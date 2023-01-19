@@ -18,6 +18,10 @@ public abstract class PokerHand : ScriptableObject
     public int rank => _rank;
     public int rankingCardsCount => _rankingCardsCount;
     public string example => _example;
+    [SerializeField]
+    private int _score;
+    public int score => _score;
+
     public abstract bool Evaluate(ICollection<ICard> cards);
 
     public RankedHand GetRankedHand(List<CardScript> cardScripts)

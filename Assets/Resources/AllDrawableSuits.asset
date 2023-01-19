@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5de0880a3caa7a649a747926afe0dcfa, type: 3}
-  m_Name: DrawableSuits
+  m_Name: AllDrawableSuits
   m_EditorClassIdentifier: 
   _suits:
   - {fileID: 11400000, guid: 3f3da35bafeadcb4a80db22a8dd88a55, type: 2}

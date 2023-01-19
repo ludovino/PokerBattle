@@ -10,6 +10,14 @@ public class ActConfiguration : ScriptableObject
     public int level;
     public int pointsForWinning;
     public bool IsBossLevel => levels[level].isBoss;
+    
+    [SerializeField]
+    private string _displayName; 
+    public string DisplayName => _displayName;
+
+    [SerializeField]
+    private int _score;
+    public int Score => _score;
 
     public List<Encounter> GetEncounters()
     {

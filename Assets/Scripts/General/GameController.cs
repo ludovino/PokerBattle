@@ -15,6 +15,7 @@ public class GameController : MonoBehaviour
     private EntityData _playerData;
     public EntityData PlayerData => _playerData;
     public Scenario _startingScenario;
+    public MetaProgress metaProgress;
     private void Awake()
     {
         if (Instance != null && Instance != this)

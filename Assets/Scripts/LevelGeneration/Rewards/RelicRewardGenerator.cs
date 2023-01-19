@@ -6,23 +6,12 @@ using System.Linq;
 public class RelicRewardGenerator : RewardGenerator
 {
     [SerializeField]
-    private List<Relic> relics;
-    private void Awake()
-    {
-        relics ??= new List<Relic>();
-    }
+    private RelicPool _relicPool;
     public override IReward Generate()
     {
-        var relic = GetRelic();
+        var relic = _relicPool.GetRelic();
         if (relic == null) return null;
         return new RelicReward(relic);
-    }
-
-    private Relic GetRelic()
-    {
-        var pool = relics.Except(PlayerData.Instance.Relics).ToList();
-        pool.Shuffle();
-        return pool.FirstOrDefault();
     }
 
     public class RelicReward : IReward

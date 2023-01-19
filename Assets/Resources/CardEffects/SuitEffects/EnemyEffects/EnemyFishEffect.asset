@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6091e7aaa122ee04c9e373a602ce52c0, type: 3}
+  m_Name: EnemyFishEffect
+  m_EditorClassIdentifier: 
+  _description: '@on play: `draw a card'
+  _suit: {fileID: 11400000, guid: 100a5f6be90975d49aa60ac021f1ce26, type: 2}
+  _effectDisplay: {fileID: 2394122613409878429, guid: f44fabb8ae0573248b6eb4e952a8ab71, type: 3}
+  _soundEffect: {fileID: 8300000, guid: 1fe250ec1951cba47b75849e8da3c2f3, type: 3}
