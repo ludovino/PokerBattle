@@ -9,9 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 613b2f84598beea479f1de40ae17436a, type: 3}
-  m_Name: Lose10
+  m_Script: {fileID: 11500000, guid: 63db90191e7e3a243a7d6d0024073360, type: 3}
+  m_Name: RelicForHighCard
   m_EditorClassIdentifier: 
-  _description: --Lose 10 chips
-  _value: 1
-  _amount: -10
+  _description: 
+  _value: 2
+  _outcomes:
+  - {fileID: 11400000, guid: 179e458ad72adbf4cb2fa5671886c375, type: 2}
+  - {fileID: 11400000, guid: 3ecdfd74f10bd6b4b9079e3cafd463e4, type: 2}

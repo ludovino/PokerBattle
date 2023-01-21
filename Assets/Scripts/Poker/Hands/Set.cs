@@ -1,4 +1,5 @@
 ﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -13,7 +14,17 @@ internal class Set : PokerHand
 
     public override CardScript[] GetHand(List<CardScript> cardScripts)
     {
-        var cards = cardScripts.GroupBy(c => c, comparer).Where(g => g.Count() >= rankingCardsCount).OrderByDescending(g => g.Key).First().Take(rankingCardsCount).ToList();
+        List<CardScript> cards;
+        try
+        {
+            cards = cardScripts.GroupBy(c => c, comparer).Where(g => g.Count() >= rankingCardsCount).OrderByDescending(g => g.Key.highCardRank).First().Take(rankingCardsCount).ToList();
+        }
+        catch(Exception ex)
+        {
+            Debug.Log(ex);
+            Debug.Log(string.Join("; ", cardScripts.Select(cs => cs.ToString())));
+            throw ex;
+        }
         var kickers = cardScripts.Where(c => !cards.Contains(c)).OrderByDescending(c => c.highCardRank).Take(5 - rankingCardsCount).ToList();
         cards.AddRange(kickers);
         return cards.ToArray();

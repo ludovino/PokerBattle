@@ -7,9 +7,6 @@ using UnityEngine;
 public class ChooseDeckController : MonoBehaviour
 {
     [SerializeField]
-    private List<Suit> _suits;
-
-    [SerializeField]
     private List<Suit> _selectedSuits;
 
     [SerializeField]
@@ -42,7 +39,7 @@ public class ChooseDeckController : MonoBehaviour
     private void Start()
     {
         _suitToggles = new List<SuitToggle>();
-        foreach(var suit in _suits)
+        foreach(var suit in MetaProgress.Instance.UnlockedSuits)
         {
             if(suit == null) continue;
             var toggle = Instantiate(_togglePrefab, _toggleParent);

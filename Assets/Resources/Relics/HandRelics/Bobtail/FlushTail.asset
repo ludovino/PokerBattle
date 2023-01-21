@@ -15,5 +15,7 @@ MonoBehaviour:
   _displayName: Flush Bobtail
   _description: your 4 card flushes beat a pair
   _sprite: {fileID: 21300000, guid: 53ce04b7a4083d94b90c5375fd1689b9, type: 3}
+  _rarity: {fileID: 11400000, guid: e573f89834fa4fa49928182fbaefa511, type: 2}
+  _conditions: []
   _pokerHands:
   - {fileID: 11400000, guid: be731a7699c9624449875604cb225b3b, type: 2}

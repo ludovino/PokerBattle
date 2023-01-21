@@ -15,5 +15,7 @@ MonoBehaviour:
   _displayName: Big Bobtail
   _description: Your 4 card straight flushes beat a full house
   _sprite: {fileID: 21300000, guid: 850077296ce052f45b8d4ce09b893d46, type: 3}
+  _rarity: {fileID: 11400000, guid: 537426f4872233d46a80502f194e6969, type: 2}
+  _conditions: []
   _pokerHands:
   - {fileID: 11400000, guid: c84c91afa296ce54a9b5e940e6aab138, type: 2}

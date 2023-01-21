@@ -16,7 +16,7 @@ public class Straight : PokerHand
     }
     public override bool Evaluate(ICollection<ICard> cards)
     {
-        return HasStraight(cards);
+        return HasStraight(cards, rankingCardsCount);
     }
 
     private static HashSet<string> GetNumerals(IEnumerable<ICard> cards)

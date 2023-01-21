@@ -16,6 +16,8 @@ public class GameController : MonoBehaviour
     public EntityData PlayerData => _playerData;
     public Scenario _startingScenario;
     public MetaProgress metaProgress;
+    public ScoreKeeper scoreKeeper;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -37,6 +39,7 @@ public class GameController : MonoBehaviour
         _sm.RegisterTransition<Map, MapEvent>();
         _sm.RegisterTransition<MapEvent, Map>();
         _sm.RegisterTransition<Map, Battle>();
+        _sm.RegisterTransition<Map, Map>();
         _sm.RegisterTransition<Map, Shop>();
         _sm.RegisterTransition<Shop, Map>();
         _sm.RegisterTransition<Battle, Lose>();
@@ -54,7 +57,7 @@ public class GameController : MonoBehaviour
 
     private void InitObjects()
     {
-       var assets = Resources.LoadAll<ScriptableObject>("").Where(so => so is IOnInit).Cast<IOnInit>().ToArray();
+       var assets = Resources.LoadAll<ScriptableObject>("").OfType<IOnInit>().ToArray();
         foreach ( var asset in assets)
         {
             asset.Init();
@@ -90,7 +93,7 @@ public class GameController : MonoBehaviour
 
     public void GameOver()
     {
-        
+        scoreKeeper.EndGame();
         CoroutineQueue.Defer(CR_GameOver());
     }
 
@@ -103,6 +106,7 @@ public class GameController : MonoBehaviour
 
     internal void PlayerWins()
     {
+        scoreKeeper.EndGame();
         _sm.MoveToState(new Win());
     }
 

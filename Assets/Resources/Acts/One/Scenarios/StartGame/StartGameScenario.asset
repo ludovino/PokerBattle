@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _title: Starting Boon
   _description: '@You stride out into the night towards the bright lights of Lost
-    Vagueness. As you pass by a darkened alley, you hear a whisper:
+    Vagueness. As you pass by a darkened alley a mysterious figure beckons...
 
 
     ~"Psst... 
@@ -23,3 +23,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a42443b19ac200846b373127874a12c1, type: 2}
   - {fileID: 11400000, guid: 51db9123a614e1b4a8a970db1383d5c5, type: 2}
   - {fileID: 11400000, guid: 0cf13e1f05c1db947b413f9ae4daef8f, type: 2}
+  - {fileID: 11400000, guid: 0f19cfe2eb8951b4690fdd38aee51c16, type: 2}

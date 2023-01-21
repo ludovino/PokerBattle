@@ -15,5 +15,7 @@ MonoBehaviour:
   _displayName: Little Bobtail
   _description: Your 3 card straight flushes beat two pair
   _sprite: {fileID: 21300000, guid: 54016b0811f005f4e95a0fd4a1872d55, type: 3}
+  _rarity: {fileID: 11400000, guid: e573f89834fa4fa49928182fbaefa511, type: 2}
+  _conditions: []
   _pokerHands:
   - {fileID: 11400000, guid: 03c33da098a165b4fb36c5f389329ec6, type: 2}

@@ -111,9 +111,9 @@ RectTransform:
   m_Father: {fileID: 3797411132956991159}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 350, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 350, y: -143}
   m_SizeDelta: {x: 640, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &3797411132044135032
@@ -492,6 +492,7 @@ GameObject:
   - component: {fileID: 3797411132956991306}
   - component: {fileID: 3797411132956991305}
   - component: {fileID: 3797411132956991304}
+  - component: {fileID: 4246143964808063419}
   m_Layer: 5
   m_Name: Scorecard
   m_TagString: Untagged
@@ -605,6 +606,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 0
   m_VerticalFit: 1
+--- !u!114 &4246143964808063419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3797411132956991158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05179ffa206846c4682fad3c9051b627, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _scorelinePrefab: {fileID: 761993721774698786, guid: bab8fb367613d5b4ab777d7703ee4e61, type: 3}
+  _scoreList: {fileID: 3797411132044135012}
+  _runTotalText: {fileID: 3797411132686558647}
+  _overallTotalText: {fileID: 6096010140245234492}
+  _scoreKeeper: {fileID: 11400000, guid: 9378576b15037e444b34d7396329795e, type: 2}
 --- !u!1 &3797411133077406246
 GameObject:
   m_ObjectHideFlags: 0
@@ -941,7 +959,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Continue
+  m_text: Return to menu
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2ef190b77111ab84ba152f9da434fbae, type: 2}
   m_sharedMaterial: {fileID: -6112306360411951812, guid: 2ef190b77111ab84ba152f9da434fbae, type: 2}
@@ -1022,6 +1040,7 @@ GameObject:
   - component: {fileID: 7893176980522752667}
   - component: {fileID: 7893176980522752666}
   - component: {fileID: 7893176980522752669}
+  - component: {fileID: 7937091277495095051}
   m_Layer: 5
   m_Name: Continue
   m_TagString: Untagged
@@ -1131,4 +1150,28 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7893176980522752666}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7937091277495095051}
+        m_TargetAssemblyTypeName: MainMenuButton, Assembly-CSharp
+        m_MethodName: MainMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &7937091277495095051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7893176980522752671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 991a5a9d6dd681548976ebb10456c1f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

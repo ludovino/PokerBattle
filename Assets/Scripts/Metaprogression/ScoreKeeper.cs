@@ -28,7 +28,6 @@ public class ScoreKeeper : ScriptableObject, IOnInit
 
     private List<ActConfiguration> completedActs;
     public IReadOnlyList<ActConfiguration> CompletedActs => completedActs;
-    
     public void WinHand(RankedHand rankedHand)
     {
         handCount[rankedHand.hand] += 1;
@@ -67,6 +66,7 @@ public class ScoreKeeper : ScriptableObject, IOnInit
     {
         var suitScores = _suitScores.Select(s => new SuitScore() { Suit = s.Key, Score = s.Value }).Where(s => s.Score > 0).ToList();
         var score = handCount.Select(kvp => kvp.Key.rank * kvp.Value).Sum();
+        score += CompletedActs.Sum(ca => ca.Score);
         score += tablesBeaten * _tablePlayedScore;
         MetaProgress.Instance.AddToScores(score, suitScores);
     }

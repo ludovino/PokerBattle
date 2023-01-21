@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-
+[CreateAssetMenu(menuName = "Relic/Rarity")]
 public class Rarity : ScriptableObject
 {
     [SerializeField]

@@ -35,6 +35,8 @@ public class BattleController : MonoBehaviour
     private RewardScreen _rewardScreen;
     [SerializeField]
     private RewardGenerator _rewardGenerator;
+    [SerializeField]
+    private ScoreKeeper _scoreKeeper;
 
     private int cardsPlayed;
     private int handCount = 0;
@@ -163,6 +165,11 @@ public class BattleController : MonoBehaviour
         var winner = eval.result == Result.PlayerWin ? player : eval.result == Result.PlayerLose ? enemy : null;
         var loser = eval.result == Result.PlayerLose ? player : eval.result == Result.PlayerWin ? enemy : null;
         
+        if(eval.result == Result.PlayerWin)
+        {
+            _scoreKeeper.WinHand(playerHand);
+        }
+
         Debug.Log(eval.ToString());
         onEvaluate.Invoke(eval);
         
@@ -173,7 +180,6 @@ public class BattleController : MonoBehaviour
         }
         else
         {
-            //AddToPot(loser, eval.winningHand.chipCost);
             eval.winningHand.rankingCards.ForEach(c =>  winner.entityData.EffectList.DoCardEffects<IOnWinHand>(c, c.playContext));
             TakeHouseCut();
             TakePot(winner);
@@ -187,6 +193,7 @@ public class BattleController : MonoBehaviour
         }
         if (enemy.chips <= 0)
         {
+            _scoreKeeper.WinTable();
             ShowRewards();
             return;
         }

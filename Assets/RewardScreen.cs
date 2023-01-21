@@ -25,8 +25,8 @@ public class RewardScreen : MonoBehaviour
     {
         _onComplete ??= new UnityEvent();
         _rewardGenerators ??= new List<RewardGenerator>();
-        _buttons ??= new List<Button>();
-        _rewards ??= new List<IReward>();
+        _buttons = new List<Button>();
+        _rewards = new List<IReward>();
         _canvas = GetComponent<CanvasGroup>();
     }
 
@@ -37,6 +37,8 @@ public class RewardScreen : MonoBehaviour
     public void Init(List<RewardGenerator> rewardGenerators)
     {
         int childs = _buttonListTransform.childCount;
+        _rewards.Clear();
+        _buttons.Clear();
         for (int i = childs - 1; i >= 0; i--)
         {
             Destroy(_buttonListTransform.GetChild(i).gameObject);
@@ -84,11 +86,11 @@ public class RewardScreen : MonoBehaviour
     }
     public void RewardClaimed()
     {
-        if (_rewards.All(r => r.Complete)) EndRewardScreen();
         for(int i = 0; i < _buttons.Count; i++)
         {
             _buttons[i].gameObject.SetActive(!_rewards[i].Complete);
         }
+        if (_rewards.All(r => r.Complete)) EndRewardScreen();
     }
 
     public void EndRewardScreen()

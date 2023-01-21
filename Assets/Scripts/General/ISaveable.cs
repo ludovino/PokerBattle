@@ -1,10 +1,10 @@
 ﻿
 using System;
 
-public interface ISaveable<T>
+public interface ISaveable<T> where T : class
 {
-    void Save(SaveManager saveManager);
-    public T Load(SaveManager saveManager);
+    T Save();
+    public void Load(T saveManager);
     public string UniqueName { get; }
 }
 

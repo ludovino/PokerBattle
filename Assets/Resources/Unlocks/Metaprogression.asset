@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5eecd501ec551824b951c1aa6c03d283, type: 3}
   m_Name: Metaprogression
   m_EditorClassIdentifier: 
-  _suitList: {fileID: 11400000, guid: acd4de4e227542442952a166f0c3df05, type: 2}
+  _defaultSuits: {fileID: 11400000, guid: edf79f7f0d602594484ffe26cabd26e8, type: 2}
+  _AllDrawableSuits: {fileID: 11400000, guid: acd4de4e227542442952a166f0c3df05, type: 2}
   _saveManager: {fileID: 0}
   _totalScore: 0
   _totalUnlocks:

@@ -22,5 +22,3 @@ MonoBehaviour:
   _rewardChances:
   - rewardGenerator: {fileID: 11400000, guid: 7f644b72d0de0a346a9e301ec28bb00e, type: 2}
     chance: 1
-  - rewardGenerator: {fileID: 11400000, guid: e241658782eec5e44ba6b9b00a244d45, type: 2}
-    chance: 1

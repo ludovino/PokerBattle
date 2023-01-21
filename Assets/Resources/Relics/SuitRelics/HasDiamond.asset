@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9585914ea3bdfcf4e80f8b3feeadb0c6, type: 3}
   m_Name: HasDiamond
   m_EditorClassIdentifier: 
-  _suit: {fileID: 11400000, guid: 4fd153827537f544a913fb8e67cfb83a, type: 2}
+  _suit: {fileID: 11400000, guid: 8e939d01707334042b0b0688499f120b, type: 2}
   _suitList: {fileID: 11400000, guid: 2e5c78850dd67a84ead601f17c7846b4, type: 2}

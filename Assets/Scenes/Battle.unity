@@ -3065,6 +3065,7 @@ MonoBehaviour:
   _cardFactory: {fileID: 11400000, guid: cdd6b8fe49f8c2e4983b0e6df27e78ca, type: 2}
   _rewardScreen: {fileID: 1345796495}
   _rewardGenerator: {fileID: 11400000, guid: 7f644b72d0de0a346a9e301ec28bb00e, type: 2}
+  _scoreKeeper: {fileID: 11400000, guid: 9378576b15037e444b34d7396329795e, type: 2}
 --- !u!4 &1464444207
 Transform:
   m_ObjectHideFlags: 0

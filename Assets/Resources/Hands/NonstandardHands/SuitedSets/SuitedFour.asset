@@ -15,5 +15,6 @@ MonoBehaviour:
   _displayName: Flush four of a kind
   _rank: 71
   _rankingCardsCount: 4
-  _example: AH;AH;AH;0-
+  _example: AH;AH;AH;AH;0-
+  _score: 0
   setComparer: {fileID: 11400000, guid: 7dd251936214f8f49b668368cb086e9c, type: 2}

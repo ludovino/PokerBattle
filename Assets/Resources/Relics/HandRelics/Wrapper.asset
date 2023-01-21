@@ -15,5 +15,7 @@ MonoBehaviour:
   _displayName: Wrapper
   _description: Wrapped straights beat three of a kind
   _sprite: {fileID: 21300000, guid: 575e38f15f7c3d6489ccd89eabc71399, type: 3}
+  _rarity: {fileID: 11400000, guid: e573f89834fa4fa49928182fbaefa511, type: 2}
+  _conditions: []
   _pokerHands:
   - {fileID: 11400000, guid: f0ae45611beeb1648af80a9aca655c9c, type: 2}

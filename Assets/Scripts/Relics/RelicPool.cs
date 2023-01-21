@@ -8,9 +8,15 @@ public class RelicPool : ScriptableObject
 {
     [SerializeField]
     private List<Relic> _poolRelics;
-    private List<Relic> _pool;
+    private List<Relic> _pool = new List<Relic>();
     public IReadOnlyList<Relic> Relics => _pool;
-    private List<RarityPool> _rarityPools;
+    private List<RarityPool> _rarityPools = new List<RarityPool>();
+
+    public void OnEnable()
+    {
+        UpdateRelics();
+    }
+
     public void UpdateRelics()
     {
         _pool.Clear();
