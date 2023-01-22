@@ -8,7 +8,6 @@ using UnityEngine.Serialization;
 public class HandList : ScriptableObject, IOnInit
 {
     [SerializeField]
-    [FormerlySerializedAs("hands")]
     private List<PokerHand> startingHands;
     private List<PokerHand> _currentHands;
     public IReadOnlyList<PokerHand> Hands => _currentHands.Append(fallback).Distinct().ToList();
@@ -43,6 +42,6 @@ public class HandList : ScriptableObject, IOnInit
 
     public void Init()
     {
-        _currentHands = startingHands;
+        _currentHands = startingHands.ToList();
     }
 }

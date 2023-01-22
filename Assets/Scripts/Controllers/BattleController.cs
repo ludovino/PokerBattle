@@ -39,8 +39,6 @@ public class BattleController : MonoBehaviour
     private ScoreKeeper _scoreKeeper;
 
     private int cardsPlayed;
-    private int handCount = 0;
-    private int blindIncreaseThreshold = 3;
     private int startingBlind;
     public int StartingBlind => startingBlind;
     private int blind;
@@ -150,11 +148,8 @@ public class BattleController : MonoBehaviour
 
     private void Evaluate()
     {
-        handCount++;
-        if(handCount % blindIncreaseThreshold == 0)
-        {
-            IncreaseBlinds();
-        }
+        IncreaseBlinds();
+        
         player.DiscardHand();
         enemy.DiscardHand();
         var playerHand = player.Evaluate();
@@ -222,7 +217,7 @@ public class BattleController : MonoBehaviour
 
     private void IncreaseBlinds()
     {
-        blind += blind;
+        blind += startingBlind;
         player.blind = blind;
         enemy.blind = blind;
         _blindText.text = $"{blind} blind";

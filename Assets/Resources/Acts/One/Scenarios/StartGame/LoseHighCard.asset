@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a704a680d91399498909c7a979e525b, type: 3}
   m_Name: LoseHighCard
   m_EditorClassIdentifier: 
-  _description: -- Lose your highest card
+  _description: -- Lose your top card
   _value: 1

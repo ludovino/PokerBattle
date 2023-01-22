@@ -16,8 +16,12 @@ internal class CardRewardGenerator : RewardGenerator
     private Sprite _sprite;
     public override IReward Generate()
     {
-        return new CardReward(_cardPool.GetWithoutReplacement(5, false),
-            Instantiate(_selectMenu), _sprite);
+
+        List<Card> cards = _cardPool.GetWithoutReplacement(5, false);
+        CardSelectMenu selectMenu = Instantiate(_selectMenu);
+        selectMenu.Init(cards, 1);
+
+        return new CardReward(cards, selectMenu, _sprite);
     }
 
     public class CardReward : IReward
@@ -49,7 +53,7 @@ internal class CardRewardGenerator : RewardGenerator
 
         public void OpenReward()
         {
-            _selectMenu.StartSelect(_cards, 1);
+            _selectMenu.StartSelect();
             _selectMenu.OnSelect.AddListener(ChooseCard);
         }
         private void ChooseCard(List<CardScript> cards)

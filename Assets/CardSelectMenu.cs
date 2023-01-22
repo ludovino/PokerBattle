@@ -57,20 +57,27 @@ public class CardSelectMenu : MonoBehaviour
 
     public void Confirm()
     {
-        foreach (var cardSelector in _cardSelectors)
-        {
-            cardSelector.OnSelectCard.RemoveListener(OnSelectCard);
-        }
         _onSelect.Invoke(_selected);
-        _onSelect.RemoveAllListeners();
-        gameObject.SetActive(false);
-        _chosen = true;
+        
+        if(_selected.Count >= _toSelect)
+        {
+            foreach (var cardSelector in _cardSelectors)
+            {
+                cardSelector.OnSelectCard.RemoveListener(OnSelectCard);
+            }
+            _onSelect.RemoveAllListeners();
+            gameObject.SetActive(false);
+            _chosen = true;
+        }
     }
-
-    private IEnumerator CR_Open()
+    public void Init(List<Card> cards, int count)
     {
-        _chosen = false;
-        gameObject.SetActive(true);
+        _grid.DestroyChildren();
+        _selected = new List<CardScript>();
+        _cardSelectors = new List<CardSelector>();
+        _toSelect = Mathf.Min(count, cards.Count);
+        _cards = cards;
+
         foreach (var card in _cards)
         {
             var cardSelector = Instantiate(_cardSelectionPrefab, _grid);
@@ -80,21 +87,17 @@ public class CardSelectMenu : MonoBehaviour
             _cardSelectors.Add(cardSelector);
         }
 
+    }
+    private IEnumerator CR_Open()
+    {
+        _chosen = false;
+        gameObject.SetActive(true);
         yield return new WaitUntil(() => _chosen);
         // animate card selection
     }
 
-    public void StartSelect(List<Card> cards, int count)
+    public void StartSelect()
     {
-        if (cards == _cards)
-        {
-            gameObject.SetActive(true);
-            return;
-        }
-        _selected = new List<CardScript>();
-        _cardSelectors = new List<CardSelector>();
-        _toSelect = Mathf.Min(count, cards.Count);
-        _cards = cards;
         CoroutineQueue.Defer(CR_Open());
     }
 }

@@ -17,7 +17,7 @@ MonoBehaviour:
     5-;5S;6H;7H;7D;8C;8-;10D;10C;
 
     J-;JH;QC;Q-;K-;KD;A-;AS;13-;15-;15-;17S;'
-  _chips: 50
+  _chips: 75
   _drawBonus: 0
   _handList: {fileID: 11400000, guid: 6bd6b922ef5cc2d498e7b16494fd3cf2, type: 2}
   _effectList: {fileID: 11400000, guid: 45b45b5fbf4f3c0449caa55c28f2a2ce, type: 2}

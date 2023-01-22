@@ -12,9 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0e5bbaa14a763442ad3d5734be97cad, type: 3}
   m_Name: BasicScenarios
   m_EditorClassIdentifier: 
-  mapSprite: {fileID: 21300000, guid: 39f85c66f94a77d48a4c1ee5ab7b1de3, type: 3}
+  mapSprite: {fileID: 21300000, guid: 49c3b9c00d794c6428efdf7cba5a88a0, type: 3}
   DisplayName: Mystery Event
-  _scenarios:
-  - {fileID: 11400000, guid: 2008aa2dd26ebbc46b3149554d19be92, type: 2}
-  - {fileID: 11400000, guid: 78bdb63be71a19840a5a976e6a2a32bb, type: 2}
+  _scenarios: []
   _tooltip: Could be anything

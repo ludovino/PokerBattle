@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6dca94e7c1821d479cce181e12dc0af, type: 3}
   m_Name: FourOfAKind
   m_EditorClassIdentifier: 
-  _displayName: Pair
+  _displayName: Four of a kind
   _rank: 70
   _rankingCardsCount: 4
   _example: AH;AS;AC;AD;0-;

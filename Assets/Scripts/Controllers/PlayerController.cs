@@ -35,7 +35,8 @@ public class PlayerController : EntityController
     {
         var selected = new List<Card>();
         var chosen = false;
-        _cardSelect.StartSelect(cards, count);
+        _cardSelect.Init(cards, count);
+        _cardSelect.StartSelect();
         UnityAction<List<CardScript>> select = c => 
         {
             selected = c.Select(c => c.card).ToList();

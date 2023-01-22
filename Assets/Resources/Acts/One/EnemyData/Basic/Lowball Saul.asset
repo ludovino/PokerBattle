@@ -12,16 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bef32fb3f4731f4a9e77d4a77fcdabe, type: 3}
   m_Name: Lowball Saul
   m_EditorClassIdentifier: 
-  _deckString: '1-;1-;1H;2-;2-;
+  _deckString: '0-;0-;1-;1-;1H;
 
-    2C;3-;3D;4-;4S;
+    2-;2-;2C;3-;3D;
 
     5-;5H;6-;6C;7-;
 
-    7D;9-;9S;10-;11-;
-
-    J-;Q-;13H;14D;'
-  _chips: 75
+    7D;9-;10-;11-;J-;'
+  _chips: 50
   _drawBonus: 0
   _handList: {fileID: 11400000, guid: 6bd6b922ef5cc2d498e7b16494fd3cf2, type: 2}
   _effectList: {fileID: 11400000, guid: 45b45b5fbf4f3c0449caa55c28f2a2ce, type: 2}

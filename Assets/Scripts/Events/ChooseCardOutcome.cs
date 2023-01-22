@@ -14,7 +14,8 @@ public class ChooseCardOutcome : Outcome, ISingularOutcome
     public override void Execute()
     {
         var menu = Instantiate(_cardSelectPrefab);
-        menu.StartSelect(_cardPool.GetWithReplacement(_count), 1);
+        menu.Init(_cardPool.GetWithReplacement(_count), 1);
+        menu.StartSelect();
         menu.OnSelect.AddListener(OnSelect);
     }
 

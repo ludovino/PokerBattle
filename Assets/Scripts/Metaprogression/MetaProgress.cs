@@ -59,6 +59,7 @@ public partial class MetaProgress : ScriptableObject, ISaveable<MetaprogressData
 
     private void UpdateUnlockedRelics()
     {
+        _unlockedRelics ??= new List<Relic>();
         _unlockedRelics.Clear();
         _unlockedRelics.AddRange(_defaultRelics);
         _unlockedRelics.AddRange(_totalUnlocks.OfType<UnlockableRelic>()

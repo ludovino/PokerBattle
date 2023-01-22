@@ -14,8 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _defaultSuits: {fileID: 11400000, guid: edf79f7f0d602594484ffe26cabd26e8, type: 2}
   _AllDrawableSuits: {fileID: 11400000, guid: acd4de4e227542442952a166f0c3df05, type: 2}
-  _saveManager: {fileID: 0}
-  _totalScore: 0
+  _totalScore: 1250
   _totalUnlocks:
   - {fileID: 11400000, guid: 44b725acb5e8cef41a93caccef5ca40b, type: 2}
   - {fileID: 11400000, guid: 136a6c0ce0e346c43a19726686003929, type: 2}
@@ -33,13 +32,13 @@ MonoBehaviour:
   - {fileID: 11400000, guid: fb5bf98cc93b60d4fab26a457a9bd8ee, type: 2}
   _suitUnlocks:
   - _suit: {fileID: 11400000, guid: 3f3da35bafeadcb4a80db22a8dd88a55, type: 2}
-    _score: 0
+    _score: 40
     _unlocks: []
   - _suit: {fileID: 11400000, guid: 9fe51d66484359647abc193b757a5fd8, type: 2}
     _score: 0
     _unlocks: []
   - _suit: {fileID: 11400000, guid: 8e939d01707334042b0b0688499f120b, type: 2}
-    _score: 0
+    _score: 16
     _unlocks: []
   - _suit: {fileID: 11400000, guid: 100a5f6be90975d49aa60ac021f1ce26, type: 2}
     _score: 0
@@ -54,7 +53,7 @@ MonoBehaviour:
     _score: 0
     _unlocks: []
   - _suit: {fileID: 11400000, guid: 4fd153827537f544a913fb8e67cfb83a, type: 2}
-    _score: 0
+    _score: 6
     _unlocks: []
   - _suit: {fileID: 11400000, guid: 2e5f01de27574134badbe91c23e184bc, type: 2}
     _score: 0

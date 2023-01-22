@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfc9b0cfbe80a084399be17f0d954eeb, type: 3}
   m_Name: ActOneShop
   m_EditorClassIdentifier: 
-  mapSprite: {fileID: 21300000, guid: 39f85c66f94a77d48a4c1ee5ab7b1de3, type: 3}
+  mapSprite: {fileID: 21300000, guid: 35efb60d24fe6334bb8000490aad12d4, type: 3}
   DisplayName: Shop

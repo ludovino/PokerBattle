@@ -22,7 +22,7 @@ public class ScenarioEncounterType : EncounterType, IOnInit
 
     public void Init()
     {
-        _encounterPool = _scenarios;
+        _encounterPool = _scenarios.ToList();
         _encounterPool.Shuffle();
     }
 

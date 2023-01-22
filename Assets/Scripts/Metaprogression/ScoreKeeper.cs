@@ -19,7 +19,7 @@ public class ScoreKeeper : ScriptableObject, IOnInit
     private Dictionary<Suit, int> _suitScores;
     public IReadOnlyDictionary<Suit, int> SuitScores => _suitScores;
     public int SuitScore => _suitScores.Select(kvp => kvp.Value).Sum() + _blankScore;
-    
+
     private int _blankScore;
     public int BlankScore => _blankScore;
 
@@ -31,16 +31,16 @@ public class ScoreKeeper : ScriptableObject, IOnInit
     public void WinHand(RankedHand rankedHand)
     {
         handCount[rankedHand.hand] += 1;
-        foreach(var card in rankedHand.rankingCards)
+        foreach (var card in rankedHand.rankingCards)
         {
             if (!card.suit)
             {
                 _blankScore += card.blackjackValue;
                 continue;
             }
-            if(_playerSuitList.Contains(card.suit)) 
+            if (_playerSuitList.Contains(card.suit))
                 _suitScores[card.suit] += card.blackjackValue;
-            
+
         }
     }
 
@@ -64,11 +64,33 @@ public class ScoreKeeper : ScriptableObject, IOnInit
 
     public void EndGame()
     {
-        var suitScores = _suitScores.Select(s => new SuitScore() { Suit = s.Key, Score = s.Value }).Where(s => s.Score > 0).ToList();
+        List<SuitScore> suitScores = GetSuitScores();
+        int score = GetTotalScore(suitScores);
+        MetaProgress.Instance.AddToScores(score, suitScores);
+    }
+
+    private List<SuitScore> GetSuitScores()
+    {
+        return _suitScores.Select(s => new SuitScore() { Suit = s.Key, Score = s.Value }).Where(s => s.Score > 0).ToList();
+    }
+
+    private int GetScore()
+    {
         var score = handCount.Select(kvp => kvp.Key.rank * kvp.Value).Sum();
         score += CompletedActs.Sum(ca => ca.Score);
         score += tablesBeaten * _tablePlayedScore;
-        MetaProgress.Instance.AddToScores(score, suitScores);
+        return score;
+    }
+
+    private int GetTotalScore(List<SuitScore> suitScores)
+    {
+        var score = GetScore();
+        score += suitScores.Sum(s => s.Score);
+        return score;
+    }
+    public int GetTotalScore()
+    {
+        return GetTotalScore(GetSuitScores());
     }
 
     public class RunStats
