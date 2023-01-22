@@ -206,7 +206,12 @@ public class GameController : MonoBehaviour
     {
         public void OnEnter()
         {
-            SceneChanger.Instance.ChangeScene("Loss");
+            SceneChanger.Instance.ChangeScene("Loss", ShowScoreCard);
+        }
+
+        void ShowScoreCard()
+        {
+            FindObjectOfType<ScoreCard>().Init();
         }
 
         public void OnExit()

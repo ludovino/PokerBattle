@@ -2,7 +2,7 @@
 using System.Reflection;
 using UnityEngine;
 
-public abstract class Unlockable : ScriptableObject
+public abstract partial class Unlockable : ScriptableObject
 {
     [SerializeField]
     private int _score;
@@ -11,12 +11,5 @@ public abstract class Unlockable : ScriptableObject
     public void Unlock()
     {
         // unlock pop-up;
-    }
-
-    protected class UnlockDisplay
-    {
-        public Sprite Sprite;
-        public string Name;
-        public string Description;
     }
 }
