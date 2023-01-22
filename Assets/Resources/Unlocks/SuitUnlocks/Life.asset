@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ef15017f7983a648a9e501ffe5a10b9, type: 3}
   m_Name: Life
   m_EditorClassIdentifier: 
-  _score: 4000
+  _score: 2700
   _suit: {fileID: 11400000, guid: 9bee05c9d2a3a544fa22e53d78245666, type: 2}

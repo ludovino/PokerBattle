@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ef15017f7983a648a9e501ffe5a10b9, type: 3}
   m_Name: Poison
   m_EditorClassIdentifier: 
-  _score: 3000
+  _score: 1800
   _suit: {fileID: 11400000, guid: bb30968a9d9db4e4f8010d8d224da8e5, type: 2}

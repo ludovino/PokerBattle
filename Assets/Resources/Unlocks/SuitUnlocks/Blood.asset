@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ef15017f7983a648a9e501ffe5a10b9, type: 3}
   m_Name: Blood
   m_EditorClassIdentifier: 
-  _score: 1000
+  _score: 500
   _suit: {fileID: 11400000, guid: 3f3da35bafeadcb4a80db22a8dd88a55, type: 2}

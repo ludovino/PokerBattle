@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ef15017f7983a648a9e501ffe5a10b9, type: 3}
   m_Name: Void
   m_EditorClassIdentifier: 
-  _score: 2000
+  _score: 1100
   _suit: {fileID: 11400000, guid: 2e5f01de27574134badbe91c23e184bc, type: 2}
