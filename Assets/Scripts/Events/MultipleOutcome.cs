@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -29,5 +30,22 @@ public class MultipleOutcome : Outcome, IMultipleOutcome
             return string.Join(", ", _outcomes.Select(oc => oc.Description));
         }
         return base.Description;
+    }
+
+    public override void Execute(Action onComplete)
+    {
+        CoroutineQueue.Defer(CR_Execute(onComplete));
+    }
+
+    private IEnumerator CR_Execute(Action onComplete)
+    {
+        var complete = 0;
+
+        foreach (var outcome in _outcomes)
+        {
+            outcome.Execute(() => complete++);
+        }
+        yield return new WaitUntil(() => complete == _outcomes.Count);
+        onComplete();
     }
 }

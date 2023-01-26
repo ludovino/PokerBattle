@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Event/Outcome/RandomCard")]
@@ -21,5 +22,11 @@ public class RandomCardOutcome : Outcome, ISingularOutcome
         {
             PlayerData.Instance.AddCard(card);
         }
+    }
+
+    public override void Execute(Action onComplete)
+    {
+        Execute();
+        onComplete();
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using UnityEngine.Serialization;
 using static MetaProgress;
@@ -40,7 +41,7 @@ public partial class MetaProgress : ScriptableObject, ISaveable<MetaprogressData
     private List<Relic> _defaultRelics;
 
     private List<Relic> _unlockedRelics;
-    public IReadOnlyList<Relic> UnlockedRelics => _unlockedRelics;
+    public IReadOnlyList<Relic> UnlockedRelics => _unlockedRelics ?? UpdateUnlockedRelics();
 
     public string UniqueName => "METAPROGRESS";
 
@@ -57,7 +58,7 @@ public partial class MetaProgress : ScriptableObject, ISaveable<MetaprogressData
         .Where(us => us.Score <= _totalScore)
         .Select(us => us.Suit)).ToList();
 
-    private void UpdateUnlockedRelics()
+    private List<Relic> UpdateUnlockedRelics()
     {
         _unlockedRelics ??= new List<Relic>();
         _unlockedRelics.Clear();
@@ -67,6 +68,7 @@ public partial class MetaProgress : ScriptableObject, ISaveable<MetaprogressData
         .Select(ur => ur.Relic));
         var unlockedSuitRelics = _suitUnlocks.SelectMany(su => su.Unlocked.OfType<UnlockableRelic>().Select(ur => ur.Relic));
         _unlockedRelics.AddRange(unlockedSuitRelics);
+        return _unlockedRelics;
     }
     internal void AddToScores(int score, List<SuitScore> suitScores)
     {

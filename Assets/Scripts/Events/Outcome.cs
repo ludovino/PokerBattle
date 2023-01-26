@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public abstract class Outcome : ScriptableObject
@@ -9,6 +10,8 @@ public abstract class Outcome : ScriptableObject
     private Sentiment _value;
     public Sentiment Value => _value;
     public abstract void Execute();
+    public abstract void Execute(Action onComplete);
+
     public enum Sentiment
     {
         Positive,

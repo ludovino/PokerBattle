@@ -12,5 +12,10 @@ internal class RewardOutcome : Outcome
     {
         throw new NotImplementedException();
     }
+
+    public override void Execute(Action onComplete)
+    {
+        throw new NotImplementedException();
+    }
 }
 

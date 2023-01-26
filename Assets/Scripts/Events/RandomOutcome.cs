@@ -13,17 +13,7 @@ public class RandomOutcome : Outcome, IMultipleOutcome
     
     public override void Execute()
     {
-        var total = _outcomeChances.Sum(c => c.chance);
-        var x = URandom.Range(0, total);
-        foreach(var outcome in _outcomeChances)
-        {
-            x -= outcome.chance;
-            if(x <= 0)
-            {
-                outcome.outcome.Execute();
-                return;
-            }
-        }
+        
     }
 
     public override string Description => GetDescription();
@@ -35,6 +25,22 @@ public class RandomOutcome : Outcome, IMultipleOutcome
         }
         return base.Description;
     }
+
+    public override void Execute(Action onComplete)
+    {
+        var total = _outcomeChances.Sum(c => c.chance);
+        var x = URandom.Range(0, total);
+        foreach (var outcome in _outcomeChances)
+        {
+            x -= outcome.chance;
+            if (x <= 0)
+            {
+                outcome.outcome.Execute(onComplete);
+                return;
+            }
+        }
+    }
+
     [Serializable]
     public class OutcomeChance
     {

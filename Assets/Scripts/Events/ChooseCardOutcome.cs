@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,10 +14,16 @@ public class ChooseCardOutcome : Outcome, ISingularOutcome
 
     public override void Execute()
     {
+        throw new NotImplementedException();
+    }
+
+    public override void Execute(Action onComplete)
+    {
         var menu = Instantiate(_cardSelectPrefab);
         menu.Init(_cardPool.GetWithReplacement(_count), 1);
         menu.StartSelect();
         menu.OnSelect.AddListener(OnSelect);
+        menu.OnSelect.AddListener(_ => onComplete());
     }
 
     private void OnSelect(List<CardScript> cards)

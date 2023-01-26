@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 [CreateAssetMenu(menuName = "Event/Outcome/GainRelic")]
 public class GainRelic : Outcome
@@ -8,5 +9,11 @@ public class GainRelic : Outcome
     public override void Execute()
     {
         PlayerData.Instance.AddRelic(_relic);
+    }
+
+    public override void Execute(Action onComplete)
+    {
+        PlayerData.Instance.AddRelic(_relic);
+        onComplete();
     }
 }

@@ -8,12 +8,14 @@ public class RelicPool : ScriptableObject
 {
     [SerializeField]
     private List<Relic> _poolRelics;
-    private List<Relic> _pool = new List<Relic>();
+    private List<Relic> _pool;
     public IReadOnlyList<Relic> Relics => _pool;
-    private List<RarityPool> _rarityPools = new List<RarityPool>();
+    private List<RarityPool> _rarityPools;
 
     public void OnEnable()
     {
+        _pool ??= new List<Relic>();
+        _rarityPools ??= new List<RarityPool>();
         UpdateRelics();
     }
 
@@ -22,6 +24,7 @@ public class RelicPool : ScriptableObject
         _pool.Clear();
         _pool.AddRange(MetaProgress.Instance.UnlockedRelics.Where(r => _poolRelics.Contains(r)));
         _pool.RemoveAll(r => !r.CanFind);
+        _pool.RemoveAll(r => PlayerData.Instance.Relics.Contains(r));
         _rarityPools.Clear();
         _rarityPools.AddRange(
             _pool
@@ -35,6 +38,7 @@ public class RelicPool : ScriptableObject
 
     public Relic GetRelic()
     {
+        UpdateRelics();
         var rarity = SelectRelicRarity();
         return rarity[URandom.Range(0, rarity.Count)];
     }

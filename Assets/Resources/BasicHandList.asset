@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c84f8a0c60639f46ab6e50d42d4113e, type: 3}
   m_Name: BasicHandList
   m_EditorClassIdentifier: 
-  hands:
+  startingHands:
   - {fileID: 11400000, guid: faf1d7513a6fe2b449c1a8ca69b67082, type: 2}
   - {fileID: 11400000, guid: 01591dc893635f9428dbf1bc9955b7e9, type: 2}
   - {fileID: 11400000, guid: 5d59b97f161574a4f95020234ef8ad3e, type: 2}

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 [CreateAssetMenu(menuName = "Event/Outcome/RandomRelic")]
 
@@ -10,6 +11,12 @@ public class RandomRelic : Outcome
     {
         var relic = _relicPool.GetRelic();
         PlayerData.Instance.AddRelic(relic);
+    }
+
+    public override void Execute(Action onComplete)
+    {
+        Execute();
+        onComplete();
     }
 }
 

@@ -17,9 +17,13 @@ public class OutcomeSelector : MonoBehaviour
     [SerializeField]
     private UnityEvent _onOptionSelected;
     public UnityEvent OnOptionSelected => _onOptionSelected;
+    [SerializeField]
+    private UnityEvent _onComplete;
+    public UnityEvent OnComplete => _onComplete;
     private void Awake()
     {
         _onOptionSelected ??= new UnityEvent();
+        _onComplete ??= new UnityEvent();
         _outcomes ??= new List<Outcome>();
         _buttons = new List<Button>();
     }
@@ -44,7 +48,7 @@ public class OutcomeSelector : MonoBehaviour
             var desc = outcome.Description;
             _style.Apply(ref desc);
             text.text = desc;
-            button.onClick.AddListener(outcome.Execute);
+            button.onClick.AddListener(() => outcome.Execute(Complete));
             button.onClick.AddListener(OptionSelected);
             _buttons.Add(button);
         }
@@ -57,5 +61,10 @@ public class OutcomeSelector : MonoBehaviour
             button.onClick.RemoveAllListeners();
         }
         _onOptionSelected.Invoke();
+    }
+
+    public void Complete()
+    {
+        _onComplete.Invoke();
     }
 }

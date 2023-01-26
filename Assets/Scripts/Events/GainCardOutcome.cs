@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 
@@ -10,5 +11,11 @@ public class GainCardOutcome : Outcome, ISingularOutcome
     public override void Execute()
     {
         PlayerData.Instance.AddCard(CardFactory.Instance.GetCard(_card));
+    }
+
+    public override void Execute(Action onComplete)
+    {
+        PlayerData.Instance.AddCard(CardFactory.Instance.GetCard(_card));
+        onComplete();
     }
 }
