@@ -11,7 +11,7 @@ public class PlayerController : EntityController
     [SerializeField]
     private CardSelectMenu _cardSelect;
     [SerializeField]
-    private Button _endTurnButton;
+    protected Button _endTurnButton;
     public override void ChooseCards(List<Card> cards, int count, Action<List<Card>> selectCallback)
     {
         StartCoroutine(CR_ChooseCard(cards, count, selectCallback));
@@ -22,10 +22,11 @@ public class PlayerController : EntityController
         base.StartTurn();
         _endTurnButton.interactable = battle.CanEndTurn();
     }
-    public bool Play(int slotNumber, CardScript card)
+
+    public virtual bool Play(CardSlot cardSlot, CardScript card)
     {
         if(!enabled) return false;
-        var result = battle.Play(slotNumber, card);
+        var result = battle.Play(cardSlot.slotNumber, card);
         if (result) card.Draggable = false;
         _endTurnButton.interactable = battle.CanEndTurn();
         return result;
@@ -46,5 +47,10 @@ public class PlayerController : EntityController
         yield return new WaitUntil(() => chosen);
         _cardSelect.OnSelect.RemoveListener(select);
         selectCallback.Invoke(selected);
+    }
+
+    public virtual void PlayerEndTurn()
+    {
+        EndTurn();
     }
 }

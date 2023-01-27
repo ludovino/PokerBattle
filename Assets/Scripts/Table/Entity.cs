@@ -120,8 +120,7 @@ public class Entity : MonoBehaviour
     }
     public bool Play(int slotNumber, CardScript card)
     {
-        if(slotNumber >= fieldOfPlay.Length) throw new Exception($"tried to play card in slot {slotNumber} on a field of size {fieldOfPlay.Length}");
-        if(fieldOfPlay[slotNumber] == null)
+        if(CanPlay(slotNumber, card))
         {
             fieldOfPlay[slotNumber] = card;
             hand.Remove(card);
@@ -130,6 +129,20 @@ public class Entity : MonoBehaviour
         }
         return false;
     }
+
+    public bool CanPlay(int slotNumber, CardScript card)
+    {
+        if (slotNumber >= fieldOfPlay.Length) throw new Exception($"tried to play card in slot {slotNumber} on a field of size {fieldOfPlay.Length}");
+        return CanOverwrite(card, fieldOfPlay[slotNumber]);
+    }
+
+    public bool CanOverwrite(CardScript toPlay, CardScript current)
+    {
+        if(current == null) return true;
+        //overwriting logic
+        return false;
+    }
+
     public int slotsRemaining => fieldOfPlay.Count(c => c == null);
 
     public IEnumerable<Card> DrawPile => _drawPileCards.Select(c => c.card);

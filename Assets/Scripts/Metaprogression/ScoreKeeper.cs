@@ -30,6 +30,7 @@ public class ScoreKeeper : ScriptableObject, IOnInit
     public IReadOnlyList<ActConfiguration> CompletedActs => completedActs;
     public void WinHand(RankedHand rankedHand)
     {
+        if (!handCount.ContainsKey(rankedHand.hand)) handCount.Add(rankedHand.hand, 0);
         handCount[rankedHand.hand] += 1;
         foreach (var card in rankedHand.rankingCards)
         {

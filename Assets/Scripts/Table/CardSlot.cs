@@ -26,7 +26,7 @@ public class CardSlot : MonoBehaviour
     private void OnDrop(Draggable cardDraggable)
     {
         var card = cardDraggable.GetComponent<CardScript>();
-        var result = playerController.Play(slotNumber, card);
+        var result = playerController.Play(this, card);
         if(!result) cardDraggable.Return();
     }
 }
