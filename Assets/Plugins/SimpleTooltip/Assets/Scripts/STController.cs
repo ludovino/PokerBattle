@@ -15,6 +15,7 @@ public class STController : MonoBehaviour
     private int showInFrames = -1;
     private bool showNow = false;
     private Coroutine _showTooltip;
+    private Canvas _canvas;
     
     private void Awake()
     {
@@ -32,13 +33,13 @@ public class STController : MonoBehaviour
         // Keep a reference for the panel image and transform
         panel = GetComponent<Image>();
         rect = GetComponent<RectTransform>();
-
+        _canvas = GetComponentInParent<Canvas>();
         // Hide at the start
         HideTooltip();
     }
     private void Update()
     {
-        if (showNow) rect.anchoredPosition = Input.mousePosition;
+        if (showNow) rect.anchoredPosition = Input.mousePosition / _canvas.scaleFactor;
     }
     private void ResizeToMatchText()
     {

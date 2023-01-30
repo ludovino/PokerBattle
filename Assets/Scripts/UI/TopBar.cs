@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 
@@ -21,7 +22,7 @@ public class TopBar : MonoBehaviour
         _player.OnChangeChips.AddListener(UpdateChips);
         _player.OnChangeDeck.AddListener(UpdateDeck);
         UpdateChips(0, _player.Chips, 0);
-        UpdateDeck(_player.Cards);
+        UpdateDeck(_player.Cards.OrderBy(c => c.highCardRank).ToList());
 
     }
 

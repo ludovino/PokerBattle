@@ -5,6 +5,7 @@ using System.Linq;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ConfirmablePlayerController : PlayerController
 {
@@ -15,16 +16,17 @@ public class ConfirmablePlayerController : PlayerController
     [SerializeField]
     private DropTarget _handDropzone;
     private CardScript[] toPlay;
-    private TextMeshProUGUI _endTurnButtonText;
+    [SerializeField]
+    private Button _setCardsButton;
 
     private bool cardsToPlay => toPlay.Any(x => x != null);
-    private bool buttonInteractable => battle.CanEndTurn() || cardsToPlay;
+    private bool endTurnInteractable => battle.CanEndTurn() || cardsToPlay;
+
     public new void Awake()
     {
         toPlay ??= new CardScript[5];
         _handDropzone.onDrop.AddListener(ReturnToHand);
         base.Awake();
-        _endTurnButtonText = _endTurnButton.GetComponentInChildren<TextMeshProUGUI>();
     }
 
     public override bool Play(CardSlot cardSlot, CardScript card)
@@ -41,9 +43,7 @@ public class ConfirmablePlayerController : PlayerController
 
         _hand.AlignHand();
         toPlay[cardSlot.slotNumber] = card;
-
-        _endTurnButton.interactable = true;
-        SetButton();
+        UpdateButtons();
         return true;
     }
 
@@ -54,17 +54,7 @@ public class ConfirmablePlayerController : PlayerController
         if (currentCard == null) return;
         toPlay[slot] = null;
         _playerEntity.hand.Add(currentCard);
-        SetButton();
-    }
-
-    private void SetButton()
-    {
-        if(cardsToPlay)
-        {
-            _endTurnButtonText.text = "Play Cards";
-            return;
-        }
-        _endTurnButtonText.text = "End Turn";
+        UpdateButtons();
     }
 
     public void ReturnToHand(Draggable cardDraggable)
@@ -78,40 +68,50 @@ public class ConfirmablePlayerController : PlayerController
             return;
         }
         ReturnToHand(currentIndex);
-        SetButton();
+        UpdateButtons();
         _hand.AlignHand();
     }
 
     public override void PlayerEndTurn()
     {
         _endTurnButton.interactable = false;
-        if (!cardsToPlay)
+        if (cardsToPlay)
         {
-            base.PlayerEndTurn();
+            SetCards(true);
         }
         else
         {
-            for (int i = 0; i < toPlay.Length; i++)
-            {
-                var card = toPlay[i];
-                if (card == null) continue;
-                battle.Play(i, card);
-                toPlay[i] = null;
-            }
-            if(_playerEntity.slotsRemaining == 0)
-            {
-                base.PlayerEndTurn();
-            }
+            base.PlayerEndTurn();
         }
+
         CoroutineQueue.Defer(CR_ResetButton());
     }
+    public void SetCards(bool endTurn)
+    {
+        for (int i = 0; i < toPlay.Length; i++)
+        {
+            var card = toPlay[i];
+            if (card == null) continue;
+            battle.Play(i, card);
+            toPlay[i] = null;
+        }
+        if (_playerEntity.slotsRemaining == 0 || endTurn)
+        {
+            base.PlayerEndTurn();
+        }
+        UpdateButtons();
+    }
 
+    public void UpdateButtons()
+    {
+        if(_endTurnButton) _endTurnButton.interactable = endTurnInteractable;
+        if(_setCardsButton) _setCardsButton.interactable = cardsToPlay;
+    }
 
     private IEnumerator CR_ResetButton()
     {
         yield return null;
-        SetButton();
-        if (_endTurnButton) _endTurnButton.interactable = buttonInteractable;
+        UpdateButtons();
     }
 }
 

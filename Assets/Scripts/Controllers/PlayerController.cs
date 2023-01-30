@@ -51,6 +51,9 @@ public class PlayerController : EntityController
 
     public virtual void PlayerEndTurn()
     {
+
+        if (!battle.CanEndTurn()) return;
+        _endTurnButton.interactable = false;
         EndTurn();
     }
 }
