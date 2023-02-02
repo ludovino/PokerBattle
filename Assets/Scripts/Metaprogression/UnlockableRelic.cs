@@ -7,7 +7,7 @@ public class UnlockableRelic : Unlockable
     private Relic _relic;
     public Relic Relic => _relic;
 
-    protected override UnlockDisplay DoUnlock()
+    public override UnlockDisplay GetDisplay()
     {
         return new UnlockDisplay() { Name = _relic.DisplayName, Description = _relic.Description, Sprite = _relic.Sprite };
     }

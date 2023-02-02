@@ -7,9 +7,5 @@ public abstract partial class Unlockable : ScriptableObject
     [SerializeField]
     private int _score;
     public int Score => _score;
-    protected abstract UnlockDisplay DoUnlock();
-    public void Unlock()
-    {
-        // unlock pop-up;
-    }
+    public abstract UnlockDisplay GetDisplay();
 }

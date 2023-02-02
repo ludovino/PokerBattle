@@ -11,14 +11,10 @@ public class ScoreKeeper : ScriptableObject, IOnInit
     [SerializeField]
     private int _tablePlayedScore;
     public int TablePlayedScore => _tablePlayedScore;
-
     private Dictionary<PokerHand, int> handCount;
     public IReadOnlyDictionary<PokerHand, int> HandCount => handCount;
-
-    public int HandScore => HandCount.Select(kvp => kvp.Value * kvp.Key.score).Sum();
     private Dictionary<Suit, int> _suitScores;
     public IReadOnlyDictionary<Suit, int> SuitScores => _suitScores;
-    public int SuitScore => _suitScores.Select(kvp => kvp.Value).Sum() + _blankScore;
 
     private int _blankScore;
     public int BlankScore => _blankScore;
@@ -41,8 +37,47 @@ public class ScoreKeeper : ScriptableObject, IOnInit
             }
             if (_playerSuitList.Contains(card.suit))
                 _suitScores[card.suit] += card.blackjackValue;
-
         }
+    }
+    
+    private List<ScoreLineItem> _lineItems;
+    public IEnumerable<ScoreLineItem> LineItems => (_lineItems?.Count ?? 0) > 0 ? _lineItems : SetLineItems();
+    private IEnumerable<ScoreLineItem> SetLineItems()
+    {
+        _lineItems ??= new List<ScoreLineItem>();
+        _lineItems.Clear();
+        
+        // tables
+        _lineItems.Add(new ScoreLineItem() 
+        { 
+            count = tablesBeaten, 
+            itemName = "Tables Beaten", 
+            score = tablesBeaten * TablePlayedScore 
+        });
+
+        // blanks
+        _lineItems.Add(new ScoreLineItem() 
+        { 
+            itemName = "Blank", 
+            score = _blankScore 
+        });
+     
+        // suits
+        _lineItems.AddRange(_suitScores.Select(kvp => new ScoreLineItem() 
+        { 
+            itemName = kvp.Key.longName, 
+            score = kvp.Value 
+        }));
+
+        // hands
+        _lineItems.AddRange(handCount.Select(kvp => new ScoreLineItem()
+        {
+            count = kvp.Value,
+            itemName = kvp.Key.DisplayName,
+            score = kvp.Value * kvp.Key.score
+        }));
+        _lineItems.RemoveAll(li => li.score == 0);
+        return _lineItems;
     }
 
     public void WinTable()
@@ -58,15 +93,21 @@ public class ScoreKeeper : ScriptableObject, IOnInit
     {
         var hands = Resources.LoadAll<PokerHand>("");
         handCount = hands.ToDictionary(h => h, h => 0);
+
         var suits = Resources.LoadAll<Suit>("");
         _suitScores = suits.ToDictionary(s => s, s => 0);
-        completedActs = new List<ActConfiguration>();
+
+        completedActs ??= new List<ActConfiguration>();
+        completedActs.Clear();
+
+        _lineItems ??= new List<ScoreLineItem>();
+        _lineItems.Clear();
     }
 
     public void EndGame()
     {
         List<SuitScore> suitScores = GetSuitScores();
-        int score = GetTotalScore(suitScores);
+        int score = GetScore();
         MetaProgress.Instance.AddToScores(score, suitScores);
     }
 
@@ -75,23 +116,9 @@ public class ScoreKeeper : ScriptableObject, IOnInit
         return _suitScores.Select(s => new SuitScore() { Suit = s.Key, Score = s.Value }).Where(s => s.Score > 0).ToList();
     }
 
-    private int GetScore()
+    public int GetScore()
     {
-        var score = handCount.Select(kvp => kvp.Key.rank * kvp.Value).Sum();
-        score += CompletedActs.Sum(ca => ca.Score);
-        score += tablesBeaten * _tablePlayedScore;
-        return score;
-    }
-
-    private int GetTotalScore(List<SuitScore> suitScores)
-    {
-        var score = GetScore();
-        score += suitScores.Sum(s => s.Score);
-        return score;
-    }
-    public int GetTotalScore()
-    {
-        return GetTotalScore(GetSuitScores());
+        return LineItems.Sum(li => li.score);
     }
 
     public class RunStats
@@ -103,4 +130,11 @@ public class ScoreKeeper : ScriptableObject, IOnInit
     }
 
     int totalScore => TablePlayedScore * TablesBeaten + _blankScore;
+}
+
+public class ScoreLineItem
+{
+    public int? count;
+    public string itemName;
+    public int score;
 }

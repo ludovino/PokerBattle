@@ -15,7 +15,6 @@ public class GameController : MonoBehaviour
     private EntityData _playerData;
     public EntityData PlayerData => _playerData;
     public Scenario _startingScenario;
-    public MetaProgress metaProgress;
     public ScoreKeeper scoreKeeper;
 
     private void Awake()
@@ -108,6 +107,7 @@ public class GameController : MonoBehaviour
     {
         scoreKeeper.EndGame();
         _sm.MoveToState(new Win());
+        
     }
 
     internal void OpenShop()
@@ -212,6 +212,7 @@ public class GameController : MonoBehaviour
         void ShowScoreCard()
         {
             FindObjectOfType<ScoreCard>().Init();
+            MetaProgress.Instance.DisplayUnlocks();
         }
 
         public void OnExit()
@@ -224,7 +225,13 @@ public class GameController : MonoBehaviour
     {
         public void OnEnter()
         {
-            SceneChanger.Instance.ChangeScene("Victory");
+            SceneChanger.Instance.ChangeScene("Victory", ShowScoreCard);
+        }
+
+        void ShowScoreCard()
+        {
+            FindObjectOfType<ScoreCard>().Init();
+            MetaProgress.Instance.DisplayUnlocks();
         }
 
         public void OnExit()

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using UnityEngine.Serialization;
 using static MetaProgress;
@@ -16,6 +15,10 @@ public partial class MetaProgress : ScriptableObject, ISaveable<MetaprogressData
     public SuitList _defaultSuits;
     [SerializeField]
     private SuitList _AllDrawableSuits;
+    [SerializeField]
+    private UnlockPopup _unlockPopupPrefab;
+    private UnlockPopup _unlockPopup;
+    private UnlockPopup GetUnlockPopup() => _unlockPopup == null ? Instantiate(_unlockPopupPrefab) : _unlockPopup;
     void OnEnable()
     {
         SetInstance();
@@ -53,6 +56,8 @@ public partial class MetaProgress : ScriptableObject, ISaveable<MetaprogressData
         return _instance = Resources.Load<MetaProgress>("Unlocks/Metaprogression");
     }
 
+    public List<UnlockDisplay> _unlocksToShow;
+
     public IReadOnlyList<Suit> UnlockedSuits => _defaultSuits.Concat(_totalUnlocks
         .OfType<UnlockableSuit>()
         .Where(us => us.Score <= _totalScore)
@@ -72,14 +77,34 @@ public partial class MetaProgress : ScriptableObject, ISaveable<MetaprogressData
     }
     internal void AddToScores(int score, List<SuitScore> suitScores)
     {
+        var initialScore = _totalScore;
         _totalScore += score;
         foreach(var suitScore in suitScores)
         {
             var suitUnlocks = _suitUnlocks.Single(s => s.Suit == suitScore.Suit);
             suitUnlocks.AddPoints(suitScore.Score);
         }
+        AddScoreUnlocks(initialScore, _totalScore);
         UpdateUnlockedRelics();
         SaveManager.Instance.SaveItem(this);
+    }
+
+    private void AddScoreUnlocks(int initialScore, int finalScore)
+    {
+        _unlocksToShow ??= new List<UnlockDisplay>();
+        _unlocksToShow.AddRange(_totalUnlocks.Where(u => u.Score > initialScore && u.Score <= finalScore).Select(u => u.GetDisplay()));
+    }
+
+    public void DisplayUnlocks()
+    {
+        var popup = GetUnlockPopup();
+        CoroutineQueue.Defer(popup.FadeIn());
+        foreach(var unlockDisplay in _unlocksToShow)
+        {
+            CoroutineQueue.Defer(popup.Pop(unlockDisplay));
+        }
+        CoroutineQueue.Defer(popup.FadeOut());
+        _unlocksToShow.Clear();
     }
 
     public MetaprogressData Save()
