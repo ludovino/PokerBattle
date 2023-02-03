@@ -20,7 +20,7 @@ MonoBehaviour:
       chance: 1
     - type: {fileID: 11400000, guid: 395738942cc78114585c6daaff1829b9, type: 2}
       chance: 1
-    blind: 3
+    blind: 5
     isBoss: 0
   - tables:
     - type: {fileID: 11400000, guid: 395738942cc78114585c6daaff1829b9, type: 2}
@@ -49,7 +49,7 @@ MonoBehaviour:
       chance: 0.5
     - type: {fileID: 11400000, guid: 1d6841d870ac3454e8ff28a00f3d6109, type: 2}
       chance: 0.5
-    blind: 5
+    blind: 10
     isBoss: 0
   - tables:
     - type: {fileID: 11400000, guid: e39955c4b78910742afaea6ae37b4f60, type: 2}
@@ -67,7 +67,7 @@ MonoBehaviour:
       chance: 1
     - type: {fileID: 11400000, guid: 576487e980792a443aef596282eb8f7c, type: 2}
       chance: 0.5
-    blind: 15
+    blind: 10
     isBoss: 0
   - tables:
     - type: {fileID: 11400000, guid: e39955c4b78910742afaea6ae37b4f60, type: 2}
@@ -97,7 +97,7 @@ MonoBehaviour:
       chance: 1
     blind: 25
     isBoss: 1
-  level: 6
-  pointsForWinning: 0
-  _displayName: 
+  level: -1
+  pointsForWinning: 50
+  _displayName: Mick's
   _score: 0
