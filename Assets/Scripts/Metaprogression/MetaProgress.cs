@@ -97,6 +97,7 @@ public partial class MetaProgress : ScriptableObject, ISaveable<MetaprogressData
 
     public void DisplayUnlocks()
     {
+        if (!_unlocksToShow.Any()) return;
         var popup = GetUnlockPopup();
         CoroutineQueue.Defer(popup.FadeIn());
         foreach(var unlockDisplay in _unlocksToShow)

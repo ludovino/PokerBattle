@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,6 +36,9 @@ public class ChooseDeckController : MonoBehaviour
     [SerializeField]
     private Transform _drawOrigin;
     private List<Card> _cards;
+
+    [SerializeField]
+    private CanvasGroup _selectMenu;
 
     private void Start()
     {
@@ -93,7 +97,15 @@ public class ChooseDeckController : MonoBehaviour
         }
 
         _cardCollection.Clear();
-        CoroutineQueue.Defer(_cardCollection.AddCards(_cardObjects));
+        _selectMenu.interactable = false;
+        _selectMenu.blocksRaycasts = false;
+        CoroutineQueue.Defer(CR_DrawCards());
+    }
+
+    public IEnumerator CR_DrawCards()
+    {
+        yield return _selectMenu.DOFade(0, 0.3f).WaitForCompletion();
+        yield return _cardCollection.AddCards(_cardObjects);
     }
 
     public void Go()

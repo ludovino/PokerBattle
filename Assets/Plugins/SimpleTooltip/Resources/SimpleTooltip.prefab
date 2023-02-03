@@ -147,7 +147,6 @@ GameObject:
   - component: {fileID: 8616030156020370399}
   - component: {fileID: 8610299824783575409}
   - component: {fileID: 2624724423723067541}
-  - component: {fileID: -298312865680278945}
   m_Layer: 5
   m_Name: SimpleTooltip
   m_TagString: Untagged
@@ -185,7 +184,7 @@ Canvas:
   m_GameObject: {fileID: 4334789946841606976}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 1
+  m_RenderMode: 0
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -193,9 +192,9 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 25
-  m_SortingLayerID: 0
-  m_SortingOrder: 100
+  m_AdditionalShaderChannelsFlag: 1
+  m_SortingLayerID: 340431161
+  m_SortingOrder: 9999
   m_TargetDisplay: 0
 --- !u!114 &8610299824783575409
 MonoBehaviour:
@@ -237,18 +236,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &-298312865680278945
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4334789946841606976}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58de1274cd0273c4a8ab0bf90e703a9b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &7111340749251114690
 GameObject:
   m_ObjectHideFlags: 0
