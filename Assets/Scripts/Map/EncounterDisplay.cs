@@ -10,10 +10,12 @@ public class EncounterDisplay : MonoBehaviour
     private Action onClick;
     [SerializeField]
     private BeginEncounter _beginEncounter;
-    private TooltipManager _tooltipManager;
     private Encounter _encounter;
+    [SerializeField]
+    private UnityEvent _encounterSelected;
     public void Awake()
     {
+        _encounterSelected ??= new UnityEvent();
         _beginEncounter = _beginEncounter ?? new BeginEncounter();
         _tooltip = GetComponent<SimpleTooltip>();
     }
@@ -26,6 +28,7 @@ public class EncounterDisplay : MonoBehaviour
             _tooltip.infoLeft = encounter.Tooltip;
             _tooltip.infoRight = $"`{encounter.EncounterType?.DisplayName}";
             spriteRenderer.sprite = encounter.EncounterType?.mapSprite;
+            _encounterSelected.Invoke();
             onClick += encounter.BeginEncounter;
         }
         else

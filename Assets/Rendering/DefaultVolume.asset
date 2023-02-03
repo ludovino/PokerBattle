@@ -40,7 +40,7 @@ MonoBehaviour:
     m_Value: {x: 0.5, y: 0.5}
   intensity:
     m_OverrideState: 1
-    m_Value: 0.3
+    m_Value: 0.328
   smoothness:
     m_OverrideState: 1
     m_Value: 1
@@ -326,11 +326,11 @@ MonoBehaviour:
   m_Name: DefaultVolume
   m_EditorClassIdentifier: 
   components:
-  - {fileID: -6284778370136159244}
   - {fileID: -7644807173140308780}
   - {fileID: -2735356986600132247}
   - {fileID: -4265218331115654279}
   - {fileID: 7940575891407409423}
+  - {fileID: -6284778370136159244}
 --- !u!114 &7940575891407409423
 MonoBehaviour:
   m_ObjectHideFlags: 3
