@@ -21,3 +21,4 @@ MonoBehaviour:
   blankSprite: {fileID: 21300000, guid: bf1ddac3725fb0249b2bdc5e6b484840, type: 3}
   clip: {fileID: 7400000, guid: fac10f0e5355cd143b5fb687303c0ace, type: 2}
   price: 25
+  hasPips: 1

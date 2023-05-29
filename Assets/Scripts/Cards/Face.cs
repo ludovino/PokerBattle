@@ -11,4 +11,5 @@ public class Face : ScriptableObject
     public Sprite blankSprite;
     public AnimationClip clip;
     public int price;
+    public bool hasPips;
 }

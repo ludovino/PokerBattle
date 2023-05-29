@@ -1,44 +1,62 @@
 ﻿using DG.Tweening;
+using NaughtyAttributes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CardDisplayNoAnim : MonoBehaviour
+public class TweenerCanvasCardDisplay : MonoBehaviour
 {
-    [SerializeField]
-    private Image[] _numeralText;
-    [SerializeField]
-    private Image[] _pipSprites;
-    [SerializeField]
-    private Image[] _smallPips;
-    [SerializeField]
-    private Image _faceSprite;
-    private CardBackScript _cardBack;
-
+    [Foldout("Current Value")]
     [SerializeField]
     [Range(0, 21)]
     private int _value;
+    [Foldout("Current Value")]
     [SerializeField]
     private Face _face;
+    [Foldout("Current Value")]
     [SerializeField]
     private Suit _suit;
 
+    [Foldout("Numeral Settings")]
+    [SerializeField]
+    private TextMeshProUGUI[] _numeralText;
+    [Foldout("Numeral Settings")]
+    [SerializeField]
+    private Image[] _numeralPips;
+
+    [Foldout("Pip Settings")]
+    [SerializeField]
+    private Image[] _pipSprites;
+    [Foldout("Pip Settings")]
     [SerializeField]
     private List<NumeralSetup> _pipConfigs;
 
+    [Foldout("Face Settings")]
+    [SerializeField]
+    private Image _faceSprite;
+    [Foldout("Face Settings")]
     [SerializeField]
     private NumeralSetup _facePips;
-
+    [Foldout("Face Settings")]
     [SerializeField]
-    private Sprite[] _numeralSprites;
+    private Face _ace;
 
+    [Foldout("Styles")]
     [SerializeField]
     private Color _blankColor;
+    [Foldout("Styles")]
+    [SerializeField]
+    private TMP_FontAsset _regularFont;
+    [Foldout("Styles")]
+    [SerializeField]
+    private TMP_FontAsset _narrowFont;
 
     private Queue<CardChange> _cardChanges;
+    private CardBackScript _cardBack;
 
     public bool FaceUp => _cardBack?.faceUp ?? true;
 
@@ -53,8 +71,20 @@ public class CardDisplayNoAnim : MonoBehaviour
         Set(_value, _suit, _face, true);
     }
 
+    private void OnDrawGizmos()
+    {
+        for (int i = 0; i < _pipSprites.Length; i++)
+        {
+            if(i < _value && _face == null)
+            {
+                Handles.Label(_pipSprites[i].transform.position, (i + 1).ToString());
+            }
+        }
+    }
+
     public void Set(int value, Suit suit, Face face, bool force)
     {
+        _cardChanges?.Clear();
         var changeSuit = suit != _suit;
         var changeValue = value != _value;
         var changeFace = face != _face;
@@ -86,24 +116,24 @@ public class CardDisplayNoAnim : MonoBehaviour
     #region Numeral
     public void SetNumeral(int value, Face face, Suit suit)
     {
-        var sprite = face != null ? face.numeralSprite : _numeralSprites[value];
-        var color = suit != null ? suit.Color.Dark : _blankColor;
+        var color = suit != null ? suit.Color.Value : _blankColor;
+        var numeral = face?.numeral ?? value.ToString();
 
         foreach (var numeralText in _numeralText)
         {
-            numeralText.sprite = sprite;
             numeralText.color = color;
+            numeralText.text = numeral;
         }
     }
 
     public void AnimateNumeral(int value, Face face, Suit suit, float time)
     {
-        var sprite = face != null ? face.numeralSprite : _numeralSprites[value];
-        var color = suit != null ? suit.Color.Dark : _blankColor;
+        var color = suit != null ? suit.Color.Value : _blankColor;
+        var numeral = face?.numeral ?? value.ToString();
 
         foreach (var numeralText in _numeralText)
         {
-            numeralText.DOFade(0, 0.5f * time).OnComplete(() => numeralText.sprite = sprite);
+            numeralText.DOFade(0, 0.5f * time).OnComplete(() => numeralText.text = numeral);
             numeralText.DOColor(color , 0.5f * time).SetDelay(0.5f * time);
         }
     }
@@ -112,29 +142,46 @@ public class CardDisplayNoAnim : MonoBehaviour
     #region Suit
     private void SetSuit(Suit suit)
     {
+        _suit = suit;
+        if (suit == null)
+        {
+            foreach (var pip in _pipSprites)
+            {
+                pip.sprite = null;
+                pip.color = Color.clear;
+            }
+            foreach (var smallpip in _numeralPips)
+            {
+                smallpip.sprite = null;
+                smallpip.color = Color.clear;
+            }
+            return;
+        }
         foreach(var pip in _pipSprites)
         {
-            pip.sprite = suit != null ? suit.sprite16 : null;
+            pip.sprite = suit.sprite;
+            pip.color = suit.Color.Value;
         }
-        foreach(var smallpip in _smallPips)
+        foreach(var smallpip in _numeralPips)
         {
-            smallpip.sprite = suit != null ? suit.sprite12 : null;
+            smallpip.sprite = suit.sprite;
+            smallpip.color = suit.Color.Value;
         }
     }  
     private void AnimateSuit(Suit suit, float time)
     {
         _suit = suit;
+        var color = _suit.Color.Value;
         foreach (var pip in _pipSprites)
         {
-            var color = pip.color;
-            pip.DOFade(0, time * 0.5f).OnComplete(() => pip.sprite = suit != null ? suit.sprite16 : null);
+            pip.DOFade(0, time * 0.5f).OnComplete(() => pip.sprite = suit != null ? suit.sprite : null);
             pip.DOColor(color, time * 0.5f).SetDelay(time * 0.5f);
         }
 
-        foreach (var smallpip in _smallPips)
+        foreach (var smallpip in _numeralPips)
         {
-            smallpip.DOFade(0, time * 0.5f).OnComplete(() => smallpip.sprite = suit != null ? suit.sprite12 : null);
-            smallpip.DOFade(1, time * 0.5f).SetDelay(time * 0.5f);
+            smallpip.DOFade(0, time * 0.5f).OnComplete(() => smallpip.sprite = suit != null ? suit.sprite : null);
+            smallpip.DOColor(color, time * 0.5f).SetDelay(time * 0.5f);
         }
     }
     #endregion
@@ -148,12 +195,23 @@ public class CardDisplayNoAnim : MonoBehaviour
             _faceSprite.enabled = false;
             return;
         }
-
+        var pips = face.hasPips ? _facePips : _pipConfigs[0];
         _faceSprite.enabled = true;
-        _faceSprite.color = new Color(1, 1, 1, 1);
-        if (face.pips) SetPips(_facePips);
-        else SetPips(0);
-        _faceSprite.sprite = _suit.Faces[face];
+        SetPips(pips);
+        
+        var faceSprite = _suit != null ? _suit.Faces[face] : face.blankSprite;
+        
+        if (face == _ace && _suit != null)
+        {
+            faceSprite = _suit.sprite;
+            _faceSprite.color = _suit.Color.Value;
+        }
+        else
+        {
+            _faceSprite.color = Color.white;
+        }
+
+        _faceSprite.sprite = faceSprite;
     }
     private void AnimateFace(Face face, float time)
     {
@@ -163,17 +221,26 @@ public class CardDisplayNoAnim : MonoBehaviour
             return;
         }
         _faceSprite.enabled = true;
-        if (face.pips) AnimatePips(_facePips, time);
-        else AnimatePips(0, time);
-        _faceSprite.DOFade(0, time * 0.5f).OnComplete(() => _faceSprite.sprite = _suit.Faces[face]);
-        _faceSprite.DOFade(0, time * 0.5f).SetDelay(time * 0.5f);
+
+        var pips = face.hasPips ? _facePips : _pipConfigs[0];
+        var faceSprite = _suit != null ? _suit.Faces[face] : face.blankSprite;
+        var faceColor = Color.white;
+        if(face == _ace && _suit != null)
+        {
+            faceSprite = _suit.sprite;
+            faceColor = _suit.Color.Value;
+        }
+
+        AnimatePips(pips, time);
+        _faceSprite.DOFade(0, time * 0.5f).OnComplete(() => _faceSprite.sprite = faceSprite);
+        _faceSprite.DOColor(faceColor, time * 0.5f).SetDelay(time * 0.5f);
     }
     #endregion
 
     #region Pips
     private void SetPips(int value)
     {
-        if (_face) return;
+        if (_face) return; 
         var setup = _pipConfigs[value];
         SetPips(setup);
     }
@@ -190,13 +257,14 @@ public class CardDisplayNoAnim : MonoBehaviour
         {
             if (i < activePips)
             {
-                _pipSprites[i].color = Color.white;
+                _pipSprites[i].enabled = true;
                 SetPip(_pipSprites[i].transform, setup.Pips[i]);
             }
             else
             {
+
+                _pipSprites[i].enabled = false;
                 _pipSprites[i].transform.localPosition = new Vector3(0, 0, 0);
-                _pipSprites[i].color = new Color(1, 1, 1, 0);
             }
         }
     }
@@ -206,12 +274,16 @@ public class CardDisplayNoAnim : MonoBehaviour
         {
             if (i < setup.Pips.Count)
             {
-                _pipSprites[i].DOFade(1f, time);
+                _pipSprites[i].DOFade(1f, time).OnComplete(() => _pipSprites[i].enabled = true);
                 AnimatePip(_pipSprites[i].transform, setup.Pips[i], time);
             }
             else
             {
-                _pipSprites[i].DOFade(1f, time).OnComplete(() => _pipSprites[i].transform.localPosition = Vector3.zero);
+                _pipSprites[i].DOFade(0f, time).OnComplete(() => 
+                { 
+                    _pipSprites[i].transform.localPosition = Vector3.zero;
+                    _pipSprites[i].enabled = false;
+                });
             }
         }
     }
@@ -226,6 +298,33 @@ public class CardDisplayNoAnim : MonoBehaviour
         pipTransform.DOLocalRotate(new Vector3(0, 0, pip.z), time);
     }
     #endregion
+
+    [Button]
+    private void SetNumeralPipsConfig()
+    {
+        if (_face != null) return;
+        var config = _pipConfigs[_value];
+        for(int i = 0; i < _value; i++)
+        {
+            var pos = _pipSprites[i].transform.localPosition;
+            var rot = _pipSprites[i].transform.localEulerAngles.z;
+            config._pips[i] = new Vector3(pos.x, pos.y, rot);
+        }
+    }
+
+    [Button]
+    private void CopyPrevious()
+    {
+        if (_face != null || _value < 1) return;
+        var config = _pipConfigs[_value];
+        var prev = _pipConfigs[_value - 1];
+        for (int i = 0; i < _value - 1; i++)
+        {
+            config._pips[i] = prev._pips[i];
+        }
+
+        Set(_value, _suit, _face, true);
+    }
 
     private class CardChange
     {
