@@ -1,3 +1,4 @@
+using NaughtyAttributes;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,8 +6,9 @@ using UnityEngine;
 public class SetToMainCamera : MonoBehaviour
 {
     private Canvas _canvas;
+    [SortingLayer]
     [SerializeField]
-    private SortingLayer _sortingLayer;
+    private string _sortingLayer;
     private void Awake()
     {
         _canvas = GetComponent<Canvas>();
@@ -14,6 +16,6 @@ public class SetToMainCamera : MonoBehaviour
     private void Start()
     {
         _canvas.worldCamera = Camera.main;
-        _canvas.sortingLayerName = "UI";
+        _canvas.sortingLayerName = _sortingLayer;
     }
 }

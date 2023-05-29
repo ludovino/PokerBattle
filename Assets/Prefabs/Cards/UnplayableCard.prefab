@@ -7,6 +7,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1749366785108308325, guid: ce743bb59c2654d4aa7df0138071e28f, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1855003773870030896, guid: ce743bb59c2654d4aa7df0138071e28f, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -63,5 +67,14 @@ PrefabInstance:
       propertyPath: infoLeft
       value: UnPlayableCardDefaultTooltip
       objectReference: {fileID: 0}
+    - target: {fileID: 9106246987686822500, guid: ce743bb59c2654d4aa7df0138071e28f, type: 3}
+      propertyPath: back
+      value: 
+      objectReference: {fileID: 2866338094099783445}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ce743bb59c2654d4aa7df0138071e28f, type: 3}
+--- !u!1 &2866338094099783445 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6352041884048249120, guid: ce743bb59c2654d4aa7df0138071e28f, type: 3}
+  m_PrefabInstance: {fileID: 9214852191865900597}
+  m_PrefabAsset: {fileID: 0}

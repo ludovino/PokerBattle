@@ -6,7 +6,7 @@ using UnityEngine.Events;
 public class CardScript : MonoBehaviour, ICard
 {
     [SerializeField]
-    private CardDisplay _cardDisplay;
+    private TweenerCanvasCardDisplay _cardDisplay;
     public UnityEvent onPlay;
     public UnityEvent onDraw;
     public UnityEvent onDiscard;
@@ -21,7 +21,7 @@ public class CardScript : MonoBehaviour, ICard
         _card = card;
         _tempCard = _card.Clone();
         gameObject.name = card.ToString();
-        _cardDisplay.UpdateCardDisplay(this);
+        _cardDisplay.Set(this.blackjackValue, this.suit, this.face, true);
         _owner = owner;
         SetTooltip();
     }
@@ -34,6 +34,7 @@ public class CardScript : MonoBehaviour, ICard
     public CardEffectContext playContext => _playContext;
     public int valueDifference => _tempCard.highCardRank - _card.highCardRank;
     private SimpleTooltip _tooltip;
+    private CardBackScript _cardBack;
 
     void Awake()
     {
@@ -42,11 +43,12 @@ public class CardScript : MonoBehaviour, ICard
         onDiscard = onDiscard ?? new UnityEvent();
         _draggable = GetComponent<Draggable>();
         _tooltip = GetComponent<SimpleTooltip>();
+        _cardBack = GetComponent<CardBackScript>();
     }
 
     void LateUpdate()
     {
-        if (!_cardDisplay.FaceUp) _tooltip.HideTooltip();
+        if (_cardBack && !_cardBack.faceUp) _tooltip.HideTooltip();
     }
 
     public void Play(CardEffectContext context)
@@ -68,8 +70,9 @@ public class CardScript : MonoBehaviour, ICard
     public void ResetCard(bool animate = false)
     {
         _tempCard = _card.Clone();
-        if (animate) _cardDisplay.AnimateCardDisplay(_tempCard);
-        else _cardDisplay.UpdateCardDisplay(_tempCard);
+        if (animate)
+            CoroutineQueue.Defer(_cardDisplay.CR_Animate(_tempCard, 0.3f));
+        else _cardDisplay.Set(_tempCard, true);
         if (animate)
             CoroutineQueue.Defer(CR_SetTooltip());
         else
@@ -79,7 +82,7 @@ public class CardScript : MonoBehaviour, ICard
     {
         if (change == 0) return;
         _tempCard.Change(change);
-        _cardDisplay.AnimateCardDisplay(_tempCard);
+        CoroutineQueue.Defer(_cardDisplay.CR_Animate(_tempCard, 0.3f));
         CoroutineQueue.Defer(CR_SetTooltip());
     }
 
@@ -87,7 +90,7 @@ public class CardScript : MonoBehaviour, ICard
     {
         if (suit == this.suit) return;
         _tempCard.SetSuit(suit);
-        _cardDisplay.AnimateCardDisplay(_tempCard);
+        CoroutineQueue.Defer(_cardDisplay.CR_Animate(_tempCard, 0.3f));
         CoroutineQueue.Defer(CR_SetTooltip());
     }
 

@@ -1,6 +1,7 @@
 ﻿using DG.Tweening;
 using NaughtyAttributes;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
@@ -81,7 +82,10 @@ public class TweenerCanvasCardDisplay : MonoBehaviour
             }
         }
     }
-
+    public void Set(ICard card, bool force)
+    {
+        Set(card.blackjackValue, card.suit, card.face, force);
+    }
     public void Set(int value, Suit suit, Face face, bool force)
     {
         _cardChanges?.Clear();
@@ -97,6 +101,18 @@ public class TweenerCanvasCardDisplay : MonoBehaviour
         _face = face;
         _suit = suit;
     }
+
+    public IEnumerator CR_Animate(ICard card, float time)
+    {
+        Animate(card.blackjackValue, card.suit, card.face, time);
+        yield return new WaitForSeconds(time);
+    }
+
+    public void Animate(ICard card, float time)
+    {
+        Animate(card.blackjackValue, card.suit, card.face, time);
+    }
+
     public void Animate(int value, Suit suit, Face face, float time)
     {
         var changeSuit = suit != _suit;
@@ -189,6 +205,7 @@ public class TweenerCanvasCardDisplay : MonoBehaviour
     #region Face
     private void SetFace(Face face)
     {
+        _face = face;
         if (face == null)
         {
             _faceSprite.color = new Color(1, 1, 1, 0);
