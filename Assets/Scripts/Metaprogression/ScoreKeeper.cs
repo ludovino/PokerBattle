@@ -32,11 +32,11 @@ public class ScoreKeeper : ScriptableObject, IOnInit
         {
             if (!card.suit)
             {
-                _blankScore += card.blackjackValue;
+                _blankScore += Mathf.Clamp(card.blackjackValue, 1, 21);
                 continue;
             }
             if (_playerSuitList.Contains(card.suit))
-                _suitScores[card.suit] += card.blackjackValue;
+                _suitScores[card.suit] += Mathf.Clamp(card.blackjackValue, 1, 21);
         }
     }
     

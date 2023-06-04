@@ -1,12 +1,11 @@
 ﻿using DG.Tweening;
 using NaughtyAttributes;
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 public class TweenerCanvasCardDisplay : MonoBehaviour
@@ -115,18 +114,17 @@ public class TweenerCanvasCardDisplay : MonoBehaviour
 
     public void Animate(int value, Suit suit, Face face, float time)
     {
-        var changeSuit = suit != _suit;
-        var changeValue = value != _value;
-        var changeFace = face != _face;
-
-        if (changeSuit) AnimateSuit(suit, time);
-        if(changeFace || (face && changeSuit)) AnimateFace(face, time);
-        if(changeValue) AnimateNumeral(value, face, suit, time);
-        if(changeValue && !face) AnimatePips(value, time);
-
         _value = value;
         _face = face;
         _suit = suit;
+
+        var setup = _pipConfigs[value];
+        if (face) setup = face.hasPips ? _facePips : _pipConfigs[0];
+        
+        PositionPips(setup, time);
+        AnimateSuit(suit, setup, time);
+        AnimateFace(face, time);
+        AnimateNumeral(value, face, suit, time);
     }
 
     #region Numeral
@@ -164,6 +162,7 @@ public class TweenerCanvasCardDisplay : MonoBehaviour
             foreach (var pip in _pipSprites)
             {
                 pip.sprite = null;
+                pip.enabled = false;
                 pip.color = Color.clear;
             }
             foreach (var smallpip in _numeralPips)
@@ -184,14 +183,30 @@ public class TweenerCanvasCardDisplay : MonoBehaviour
             smallpip.color = suit.Color.Value;
         }
     }  
-    private void AnimateSuit(Suit suit, float time)
+    private void AnimateSuit(Suit suit, NumeralSetup numeralSetup, float time)
     {
         _suit = suit;
-        var color = _suit.Color.Value;
-        foreach (var pip in _pipSprites)
+        var color = _suit?.Color.Value ?? Color.clear;
+        for (int i = 0; i < _pipSprites.Length; i++)
         {
-            pip.DOFade(0, time * 0.5f).OnComplete(() => pip.sprite = suit != null ? suit.sprite : null);
-            pip.DOColor(color, time * 0.5f).SetDelay(time * 0.5f);
+            Image pip = _pipSprites[i];
+            if (i < numeralSetup.Pips.Count)
+            {
+                pip.DOFade(0, time * 0.5f).OnComplete(() =>
+                {
+                    pip.sprite = suit?.sprite;
+                    pip.enabled = suit != null;
+                });
+                pip.DOColor(color, time * 0.5f).SetDelay(time * 0.5f);
+            }
+            else
+            {
+                pip.DOColor(Color.clear, time * 0.5f).OnComplete(() =>
+                {
+                    pip.sprite = suit?.sprite;
+                    pip.enabled = false;
+                });
+            }
         }
 
         foreach (var smallpip in _numeralPips)
@@ -232,6 +247,7 @@ public class TweenerCanvasCardDisplay : MonoBehaviour
     }
     private void AnimateFace(Face face, float time)
     {
+        _face = face;
         if(face == null)
         {
             _faceSprite.DOFade(0, time).OnComplete(() => _faceSprite.enabled = false);
@@ -248,7 +264,6 @@ public class TweenerCanvasCardDisplay : MonoBehaviour
             faceColor = _suit.Color.Value;
         }
 
-        AnimatePips(pips, time);
         _faceSprite.DOFade(0, time * 0.5f).OnComplete(() => _faceSprite.sprite = faceSprite);
         _faceSprite.DOColor(faceColor, time * 0.5f).SetDelay(time * 0.5f);
     }
@@ -257,15 +272,17 @@ public class TweenerCanvasCardDisplay : MonoBehaviour
     #region Pips
     private void SetPips(int value)
     {
+        _value = value;
         if (_face) return; 
         var setup = _pipConfigs[value];
         SetPips(setup);
     }
-    private void AnimatePips(int value, float time)
+    private void AnimatePips(int value, Face face, float time)
     {
-        if (_face) return;
+        _value = value;
         var setup = _pipConfigs[value];
-        AnimatePips(setup, time);
+        if (face) setup = face.hasPips ? _facePips : _pipConfigs[0];
+        PositionPips(setup, time);
     }
     private void SetPips(NumeralSetup setup)
     {
@@ -279,28 +296,25 @@ public class TweenerCanvasCardDisplay : MonoBehaviour
             }
             else
             {
-
                 _pipSprites[i].enabled = false;
                 _pipSprites[i].transform.localPosition = new Vector3(0, 0, 0);
             }
         }
     }
-    private void AnimatePips(NumeralSetup setup, float time)
+    private void PositionPips(NumeralSetup setup, float time)
     {
         for (int i = 0; i < _pipSprites.Length; i++)
         {
+            float animationTime = time - Random.Range(0, time * 0.2f);
+            var sprite = _pipSprites[i];
             if (i < setup.Pips.Count)
             {
-                _pipSprites[i].DOFade(1f, time).OnComplete(() => _pipSprites[i].enabled = true);
-                AnimatePip(_pipSprites[i].transform, setup.Pips[i], time);
+                AnimatePip(sprite.transform, setup.Pips[i], animationTime);
             }
             else
             {
-                _pipSprites[i].DOFade(0f, time).OnComplete(() => 
-                { 
-                    _pipSprites[i].transform.localPosition = Vector3.zero;
-                    _pipSprites[i].enabled = false;
-                });
+                sprite.transform.DOLocalMove(Vector3.zero, 0).SetDelay(time);
+                sprite.transform.DOLocalRotate(Vector3.zero, 0).SetDelay(time);
             }
         }
     }
@@ -311,8 +325,8 @@ public class TweenerCanvasCardDisplay : MonoBehaviour
     }
     private void AnimatePip(Transform pipTransform, Vector3 pip, float time)
     {
-        pipTransform.DOLocalMove(new Vector3(pip.x, pip.y, 0), time);
-        pipTransform.DOLocalRotate(new Vector3(0, 0, pip.z), time);
+        pipTransform.DOLocalMove(new Vector3(pip.x, pip.y, 0), time).SetEase(Ease.InCubic);
+        pipTransform.DOLocalRotate(new Vector3(0, 0, pip.z), time).SetEase(Ease.InCubic);
     }
     #endregion
 
@@ -375,7 +389,7 @@ public class TweenerCanvasCardDisplay : MonoBehaviour
     }
 }
 
-[Serializable]
+[System.Serializable]
 public class NumeralSetup
 {
     [SerializeField]

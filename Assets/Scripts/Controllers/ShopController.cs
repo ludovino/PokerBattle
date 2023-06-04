@@ -32,7 +32,6 @@ public class ShopController : MonoBehaviour
             var priceText = cardSlot.GetComponentInChildren<TextMeshPro>();
             priceText.text = card.price.ToString();
             selector.SetCard(card, playerData);
-            selector.GetComponentInChildren<SortingGroup>().sortingLayerID = SortingLayer.NameToID("Default");
             selector.transform.position = shopDeckOrigin.position;
             selector.transform.rotation = Quaternion.Euler(0, 180, 0);
             selector.transform.DOMove(cardSlot.position, 0.3f);

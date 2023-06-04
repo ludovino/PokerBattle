@@ -30,6 +30,7 @@ public class CoroutineQueue : MonoBehaviour
     {
         _crHandler = StartCoroutine(CR_Handler());
     }
+
     private IEnumerator CR_Handler()
     {
         while (true)

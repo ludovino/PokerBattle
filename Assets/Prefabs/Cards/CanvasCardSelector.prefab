@@ -80,6 +80,7 @@ MonoBehaviour:
   _onDeselectCard:
     m_PersistentCalls:
       m_Calls: []
+  _cardScript: {fileID: 7110671938629538825}
 --- !u!114 &5912188514502277099
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -198,6 +199,14 @@ PrefabInstance:
     - target: {fileID: 7226997595579526806, guid: e0359b694bab9d04bb736bdaa847fd5f, type: 3}
       propertyPath: m_fontColor32.rgba
       value: 4287203721
+      objectReference: {fileID: 0}
+    - target: {fileID: 7226997595723641348, guid: e0359b694bab9d04bb736bdaa847fd5f, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7226997595723641348, guid: e0359b694bab9d04bb736bdaa847fd5f, type: 3}
+      propertyPath: m_UseSpriteMesh
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e0359b694bab9d04bb736bdaa847fd5f, type: 3}

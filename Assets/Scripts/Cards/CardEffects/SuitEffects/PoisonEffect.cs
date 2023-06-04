@@ -6,7 +6,7 @@ public class PoisonEffect : SuitEffect, IOnOpponentTurn
     private int damage;
     public override void Execute(CardEffectContext context)
     {
-        var enemyCard = context.Opponent.fieldOfPlay[context.PlayIndex];
+        var enemyCard = context.OpposingCard;
         if (enemyCard is null) return;
         DoEffect(context);
         enemyCard.ChangeValue(-damage);

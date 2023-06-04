@@ -12,8 +12,10 @@ public class CardSelector : MonoBehaviour, IPointerClickHandler
     [SerializeField]
     private OnDeselectCard _onDeselectCard;
     public OnDeselectCard OnDeselectCard => _onDeselectCard;
-
+    [SerializeField]
     private CardScript _cardScript;
+
+    private Vector3 _initialScale;
     private bool _selected;
 
     private void Awake()
@@ -22,6 +24,7 @@ public class CardSelector : MonoBehaviour, IPointerClickHandler
         _onDeselectCard = _onDeselectCard ?? new OnDeselectCard();
         _cardScript = GetComponent<CardScript>();
         _selected = false;
+        _initialScale = this.transform.localScale;
     }
 
 
@@ -34,14 +37,14 @@ public class CardSelector : MonoBehaviour, IPointerClickHandler
     public void Deselect()
     {
         _onDeselectCard.Invoke(_cardScript);
-        transform.DOScale(Vector3.one, 0.2f);
+        transform.DOScale(_initialScale, 0.2f);
         _selected = false;
     }
 
     public void Select()
     {
         _onSelectCard.Invoke(_cardScript);
-        transform.DOScale(Vector3.one * 1.1f, 0.2f);
+        transform.DOScale(_initialScale * 1.1f, 0.2f);
         _selected = true;
     }
 

@@ -118,8 +118,8 @@ public class BattleController : MonoBehaviour
         player.Init(playerData, blind);
         enemy.Init(enemyData, blind);
         onChangePot.Invoke(0, 0, 0);
-        _houseCutText.text = $"{houseCut * 100}% house cut";
-        _blindText.text = $"{blind} blind";
+        if(_houseCutText != null) _houseCutText.text = $"{houseCut * 100}% house cut";
+        if (_blindText != null) _blindText.text = $"{blind} blind";
         StartRound();
         if(GameController.Instance?.currentAct?.IsBossLevel ?? false)
         {
@@ -220,7 +220,7 @@ public class BattleController : MonoBehaviour
         blind += startingBlind;
         player.blind = blind;
         enemy.blind = blind;
-        _blindText.text = $"{blind} blind";
+        if (_blindText != null) _blindText.text = $"{blind} blind";
     }
 
     private void TakeHouseCut()
@@ -328,6 +328,7 @@ public class CardEffectContext
 
     public Entity Owner => _owner;
     public Entity Opponent => _opponent;
+    public CardScript OpposingCard => Opponent.fieldOfPlay[PlayIndex];
     public CardScript Card => _card;
     public BattleController Battle => _battle;
     public int PlayIndex  => _playIndex;

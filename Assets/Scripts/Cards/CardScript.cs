@@ -64,14 +64,14 @@ public class CardScript : MonoBehaviour, ICard
     public void Discard()
     {
         _playContext = null;
-        ResetCard(true);
+        ResetCard(true, 0.0f);
         onDiscard.Invoke();
     }
-    public void ResetCard(bool animate = false)
+    public void ResetCard(bool animate = false, float time = 0.3f)
     {
         _tempCard = _card.Clone();
         if (animate)
-            CoroutineQueue.Defer(_cardDisplay.CR_Animate(_tempCard, 0.3f));
+            CoroutineQueue.Defer(_cardDisplay.CR_Animate(_tempCard, time));
         else _cardDisplay.Set(_tempCard, true);
         if (animate)
             CoroutineQueue.Defer(CR_SetTooltip());
