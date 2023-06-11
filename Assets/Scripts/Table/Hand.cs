@@ -37,7 +37,7 @@ public class Hand : MonoBehaviour
         for (var i = 0; i < handCards.Count; i++)
         {
             var card = handCards[i];
-            var offsetVector = new Vector3((i + 1) * spacing - offset, 0, -i * spacing);
+            var offsetVector = new Vector3((i + 1) * spacing - offset, 0, 0);
             var position = transform.position + offsetVector;
             if (drawn.Contains(card))
             {

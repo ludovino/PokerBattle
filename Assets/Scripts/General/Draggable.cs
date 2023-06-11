@@ -22,7 +22,7 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
     public void OnDrag(PointerEventData eventData)
     {
         if (!enabled) return;
-        var pos = Camera.main.ScreenToWorldPoint((Vector2)Input.mousePosition);
+        var pos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10));
         pos.z = 0;
         this.transform.position = pos;
     }
