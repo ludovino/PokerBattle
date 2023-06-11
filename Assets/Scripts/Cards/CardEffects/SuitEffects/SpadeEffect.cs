@@ -3,7 +3,7 @@
 public class SpadeEffect : SuitEffect, IOnPlay
 {
     public int damage;
-    public override void Execute(CardEffectContext context)
+    public override void Trigger(CardEffectContext context)
     {
         if (context.OpposingCard is null) return;
         DoEffect(context);

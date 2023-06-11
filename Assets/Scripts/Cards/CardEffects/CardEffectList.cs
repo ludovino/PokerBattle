@@ -13,7 +13,7 @@ public class CardEffectList : ScriptableObject
         var effects = _cardEffects.OfType<T>().Where(c => c.Condition(card));
         foreach (var effect in effects)
         {
-            effect.Execute(context);
+            effect.Trigger(context);
         }
     }
 

@@ -19,6 +19,6 @@ public abstract class CardEffect : ScriptableObject, ICardEffect
     }
     public abstract bool Condition(ICard card);
 
-    public abstract void Execute(CardEffectContext context);
+    public abstract void Trigger(CardEffectContext context);
 }
 

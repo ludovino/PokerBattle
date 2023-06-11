@@ -2,7 +2,7 @@
 
 public class ClubEffect : SuitEffect, IOnWinHand
 {
-    public override void Execute(CardEffectContext context)
+    public override void Trigger(CardEffectContext context)
     {
         if (context.Opponent.chips <= 0) return;
         DoEffect(context);

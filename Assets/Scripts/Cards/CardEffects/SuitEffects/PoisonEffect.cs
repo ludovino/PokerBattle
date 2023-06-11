@@ -4,7 +4,7 @@ public class PoisonEffect : SuitEffect, IOnOpponentTurn
 {
     [SerializeField]
     private int damage;
-    public override void Execute(CardEffectContext context)
+    public override void Trigger(CardEffectContext context)
     {
         var enemyCard = context.OpposingCard;
         if (enemyCard is null) return;
