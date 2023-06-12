@@ -1,1 +1,4 @@
-﻿internal interface IOnPlayerTurn : ICardEffect {}
+﻿internal interface IOnPlayerTurn : ICardEffect 
+{
+    void OnPlayerTurn(CardEffectContext context);
+}

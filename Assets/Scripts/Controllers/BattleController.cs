@@ -175,7 +175,7 @@ public class BattleController : MonoBehaviour
         }
         else
         {
-            eval.winningHand.rankingCards.ForEach(c =>  winner.entityData.EffectList.DoCardEffects<IOnWinHand>(c, c.playContext));
+            eval.winningHand.rankingCards.ForEach(c =>  c.DoWinEffects());
             TakeHouseCut();
             TakePot(winner);
         }
@@ -236,7 +236,6 @@ public class BattleController : MonoBehaviour
         if (!played) return played;
         cardsPlayed++;
         card.Play(new CardEffectContext(this, active, idle, card, slotNumber));
-        active.entityData.EffectList.DoCardEffects<IOnPlay>(card, card.playContext);
         return played;
     }
     public bool CanEndTurn()

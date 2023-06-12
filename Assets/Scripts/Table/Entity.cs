@@ -97,7 +97,7 @@ public class Entity : MonoBehaviour
         var onStartCards = fieldOfPlay.Where(c => c != null);
         foreach (var card in onStartCards)
         {
-            entityData.EffectList.DoCardEffects<IOnPlayerTurn>(card, card.playContext);
+            card.DoPlayerTurnEffects();
         }
     }
 
@@ -106,7 +106,7 @@ public class Entity : MonoBehaviour
         var onStartCards = fieldOfPlay.Where(c => c != null);
         foreach (var card in onStartCards)
         {
-            entityData.EffectList.DoCardEffects<IOnOpponentTurn>(card, card.playContext);
+            card.DoOpponentTurnEffects();
         }
     }
 
@@ -211,7 +211,7 @@ public class Entity : MonoBehaviour
     {
         var card = fieldOfPlay[slotNumber];
         if (card is null) return;
-        entityData.EffectList.DoCardEffects<IAfterOpponentPlay>(card, card.playContext);
+        card.DoOpponentPlayEffects();
     }
 }
 [Serializable]

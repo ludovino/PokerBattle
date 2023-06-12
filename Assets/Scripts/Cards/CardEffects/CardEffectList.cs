@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor.U2D.Path.GUIFramework;
 using UnityEngine;
 [CreateAssetMenu(menuName = "Card/EffectList")]
 public class CardEffectList : ScriptableObject
@@ -8,13 +9,10 @@ public class CardEffectList : ScriptableObject
     [SerializeField]
     private List<CardEffect> _initialCardEffects;
     private List<CardEffect> _cardEffects;
-    public void DoCardEffects<T>(ICard card, CardEffectContext context) where T : ICardEffect
+
+    public IEnumerable<CardEffect> ForCard(ICard card)
     {
-        var effects = _cardEffects.OfType<T>().Where(c => c.Condition(card));
-        foreach (var effect in effects)
-        {
-            effect.Trigger(context);
-        }
+        return _cardEffects.Where(c => c.Condition(card));
     }
 
     public void OnEnable()
