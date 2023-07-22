@@ -17,6 +17,8 @@ public class CardScript : MonoBehaviour, ICard
     private EntityData _owner;
     private EntityData _holder;
     private List<CardEffect> _cardEffects;
+    [SerializeField]
+    private float _animationTime = 0.3f;
     public bool Draggable { get { return _draggable.enabled; } set { _draggable.enabled = value; } }
     public void SetCard(Card card, EntityData owner)
     {
@@ -84,43 +86,52 @@ public class CardScript : MonoBehaviour, ICard
     public void Discard()
     {
         _playContext = null;
-        ResetCard(true, 0.0f);
+        ResetCard(0.0f);
         onDiscard.Invoke();
     }
 
-    public void ResetCard(bool animate = false, float time = 0.3f)
+    public void ResetCard()
     {
         _tempCard = _card.Clone();
-        if (animate)
-            CoroutineQueue.Defer(_cardDisplay.CR_Animate(_tempCard, time));
-        else _cardDisplay.Set(_tempCard, true);
-        if (animate)
-            CoroutineQueue.Defer(CR_SetTooltip());
-        else
-            SetTooltip();
+        CR_AnimateCard(_tempCard);
     }
-    public void ChangeValue(int change)
+    public void ResetCard(float time)
     {
-        if (change == 0) return;
-        _tempCard.Change(change);
-        CoroutineQueue.Defer(_cardDisplay.CR_Animate(_tempCard, 0.3f));
-        CoroutineQueue.Defer(CR_SetTooltip());
-        UpdateEffects();
+        _tempCard = _card.Clone();
+        CR_AnimateCard(_tempCard, time);
     }
-
-    public void ChangeSuit(Suit suit)
+    public void ResetCardImmediate()
     {
-        if (suit == this.suit) return;
-        _tempCard.SetSuit(suit);
-        CoroutineQueue.Defer(_cardDisplay.CR_Animate(_tempCard, 0.3f));
-        CoroutineQueue.Defer(CR_SetTooltip());
-        UpdateEffects();
-    }
-
-    private IEnumerator CR_SetTooltip()
-    {
-        yield return null;
+        _cardDisplay.Set(_tempCard, true); 
         SetTooltip();
+    }
+
+    public IEnumerator ChangeValue(int change)
+    {
+        if (change == 0) return null;
+        _tempCard.Change(change);
+        UpdateEffects();
+        return CR_AnimateCard(_tempCard);
+    }
+
+    public IEnumerator ChangeSuit(Suit suit)
+    {
+        if (suit == this.suit) return null;
+        _tempCard.SetSuit(suit);
+        UpdateEffects();
+        return CR_AnimateCard(_tempCard);
+    }
+
+    private IEnumerator CR_AnimateCard(Card card)
+    {
+        SetTooltip();
+        yield return _cardDisplay.CR_Animate(card, _animationTime);
+    }
+
+    private IEnumerator CR_AnimateCard(Card card, float time)
+    {
+        SetTooltip();
+        yield return _cardDisplay.CR_Animate(card, time);
     }
 
     private void SetTooltip()

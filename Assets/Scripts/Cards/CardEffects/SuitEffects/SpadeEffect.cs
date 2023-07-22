@@ -1,19 +1,34 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
-public class SpadeEffect : SuitEffect, IOnPlay
+public class SpadeEffect : SuitEffect, IOnPlay, IOnHoverEnter, IOnHoverExit
 {
     public int damage;
+    public static string indicatorName = "spade";
+    public GameObject indicatorPrefab;
 
     public void OnPlay(CardEffectContext context)
     {
-        Trigger(context);
+        if (context.OpposingCard is null) return;
+        var changeCR = context.OpposingCard.ChangeValue(-damage);
+        if (changeCR == null) return;
+        CoroutineQueue.Defer(Effect_CR(changeCR, context));
     }
 
-    public override void Trigger(CardEffectContext context)
+    public IEnumerator Effect_CR(IEnumerator changeCR, CardEffectContext context)
     {
-        if (context.OpposingCard is null) return;
         DoEffect(context);
-        context.OpposingCard.ChangeValue(-damage);
+        yield return changeCR;
     }
+
+    void OnHoverEnter(CardEffectContext context) 
+    {
+        if(context.OpposingCard is null) return;
+        var indicator = Instantiate(indicatorPrefab);
+
+    }
+    void OnHoverExit(CardEffectContext context){}
+
+    public override void Trigger(CardEffectContext context) {}
 }
 
