@@ -121,6 +121,7 @@ MonoBehaviour:
   onDiscard:
     m_PersistentCalls:
       m_Calls: []
+  _animationTime: 0.3
 --- !u!50 &2131216138285514743
 Rigidbody2D:
   serializedVersion: 4

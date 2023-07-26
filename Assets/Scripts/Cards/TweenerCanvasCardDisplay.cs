@@ -2,6 +2,7 @@
 using NaughtyAttributes;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
@@ -23,7 +24,7 @@ public class TweenerCanvasCardDisplay : MonoBehaviour
 
     [Foldout("Numeral Settings")]
     [SerializeField]
-    private TextMeshProUGUI[] _numeralText;
+    private Image[] _numeralText;
     [Foldout("Numeral Settings")]
     [SerializeField]
     private Image[] _numeralPips;
@@ -58,13 +59,27 @@ public class TweenerCanvasCardDisplay : MonoBehaviour
     private Queue<CardChange> _cardChanges;
     private CardBackScript _cardBack;
 
+    private Dictionary<string, Sprite> _numeralSpritesByNameDict;
+    [SerializeField]
+    [Foldout("Styles")]
+    private List<Sprite> _numerals;
+    private Dictionary<string, Sprite> _numeralSpritesByName => _numeralSpritesByNameDict ?? SetNumeralSpriteDict();
+
     public bool FaceUp => _cardBack?.faceUp ?? true;
 
     private void Awake()
     {
         _cardChanges ??= new Queue<CardChange>();
-        _cardBack = GetComponent<CardBackScript>();
+        _cardBack = GetComponent<CardBackScript>(); 
+        SetNumeralSpriteDict();
     }
+
+    private Dictionary<string, Sprite> SetNumeralSpriteDict()
+    {
+        _numeralSpritesByNameDict = _numerals.ToDictionary(s => s.name, s => s);
+        return _numeralSpritesByNameDict;
+    }
+
 
     public void OnValidate()
     {
@@ -81,6 +96,13 @@ public class TweenerCanvasCardDisplay : MonoBehaviour
             }
         }
     }
+
+    private string GetNumeralValueName(int value, Face face)
+    {
+        if(face != null) return face.numeral;
+        return value.ToString("D2");
+    }
+
     public void Set(ICard card, bool force)
     {
         Set(card.blackjackValue, card.suit, card.face, force);
@@ -131,12 +153,13 @@ public class TweenerCanvasCardDisplay : MonoBehaviour
     public void SetNumeral(int value, Face face, Suit suit)
     {
         var color = suit != null ? suit.Color.Value : _blankColor;
-        var numeral = face?.numeral ?? value.ToString();
+        var numeral = GetNumeralValueName(value, face);
+        var sprite = _numeralSpritesByName[numeral];
 
         foreach (var numeralText in _numeralText)
         {
+            numeralText.sprite = sprite;
             numeralText.color = color;
-            numeralText.text = numeral;
         }
     }
 
@@ -147,7 +170,7 @@ public class TweenerCanvasCardDisplay : MonoBehaviour
 
         foreach (var numeralText in _numeralText)
         {
-            numeralText.DOFade(0, 0.5f * time).OnComplete(() => numeralText.text = numeral);
+            //numeralText.DOFade(0, 0.5f * time).OnComplete(() => numeralText.text = numeral);
             numeralText.DOColor(color , 0.5f * time).SetDelay(0.5f * time);
         }
     }
@@ -174,13 +197,13 @@ public class TweenerCanvasCardDisplay : MonoBehaviour
         }
         foreach(var pip in _pipSprites)
         {
-            pip.sprite = suit.sprite;
-            pip.color = suit.Color.Value;
+            pip.sprite = suit.bigSprite;
+            pip.color = Color.white;
         }
         foreach(var smallpip in _numeralPips)
         {
-            smallpip.sprite = suit.sprite;
-            smallpip.color = suit.Color.Value;
+            smallpip.sprite = suit.smallSprite;
+            smallpip.color = Color.white;
         }
     }  
     private void AnimateSuit(Suit suit, NumeralSetup numeralSetup, float time)
@@ -194,7 +217,7 @@ public class TweenerCanvasCardDisplay : MonoBehaviour
             {
                 pip.DOFade(0, time * 0.5f).OnComplete(() =>
                 {
-                    pip.sprite = suit?.sprite;
+                    pip.sprite = suit?.displaySprite;
                     pip.enabled = suit != null;
                 });
                 pip.DOColor(color, time * 0.5f).SetDelay(time * 0.5f);
@@ -203,7 +226,7 @@ public class TweenerCanvasCardDisplay : MonoBehaviour
             {
                 pip.DOColor(Color.clear, time * 0.5f).OnComplete(() =>
                 {
-                    pip.sprite = suit?.sprite;
+                    pip.sprite = suit?.displaySprite;
                     pip.enabled = false;
                 });
             }
@@ -211,7 +234,7 @@ public class TweenerCanvasCardDisplay : MonoBehaviour
 
         foreach (var smallpip in _numeralPips)
         {
-            smallpip.DOFade(0, time * 0.5f).OnComplete(() => smallpip.sprite = suit != null ? suit.sprite : null);
+            smallpip.DOFade(0, time * 0.5f).OnComplete(() => smallpip.sprite = suit != null ? suit.displaySprite : null);
             smallpip.DOColor(color, time * 0.5f).SetDelay(time * 0.5f);
         }
     }
@@ -227,21 +250,12 @@ public class TweenerCanvasCardDisplay : MonoBehaviour
             _faceSprite.enabled = false;
             return;
         }
+        _faceSprite.color = new Color(1, 1, 1, 1);
         var pips = face.hasPips ? _facePips : _pipConfigs[0];
         _faceSprite.enabled = true;
         SetPips(pips);
         
         var faceSprite = _suit != null ? _suit.Faces[face] : face.blankSprite;
-        
-        if (face == _ace && _suit != null)
-        {
-            faceSprite = _suit.sprite;
-            _faceSprite.color = _suit.Color.Value;
-        }
-        else
-        {
-            _faceSprite.color = Color.white;
-        }
 
         _faceSprite.sprite = faceSprite;
     }
@@ -260,7 +274,7 @@ public class TweenerCanvasCardDisplay : MonoBehaviour
         var faceColor = Color.white;
         if(face == _ace && _suit != null)
         {
-            faceSprite = _suit.sprite;
+            faceSprite = _suit.displaySprite;
             faceColor = _suit.Color.Value;
         }
 

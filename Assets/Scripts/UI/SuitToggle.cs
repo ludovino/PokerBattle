@@ -28,7 +28,7 @@ public class SuitToggle : MonoBehaviour
     {
         Select(selected);
         _suit = suit;
-        _background.sprite = _checkmark.sprite = _suit.sprite;
+        _background.sprite = _checkmark.sprite = _suit.displaySprite;
         _background.color = _suit.Color.Light;
         _checkmark.color = _suit.Color.Value;
         _toggle.onValueChanged.AddListener(Select);

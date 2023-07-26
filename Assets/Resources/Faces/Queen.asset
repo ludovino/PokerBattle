@@ -18,7 +18,7 @@ MonoBehaviour:
   blackjackValue: 10
   higher: {fileID: 11400000, guid: 241a46e83c2eeb8418f4275b48d968e5, type: 2}
   lower: {fileID: 11400000, guid: fcd1aacea6f1a414ba0e6fe38008a0d0, type: 2}
-  blankSprite: {fileID: 21300000, guid: bfacbf5a571d02c4492e2b1dbdfc1783, type: 3}
+  blankSprite: {fileID: 21300000, guid: c15589cecec81c649a5c0c6337a950b5, type: 3}
   clip: {fileID: 7400000, guid: fac10f0e5355cd143b5fb687303c0ace, type: 2}
   price: 30
   hasPips: 1

@@ -15,16 +15,17 @@ MonoBehaviour:
   longName: Voids
   shortName: V
   display: V
-  sprite: {fileID: 21300000, guid: 5909f92eeeeb007419a22a8d56cc7a58, type: 3}
+  displaySprite: {fileID: 138557670, guid: b4677a72a22a8e04db145ef893669f38, type: 3}
+  smallSprite: {fileID: -698404481, guid: ec4b477c7ac915648997b71d4a271232, type: 3}
+  bigSprite: {fileID: 138557670, guid: b4677a72a22a8e04db145ef893669f38, type: 3}
   price: 20
   _color: {fileID: 11400000, guid: 9229384c0e92d7a45a76bd4e716865a2, type: 2}
   faceSprites:
   - face: {fileID: 11400000, guid: 9ff558177451b0040b4f06b0b573aeb9, type: 2}
-    sprite: {fileID: 0}
+    sprite: {fileID: 21300000, guid: 95355788e7b249a438ef043fd02ef686, type: 3}
   - face: {fileID: 11400000, guid: fcd1aacea6f1a414ba0e6fe38008a0d0, type: 2}
-    sprite: {fileID: 21300000, guid: bf1ddac3725fb0249b2bdc5e6b484840, type: 3}
+    sprite: {fileID: 21300000, guid: a3a2043a5a9b1064c98fbb651c2ef003, type: 3}
   - face: {fileID: 11400000, guid: 241a46e83c2eeb8418f4275b48d968e5, type: 2}
-    sprite: {fileID: 21300000, guid: 3f13b58a1257abd4c80a01ef8a9111c3, type: 3}
+    sprite: {fileID: 21300000, guid: c9332bcbad0796c48a274d47a65a6451, type: 3}
   - face: {fileID: 11400000, guid: a7f26412482c96a468a84cf8fce43186, type: 2}
-    sprite: {fileID: 21300000, guid: bfacbf5a571d02c4492e2b1dbdfc1783, type: 3}
-  _effect: {fileID: 11400000, guid: 1e7fb43aa71456d46b7dbb6655c161b0, type: 2}
+    sprite: {fileID: 21300000, guid: c15589cecec81c649a5c0c6337a950b5, type: 3}

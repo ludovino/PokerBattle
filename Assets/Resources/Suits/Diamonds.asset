@@ -15,16 +15,17 @@ MonoBehaviour:
   longName: Diamonds
   shortName: D
   display: D
-  sprite: {fileID: 21300000, guid: f99a4b55b00c1874bac4030abbd0f5f6, type: 3}
+  displaySprite: {fileID: -1021623199, guid: b4677a72a22a8e04db145ef893669f38, type: 3}
+  smallSprite: {fileID: -1851642741, guid: ec4b477c7ac915648997b71d4a271232, type: 3}
+  bigSprite: {fileID: -1021623199, guid: b4677a72a22a8e04db145ef893669f38, type: 3}
   price: 10
   _color: {fileID: 11400000, guid: aeca136274fa3ad448e73d4fde27893a, type: 2}
   faceSprites:
   - face: {fileID: 11400000, guid: 9ff558177451b0040b4f06b0b573aeb9, type: 2}
-    sprite: {fileID: 0}
+    sprite: {fileID: 21300000, guid: 95355788e7b249a438ef043fd02ef686, type: 3}
   - face: {fileID: 11400000, guid: fcd1aacea6f1a414ba0e6fe38008a0d0, type: 2}
-    sprite: {fileID: 21300000, guid: bdca2ee702d6f42469db00af504d11dc, type: 3}
+    sprite: {fileID: 21300000, guid: a3a2043a5a9b1064c98fbb651c2ef003, type: 3}
   - face: {fileID: 11400000, guid: 241a46e83c2eeb8418f4275b48d968e5, type: 2}
-    sprite: {fileID: 21300000, guid: 481d55a1d40ad144280882df6923e290, type: 3}
+    sprite: {fileID: 21300000, guid: c9332bcbad0796c48a274d47a65a6451, type: 3}
   - face: {fileID: 11400000, guid: a7f26412482c96a468a84cf8fce43186, type: 2}
-    sprite: {fileID: 21300000, guid: a13c0decb79ead3408ccc1569315a862, type: 3}
-  _effect: {fileID: 11400000, guid: a67b892dd390e2044bb31bd168771b95, type: 2}
+    sprite: {fileID: 21300000, guid: c15589cecec81c649a5c0c6337a950b5, type: 3}

@@ -34,7 +34,7 @@ public class SuitDisplay : MonoBehaviour
         }
         _suit = suit;
         _suitImage.enabled = true;
-        _suitImage.sprite = suit.sprite;
+        _suitImage.sprite = suit.displaySprite;
         _suitImage.color = suit.Color.Value;
         _text.text = $"~{suit.longName}" + "\n@" + _effectList.SuitEffectDescription(_suit);
         _style.Apply(_text);

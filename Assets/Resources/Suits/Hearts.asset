@@ -15,16 +15,17 @@ MonoBehaviour:
   longName: Hearts
   shortName: H
   display: H
-  sprite: {fileID: 21300000, guid: a902a3da56babe14cb8143d2f6bf60be, type: 3}
+  displaySprite: {fileID: 2044083254, guid: b4677a72a22a8e04db145ef893669f38, type: 3}
+  smallSprite: {fileID: 9453861, guid: ec4b477c7ac915648997b71d4a271232, type: 3}
+  bigSprite: {fileID: 2044083254, guid: b4677a72a22a8e04db145ef893669f38, type: 3}
   price: 10
   _color: {fileID: 11400000, guid: aeca136274fa3ad448e73d4fde27893a, type: 2}
   faceSprites:
   - face: {fileID: 11400000, guid: 9ff558177451b0040b4f06b0b573aeb9, type: 2}
-    sprite: {fileID: 0}
+    sprite: {fileID: 21300000, guid: 95355788e7b249a438ef043fd02ef686, type: 3}
   - face: {fileID: 11400000, guid: fcd1aacea6f1a414ba0e6fe38008a0d0, type: 2}
-    sprite: {fileID: 21300000, guid: 39ee9124ace213446b727c999f8023ad, type: 3}
+    sprite: {fileID: 21300000, guid: a3a2043a5a9b1064c98fbb651c2ef003, type: 3}
   - face: {fileID: 11400000, guid: 241a46e83c2eeb8418f4275b48d968e5, type: 2}
-    sprite: {fileID: 21300000, guid: 587d8214144dccb47bef86ae8fffaf4b, type: 3}
+    sprite: {fileID: 21300000, guid: c9332bcbad0796c48a274d47a65a6451, type: 3}
   - face: {fileID: 11400000, guid: a7f26412482c96a468a84cf8fce43186, type: 2}
-    sprite: {fileID: 21300000, guid: 2299f70765ed99c4ab9be7369c69005a, type: 3}
-  _effect: {fileID: 11400000, guid: 99a62ab8f35cedf43a216a0ca4a192e4, type: 2}
+    sprite: {fileID: 21300000, guid: c15589cecec81c649a5c0c6337a950b5, type: 3}

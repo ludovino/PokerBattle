@@ -37,7 +37,7 @@ public class HandResultEffect : MonoBehaviour
             em.rateOverTime = perSuit;
 
             var tex = system.textureSheetAnimation;
-            tex.SetSprite(0, suit.sprite);
+            tex.SetSprite(0, suit.displaySprite);
 
             var main = system.main;
             main.startColor = suit.Color.Value;

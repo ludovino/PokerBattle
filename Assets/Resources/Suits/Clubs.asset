@@ -15,16 +15,17 @@ MonoBehaviour:
   longName: Clubs
   shortName: C
   display: C
-  sprite: {fileID: 21300000, guid: ca84827d671c0884aa1eda69ca5a697b, type: 3}
+  displaySprite: {fileID: 1235550957, guid: b4677a72a22a8e04db145ef893669f38, type: 3}
+  smallSprite: {fileID: 538474322, guid: ec4b477c7ac915648997b71d4a271232, type: 3}
+  bigSprite: {fileID: 1235550957, guid: b4677a72a22a8e04db145ef893669f38, type: 3}
   price: 10
   _color: {fileID: 11400000, guid: 9229384c0e92d7a45a76bd4e716865a2, type: 2}
   faceSprites:
   - face: {fileID: 11400000, guid: 9ff558177451b0040b4f06b0b573aeb9, type: 2}
-    sprite: {fileID: 0}
+    sprite: {fileID: 21300000, guid: 95355788e7b249a438ef043fd02ef686, type: 3}
   - face: {fileID: 11400000, guid: fcd1aacea6f1a414ba0e6fe38008a0d0, type: 2}
-    sprite: {fileID: 21300000, guid: 4f8f53b8a9462534a928ac22a6b0670e, type: 3}
+    sprite: {fileID: 21300000, guid: a3a2043a5a9b1064c98fbb651c2ef003, type: 3}
   - face: {fileID: 11400000, guid: 241a46e83c2eeb8418f4275b48d968e5, type: 2}
-    sprite: {fileID: 21300000, guid: 1b38dac72e08c1744bf7e75998ac467e, type: 3}
+    sprite: {fileID: 21300000, guid: c9332bcbad0796c48a274d47a65a6451, type: 3}
   - face: {fileID: 11400000, guid: a7f26412482c96a468a84cf8fce43186, type: 2}
-    sprite: {fileID: 21300000, guid: 6b8b4232c33169e4e9e88ee05cfe6317, type: 3}
-  _effect: {fileID: 11400000, guid: 12285f50346841e4bba133c9f14c7726, type: 2}
+    sprite: {fileID: 21300000, guid: c15589cecec81c649a5c0c6337a950b5, type: 3}

@@ -26,7 +26,7 @@ public class CardDisplayUI : MonoBehaviour
     public void UpdateCardDisplay()
     {
         _suitSprite.enabled = _card.suit != null;
-        _suitSprite.sprite = _card.suit?.sprite;
+        _suitSprite.sprite = _card.suit?.displaySprite;
         _numeralText.text = _card.numeral;
         _numeralText.font = _card.highCardRank >= 10 ? _narrowFont : _regularFont;
         var color = _card.suit?.Color.Value ?? Color.grey;

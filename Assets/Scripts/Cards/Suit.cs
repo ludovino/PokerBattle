@@ -10,7 +10,9 @@ public class Suit : ScriptableObject
     public string longName;
     public string shortName;
     public string display;
-    public Sprite sprite;
+    public Sprite displaySprite;
+    public Sprite smallSprite;
+    public Sprite bigSprite;
     public int price;
     [SerializeField]
     private CardColor _color;

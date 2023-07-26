@@ -83,13 +83,13 @@ public class CardDisplay : MonoBehaviour
     {
         foreach(var sprite in _spriteRenderers)
         {
-            sprite.sprite = _card.suit?.sprite;
+            sprite.sprite = _card.suit?.displaySprite;
             sprite.color = _card.suit?.Color.Value ?? Color.grey;
         }
 
         foreach(var image in _canvasPips)
         {
-            image.sprite = _card.suit?.sprite;
+            image.sprite = _card.suit?.displaySprite;
             image.color = _card.suit?.Color.Value ?? Color.white;
         }
 
@@ -126,7 +126,7 @@ public class CardDisplay : MonoBehaviour
         var seq = DOTween.Sequence();
         foreach (var sprite in _spriteRenderers)
         {
-            seq.Insert(0, sprite.DOFade(0, 0.1f).OnComplete(() => sprite.sprite = card.suit?.sprite));
+            seq.Insert(0, sprite.DOFade(0, 0.1f).OnComplete(() => sprite.sprite = card.suit?.displaySprite));
             seq.Insert(0.1f, sprite.DOColor(card.suit?.Color.Value ?? Color.grey, 0.1f));
         }
 

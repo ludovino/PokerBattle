@@ -16,7 +16,7 @@ public class CardEffectDisplay : MonoBehaviour
     public void Init(CardEffectContext context, AudioClip soundEffect)
     {
         var suit = context.Card.suit;
-        _sprite.sprite = suit.sprite;
+        _sprite.sprite = suit.displaySprite;
         var spriteColor = suit.Color.Value;
         spriteColor.a = 0;
         _sprite.color = spriteColor;

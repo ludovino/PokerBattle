@@ -8,6 +8,6 @@ internal class UnlockableSuit : Unlockable
 
     public override UnlockDisplay GetDisplay()
     {
-        return new UnlockDisplay() { Name = _suit.longName, Sprite = _suit.sprite, Description = PlayerData.Instance.EffectList.SuitEffectDescription(_suit) };
+        return new UnlockDisplay() { Name = _suit.longName, Sprite = _suit.displaySprite, Description = PlayerData.Instance.EffectList.SuitEffectDescription(_suit) };
     }
 }
