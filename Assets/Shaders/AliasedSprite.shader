@@ -60,6 +60,7 @@ Shader "CoTT/AliasedSprite"
             TEXTURE2D(_MainTex);
             SAMPLER(sampler_MainTex);
             half4 _MainTex_ST;
+            float4 _MainTex_TexelSize;
             float4 _Color;
             half4 _RendererColor;
 
@@ -85,7 +86,7 @@ Shader "CoTT/AliasedSprite"
                 float2 tx = i.uv * _MainTex_TexelSize.zw - 0.5 * boxSize;
                 float2 txOffset = saturate((frac(tx) - (1 - boxSize)) / boxSize);
                 float2 uv = (floor(tx) + 0.5 + txOffset) * _MainTex_TexelSize.xy;
-                float4 mainTex = SAMPLE_TEXTURE2D_GRAD(_MainTex, sampler_MainTex,  uv, ddx(i.uv), ddy(i.uv));
+                float4 mainTex = i.color * SAMPLE_TEXTURE2D_GRAD(_MainTex, sampler_MainTex,  uv, ddx(i.uv), ddy(i.uv));
 
                 #if defined(DEBUG_DISPLAY)
                 SurfaceData2D surfaceData;
@@ -171,7 +172,7 @@ Shader "CoTT/AliasedSprite"
                 float2 tx = i.uv * _MainTex_TexelSize.zw - 0.5 * boxSize;
                 float2 txOffset = saturate((frac(tx) - (1 - boxSize)) / boxSize);
                 float2 uv = (floor(tx) + 0.5 + txOffset) * _MainTex_TexelSize.xy;
-                float4 mainTex = SAMPLE_TEXTURE2D_GRAD(_MainTex, sampler_MainTex,  uv, ddx(i.uv), ddy(i.uv));
+                float4 mainTex = i.color * SAMPLE_TEXTURE2D_GRAD(_MainTex, sampler_MainTex,  uv, ddx(i.uv), ddy(i.uv));
                 #if defined(DEBUG_DISPLAY)
                 SurfaceData2D surfaceData;
                 InputData2D inputData;

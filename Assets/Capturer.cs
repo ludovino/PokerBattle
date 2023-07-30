@@ -45,7 +45,6 @@ public class Capturer : MonoBehaviour
     {
         string numeral = GetNumeralValueName(value, face);
         var suitName = suit != null ? suit.name : "blank";
-        Debug.Log(numeral);
         cardDisplay.Set(value, suit, face, true);
         Debug.Log("Get Texture");
         Texture2D tex2d = GetTexture();

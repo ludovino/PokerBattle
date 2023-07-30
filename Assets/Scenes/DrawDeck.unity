@@ -731,7 +731,7 @@ MonoBehaviour:
   _playerCardPool: {fileID: 11400000, guid: cdd6b8fe49f8c2e4983b0e6df27e78ca, type: 2}
   _playerSuitList: {fileID: 11400000, guid: 2e5c78850dd67a84ead601f17c7846b4, type: 2}
   _player: {fileID: 11400000, guid: ec024013c2feb2e498caea236848969d, type: 2}
-  _cardPrefab: {fileID: 7376886455751003658, guid: d81717a4ad3b877449d36ccf1c7840f6, type: 3}
+  _cardPrefab: {fileID: 5134332006943771373, guid: d81717a4ad3b877449d36ccf1c7840f6, type: 3}
   _suitDisplays:
   - {fileID: 16332582}
   - {fileID: 850669566}
@@ -1068,10 +1068,6 @@ PrefabInstance:
     - target: {fileID: 4464202546322485956, guid: 01dbe4c981b14ed45883f31b2f067d91, type: 3}
       propertyPath: m_Name
       value: Main Camera
-      objectReference: {fileID: 0}
-    - target: {fileID: 4464202546322485959, guid: 01dbe4c981b14ed45883f31b2f067d91, type: 3}
-      propertyPath: orthographic size
-      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 01dbe4c981b14ed45883f31b2f067d91, type: 3}
@@ -1430,7 +1426,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1418532801}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.85, y: 0, z: 0}
+  m_LocalPosition: {x: -1.2, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1451,9 +1447,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _addTime: 0.3
   _addInterval: 0.1
-  _xOffset: 0.3
-  _zOffset: -0.21
-  _scale: 2
+  _xOffset: 0.12
+  _zOffset: -0.01
+  _scale: 1
   _faceDown: 0
   _addRotations: 1
   _cardSfxClip: 3

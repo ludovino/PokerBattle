@@ -1,12 +1,18 @@
+using Assets.Scripts.Cards;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class CardScript : MonoBehaviour, ICard
 {
     [SerializeField]
-    private TweenerCanvasCardDisplay _cardDisplay;
+    private SpriteRenderer _spriteRenderer;
+    [SerializeField]
+    private Image _image;
+    [SerializeField]
+    private CardSpriteCollection _spriteCollection;
     public UnityEvent onPlay;
     public UnityEvent onDraw;
     public UnityEvent onDiscard;
@@ -17,17 +23,15 @@ public class CardScript : MonoBehaviour, ICard
     private EntityData _owner;
     private EntityData _holder;
     private List<CardEffect> _cardEffects;
-    [SerializeField]
-    private float _animationTime = 0.3f;
     public bool Draggable { get { return _draggable.enabled; } set { _draggable.enabled = value; } }
     public void SetCard(Card card, EntityData owner)
     {
         _card = card;
         _tempCard = _card.Clone();
         gameObject.name = card.ToString();
-        _cardDisplay.Set(blackjackValue, suit, face, true);
         _owner = owner;
         _holder = owner;
+        UpdateSprite();
         UpdateEffects();
         SetTooltip();
     }
@@ -86,52 +90,56 @@ public class CardScript : MonoBehaviour, ICard
     public void Discard()
     {
         _playContext = null;
-        ResetCard(0.0f);
+        ResetCard();
         onDiscard.Invoke();
     }
 
     public void ResetCard()
     {
-        _tempCard = _card.Clone();
-        CR_AnimateCard(_tempCard);
-    }
-    public void ResetCard(float time)
-    {
-        _tempCard = _card.Clone();
-        CR_AnimateCard(_tempCard, time);
-    }
-    public void ResetCardImmediate()
-    {
-        _cardDisplay.Set(_tempCard, true); 
+        _tempCard.Set(_card);
+        UpdateEffects();
+        UpdateSprite();
         SetTooltip();
+    }
+    public IEnumerator ResetCardAnimated()
+    {
+        _tempCard.Set(_card);
+        UpdateEffects();
+        var sprite = _spriteCollection.Get(_tempCard);
+        SetTooltip();
+        return CR_UpdateSprite(sprite);
     }
 
     public IEnumerator ChangeValue(int change)
     {
         if (change == 0) return null;
-        _tempCard.Change(change);
+        _tempCard.Change(change); 
+        var sprite = _spriteCollection.Get(_tempCard);
         UpdateEffects();
-        return CR_AnimateCard(_tempCard);
+        return CR_UpdateSprite(sprite);
     }
 
     public IEnumerator ChangeSuit(Suit suit)
     {
         if (suit == this.suit) return null;
         _tempCard.SetSuit(suit);
+        var sprite = _spriteCollection.Get(_tempCard);
         UpdateEffects();
-        return CR_AnimateCard(_tempCard);
+        return CR_UpdateSprite(sprite);
     }
 
-    private IEnumerator CR_AnimateCard(Card card)
+
+    private IEnumerator CR_UpdateSprite(Sprite sprite)
     {
-        SetTooltip();
-        yield return _cardDisplay.CR_Animate(card, _animationTime);
+        UpdateSprite(sprite);
+        yield return null;
     }
 
-    private IEnumerator CR_AnimateCard(Card card, float time)
+    private void UpdateSprite(Sprite sprite = null)
     {
-        SetTooltip();
-        yield return _cardDisplay.CR_Animate(card, time);
+        if(sprite == null) sprite = _spriteCollection.Get(_tempCard);
+        if(_spriteRenderer) _spriteRenderer.sprite = sprite;
+        if(_image) _image.sprite = sprite;
     }
 
     private void SetTooltip()

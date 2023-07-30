@@ -28,6 +28,7 @@ public class Card : ICard, IEquatable<Card>
         if (_value == 0) numeral = string.Empty;
         return numeral;
     }
+
     public Suit suit => _suit;
 
     public Face face => _face;
@@ -71,6 +72,14 @@ public class Card : ICard, IEquatable<Card>
     {
         return new Card(_suit, _value, _face);
     }
+
+    public void Set(Card card)
+    {
+        _face = card.face;
+        _value = card._value;
+        _suit = card._suit;
+    }
+
     public bool Equals(Card other)
     {
         return ToString() == (other?.ToString() ?? null);
@@ -80,6 +89,7 @@ public class Card : ICard, IEquatable<Card>
         return HashCode.Combine(this.ToString());
     }
     public override bool Equals(object obj) => Equals(obj as Card);
+
     public static bool operator ==(Card lhs, Card rhs)
     {
         if (lhs is null)
