@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: AliasedSprite
-  m_Shader: {fileID: 4800000, guid: e56ed763497c2194081909949519cc6a, type: 3}
+  m_Shader: {fileID: 4800000, guid: eb3dd30587c06de449e7748b8c68a6e6, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 1

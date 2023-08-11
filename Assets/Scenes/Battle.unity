@@ -1980,12 +1980,44 @@ PrefabInstance:
       value: -2.16
       objectReference: {fileID: 0}
     - target: {fileID: 5079656923284706317, guid: aa3f7f9eb26149a4f8eeaacaf2e1f94e, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5079656923284706317, guid: aa3f7f9eb26149a4f8eeaacaf2e1f94e, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5079656923284706317, guid: aa3f7f9eb26149a4f8eeaacaf2e1f94e, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -0.54
       objectReference: {fileID: 0}
     - target: {fileID: 5079656923284706354, guid: aa3f7f9eb26149a4f8eeaacaf2e1f94e, type: 3}
       propertyPath: m_SortingLayer
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5079656923284706355, guid: aa3f7f9eb26149a4f8eeaacaf2e1f94e, type: 3}
+      propertyPath: m_fontSize
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5079656923284706355, guid: aa3f7f9eb26149a4f8eeaacaf2e1f94e, type: 3}
+      propertyPath: m_isOrthographic
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5079656923284706355, guid: aa3f7f9eb26149a4f8eeaacaf2e1f94e, type: 3}
+      propertyPath: m_charWidthMaxAdj
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5079656923284706355, guid: aa3f7f9eb26149a4f8eeaacaf2e1f94e, type: 3}
+      propertyPath: checkPaddingRequired
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5079656923284706355, guid: aa3f7f9eb26149a4f8eeaacaf2e1f94e, type: 3}
+      propertyPath: m_enableExtraPadding
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5079656923284706355, guid: aa3f7f9eb26149a4f8eeaacaf2e1f94e, type: 3}
+      propertyPath: m_IsTextObjectScaleStatic
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aa3f7f9eb26149a4f8eeaacaf2e1f94e, type: 3}

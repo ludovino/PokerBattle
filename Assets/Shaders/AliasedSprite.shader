@@ -1,4 +1,4 @@
-Shader "CoTT/AliasedSprite"
+Shader "CoTT/SpriteUnlitAliased"
 {
     Properties
     {
@@ -32,6 +32,9 @@ Shader "CoTT/AliasedSprite"
             #include "Packages/com.unity.render-pipelines.universal/Shaders/2D/Include/SurfaceData2D.hlsl"
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Debug/Debugging2D.hlsl"
             #endif
+
+
+            #include "Assets/Shaders/sampleAliased.hlsl"
 
             #pragma vertex UnlitVertex
             #pragma fragment UnlitFragment
@@ -81,12 +84,7 @@ Shader "CoTT/AliasedSprite"
 
             half4 UnlitFragment(Varyings i) : SV_Target
             {
-                
-                float2 boxSize = clamp(fwidth(i.uv) * _MainTex_TexelSize.zw, 1e-5, 1);
-                float2 tx = i.uv * _MainTex_TexelSize.zw - 0.5 * boxSize;
-                float2 txOffset = saturate((frac(tx) - (1 - boxSize)) / boxSize);
-                float2 uv = (floor(tx) + 0.5 + txOffset) * _MainTex_TexelSize.xy;
-                float4 mainTex = i.color * SAMPLE_TEXTURE2D_GRAD(_MainTex, sampler_MainTex,  uv, ddx(i.uv), ddy(i.uv));
+                float4 mainTex = i.color * SampleAliasedSprite(i.uv, _MainTex_TexelSize, _MainTex, sampler_MainTex);
 
                 #if defined(DEBUG_DISPLAY)
                 SurfaceData2D surfaceData;
@@ -119,6 +117,8 @@ Shader "CoTT/AliasedSprite"
             #include "Packages/com.unity.render-pipelines.universal/Shaders/2D/Include/SurfaceData2D.hlsl"
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Debug/Debugging2D.hlsl"
             #endif
+            
+            #include "Assets/Shaders/sampleAliased.hlsl"
 
             #pragma vertex UnlitVertex
             #pragma fragment UnlitFragment
@@ -168,11 +168,8 @@ Shader "CoTT/AliasedSprite"
 
             float4 UnlitFragment(Varyings i) : SV_Target
             {
-                float2 boxSize = clamp(fwidth(i.uv) * _MainTex_TexelSize.zw, 1e-5, 1);
-                float2 tx = i.uv * _MainTex_TexelSize.zw - 0.5 * boxSize;
-                float2 txOffset = saturate((frac(tx) - (1 - boxSize)) / boxSize);
-                float2 uv = (floor(tx) + 0.5 + txOffset) * _MainTex_TexelSize.xy;
-                float4 mainTex = i.color * SAMPLE_TEXTURE2D_GRAD(_MainTex, sampler_MainTex,  uv, ddx(i.uv), ddy(i.uv));
+                float4 mainTex = i.color * SampleAliasedSprite(i.uv, _MainTex_TexelSize, _MainTex, sampler_MainTex);
+
                 #if defined(DEBUG_DISPLAY)
                 SurfaceData2D surfaceData;
                 InputData2D inputData;
