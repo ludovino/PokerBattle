@@ -31,7 +31,7 @@ public class ConfirmablePlayerController : PlayerController
 
     public override bool Play(CardSlot cardSlot, CardScript card)
     {
-        if(!enabled || !_playerEntity.CanPlay(cardSlot.slotNumber, card)) return false;
+        if(!enabled || !_playerEntity.CanPlay(cardSlot.SlotNumber, card)) return false;
         
         var currentIndex = Array.IndexOf(toPlay, card);
         if (currentIndex >= 0) toPlay[currentIndex] = null;
@@ -39,10 +39,10 @@ public class ConfirmablePlayerController : PlayerController
         _playerEntity.hand.Remove(card);
         card.transform.DOMove(cardSlot.transform.position + Vector3.down * 0.2f, 0.2f).SetEase(Ease.OutExpo);
 
-        ReturnToHand(cardSlot.slotNumber);
+        ReturnToHand(cardSlot.SlotNumber);
 
         _hand.AlignHand();
-        toPlay[cardSlot.slotNumber] = card;
+        toPlay[cardSlot.SlotNumber] = card;
         UpdateButtons();
         return true;
     }

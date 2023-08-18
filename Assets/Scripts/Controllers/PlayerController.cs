@@ -12,21 +12,38 @@ public class PlayerController : EntityController
     private CardSelectMenu _cardSelect;
     [SerializeField]
     protected Button _endTurnButton;
+    [SerializeField]
+    private CardSlot[] _cardSlots;
     public override void ChooseCards(List<Card> cards, int count, Action<List<Card>> selectCallback)
     {
         StartCoroutine(CR_ChooseCard(cards, count, selectCallback));
     }
+
+    public void Start()
+    {
+        for (int i = 0; i < _cardSlots.Length; i++)
+        {
+            CardSlot cardSlot = _cardSlots[i];
+            cardSlot.OnCardDrop += Play;
+            cardSlot.SlotNumber = i;
+        }
+    }
+
     public override void Init(){}
     public override void StartTurn()
     {
         base.StartTurn();
+        foreach (var cardSlot in _cardSlots)
+        {
+            cardSlot.EnableDropTarget();
+        }
         _endTurnButton.interactable = battle.CanEndTurn();
     }
 
     public virtual bool Play(CardSlot cardSlot, CardScript card)
     {
         if(!enabled) return false;
-        var result = battle.Play(cardSlot.slotNumber, card);
+        var result = battle.Play(cardSlot.SlotNumber, card);
         if (result) card.Draggable = false;
         _endTurnButton.interactable = battle.CanEndTurn();
         return result;
@@ -54,6 +71,10 @@ public class PlayerController : EntityController
 
         if (!battle.CanEndTurn()) return;
         _endTurnButton.interactable = false;
+        foreach (var cardSlot in _cardSlots)
+        {
+            cardSlot.DisableDropTarget();
+        }
         EndTurn();
     }
 }

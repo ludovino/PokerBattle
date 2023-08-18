@@ -333,6 +333,7 @@
 
             #include "UnityCG.cginc"
 			#include "AllIn1OneShaderFunctions.cginc"
+            #include "Assets/Shaders/sampleAliased.hlsl"
 
 			struct appdata
 			{
@@ -815,7 +816,7 @@
 				i.uv = floor(i.uv * _PixelateSize) / _PixelateSize;
 				#endif
 
-				half4 col = tex2D(_MainTex, i.uv);
+				half4 col = SampleAliasedSprite(_MainTex_TexelSize, _MainTex, i.uv);
 				half originalAlpha = col.a;
 				col *= i.color;
 				#if PREMULTIPLYALPHA_ON
@@ -827,12 +828,12 @@
 				uvGlitch.y -= 0.5;
 				half lineNoise = pow(rand2(floor(uvGlitch * half2(24., 19.) * _GlitchSize) * 4.0, randomSeed), 3.0) * _GlitchAmount
 					* pow(rand2(floor(uvGlitch * half2(38., 14.) * _GlitchSize) * 4.0, randomSeed), 3.0);
-				col = tex2D(_MainTex, i.uv + half2(lineNoise * 0.02 * rand2(half2(2.0, 1), randomSeed), 0)) * i.color;
+				col = SampleAliasedSprite(_MainTex_TexelSize, _MainTex, i.uv + half2(lineNoise * 0.02 * rand2(half2(2.0, 1), randomSeed), 0)) * i.color;
 				#endif
 
 				#if CHROMABERR_ON
-				half4 r = tex2D(_MainTex, i.uv + half2(_ChromAberrAmount/10, 0)) * i.color;
-				half4 b = tex2D(_MainTex, i.uv + half2(-_ChromAberrAmount/10, 0)) * i.color;
+				half4 r = SampleAliasedSprite(_MainTex_TexelSize, _MainTex, i.uv + half2(_ChromAberrAmount/10, 0)) * i.color;
+				half4 b = SampleAliasedSprite(_MainTex_TexelSize, _MainTex, i.uv + half2(-_ChromAberrAmount/10, 0)) * i.color;
 				col = half4(r.r * r.a, col.g, b.b * b.a, max(max(r.a, b.a) * _ChromAberrAlpha, col.a));
 				#endif
 
@@ -859,15 +860,15 @@
                 #if ATLAS_ON
                 _MotionBlurDist *= (_MaxXUV - _MinXUV);
                 #endif
-                col.rgb += tex2D(_MainTex, i.uv + rot(half2(-_MotionBlurDist, -_MotionBlurDist)));
-                col.rgb += tex2D(_MainTex, i.uv + rot(half2(-_MotionBlurDist * 2, -_MotionBlurDist * 2)));
-                col.rgb += tex2D(_MainTex, i.uv + rot(half2(-_MotionBlurDist * 3, -_MotionBlurDist * 3)));
-                col.rgb += tex2D(_MainTex, i.uv + rot(half2(-_MotionBlurDist * 4, -_MotionBlurDist * 4)));
-                col.rgb += tex2D(_MainTex, i.uv);
-                col.rgb += tex2D(_MainTex, i.uv + rot(half2(_MotionBlurDist, _MotionBlurDist)));
-                col.rgb += tex2D(_MainTex, i.uv + rot(half2(_MotionBlurDist * 2, _MotionBlurDist * 2)));
-                col.rgb += tex2D(_MainTex, i.uv + rot(half2(_MotionBlurDist * 3, _MotionBlurDist * 3)));
-                col.rgb += tex2D(_MainTex, i.uv + rot(half2(_MotionBlurDist * 4, _MotionBlurDist * 4)));
+                col.rgb += SampleAliasedSprite(_MainTex_TexelSize, _MainTex, i.uv + rot(half2(-_MotionBlurDist, -_MotionBlurDist)));
+                col.rgb += SampleAliasedSprite(_MainTex_TexelSize, _MainTex, i.uv + rot(half2(-_MotionBlurDist * 2, -_MotionBlurDist * 2)));
+                col.rgb += SampleAliasedSprite(_MainTex_TexelSize, _MainTex, i.uv + rot(half2(-_MotionBlurDist * 3, -_MotionBlurDist * 3)));
+                col.rgb += SampleAliasedSprite(_MainTex_TexelSize, _MainTex, i.uv + rot(half2(-_MotionBlurDist * 4, -_MotionBlurDist * 4)));
+                col.rgb += SampleAliasedSprite(_MainTex_TexelSize, _MainTex, i.uv);
+                col.rgb += SampleAliasedSprite(_MainTex_TexelSize, _MainTex, i.uv + rot(half2(_MotionBlurDist, _MotionBlurDist)));
+                col.rgb += SampleAliasedSprite(_MainTex_TexelSize, _MainTex, i.uv + rot(half2(_MotionBlurDist * 2, _MotionBlurDist * 2)));
+                col.rgb += SampleAliasedSprite(_MainTex_TexelSize, _MainTex, i.uv + rot(half2(_MotionBlurDist * 3, _MotionBlurDist * 3)));
+                col.rgb += SampleAliasedSprite(_MainTex_TexelSize, _MainTex, i.uv + rot(half2(_MotionBlurDist * 4, _MotionBlurDist * 4)));
                 col.rgb = col.rgb / 9;
                 #endif
 
@@ -1026,17 +1027,17 @@
 					destUv.y += outDistortAmnt;
 					#endif
 
-					half spriteLeft = tex2D(_MainTex, i.uv + half2(destUv.x, 0)).a;
-					half spriteRight = tex2D(_MainTex, i.uv - half2(destUv.x, 0)).a;
-					half spriteBottom = tex2D(_MainTex, i.uv + half2(0, destUv.y)).a;
-					half spriteTop = tex2D(_MainTex, i.uv - half2(0, destUv.y)).a;
+					half spriteLeft = SampleAliasedSprite(_MainTex_TexelSize, _MainTex, i.uv + half2(destUv.x, 0)).a;
+					half spriteRight = SampleAliasedSprite(_MainTex_TexelSize, _MainTex, i.uv - half2(destUv.x, 0)).a;
+					half spriteBottom = SampleAliasedSprite(_MainTex_TexelSize, _MainTex, i.uv + half2(0, destUv.y)).a;
+					half spriteTop = SampleAliasedSprite(_MainTex_TexelSize, _MainTex, i.uv - half2(0, destUv.y)).a;
 					half result = spriteLeft + spriteRight + spriteBottom + spriteTop;
 
 					#if OUTBASE8DIR_ON
-					half spriteTopLeft = tex2D(_MainTex, i.uv + half2(destUv.x, destUv.y)).a;
-					half spriteTopRight = tex2D(_MainTex, i.uv + half2(-destUv.x, destUv.y)).a;
-					half spriteBotLeft = tex2D(_MainTex, i.uv + half2(destUv.x, -destUv.y)).a;
-					half spriteBotRight = tex2D(_MainTex, i.uv + half2(-destUv.x, -destUv.y)).a;
+					half spriteTopLeft = SampleAliasedSprite(_MainTex_TexelSize, _MainTex, i.uv + half2(destUv.x, destUv.y)).a;
+					half spriteTopRight = SampleAliasedSprite(_MainTex_TexelSize, _MainTex, i.uv + half2(-destUv.x, destUv.y)).a;
+					half spriteBotLeft = SampleAliasedSprite(_MainTex_TexelSize, _MainTex, i.uv + half2(destUv.x, -destUv.y)).a;
+					half spriteBotRight = SampleAliasedSprite(_MainTex_TexelSize, _MainTex, i.uv + half2(-destUv.x, -destUv.y)).a;
 					result = result + spriteTopLeft + spriteTopRight + spriteBotLeft + spriteBotRight;
 					#endif
 					
@@ -1082,7 +1083,7 @@
 				#endif
 				
 				#if SHADOW_ON
-				half shadowA = tex2D(_MainTex, i.uv + half2(_ShadowX, _ShadowY)).a;
+				half shadowA = SampleAliasedSprite(_MainTex_TexelSize, _MainTex, i.uv + half2(_ShadowX, _ShadowY)).a;
 				half preMultShadowMask = 1 - (saturate(shadowA - col.a) * (1 - col.a));
 				col.rgb *= 1 - ((shadowA - col.a) * (1 - col.a));
 				col.rgb += (_ShadowColor * shadowA) * (1 - col.a);
