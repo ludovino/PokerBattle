@@ -1,11 +1,7 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System;
 using UnityEngine.UI;
 using TMPro;
-using System.Collections.Generic;
-using DG.DemiLib;
-using static SimpleTooltipStyle;
 
 [Serializable]
 [CreateAssetMenu]

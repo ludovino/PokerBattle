@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: WinGradient
   m_EditorClassIdentifier: 
   colorMode: 3
-  topLeft: {r: 1, g: 0.75458574, b: 0.0047169924, a: 1}
+  topLeft: {r: 1, g: 0.83978397, b: 0.0039215684, a: 1}
   topRight: {r: 1, g: 1, b: 1, a: 1}
-  bottomLeft: {r: 0.9056604, g: 0.6819091, b: 0, a: 1}
-  bottomRight: {r: 1, g: 0.75, b: 0, a: 1}
+  bottomLeft: {r: 0.6415094, g: 0.2585103, b: 0.04538981, a: 1}
+  bottomRight: {r: 0.8113208, g: 0.6144187, b: 0.026788909, a: 1}

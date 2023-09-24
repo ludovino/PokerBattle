@@ -22,10 +22,9 @@ public class CardSlot : MonoBehaviour
         _target.Activate();
     }
 
-    private void OnDrop(Draggable cardDraggable)
+    private void OnDrop(GameObject cardGameObject)
     {
-        var card = cardDraggable.GetComponent<CardScript>();
+        var card = cardGameObject.GetComponent<CardScript>();
         var result = OnCardDrop(this, card);
-        if(!result) cardDraggable.Return();
     }
 }

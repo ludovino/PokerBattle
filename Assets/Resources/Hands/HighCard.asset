@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06f342d1ca7cc454ea5b927c4b3c7349, type: 3}
   m_Name: HighCard
   m_EditorClassIdentifier: 
-  _displayName: High Card
+  _displayName: 
   _rank: 0
-  _rankingCardsCount: 1
-  _example: AH;0-;0-;0-;0-;
-  _score: 1
+  _rankingCardsCount: 0
+  _example: 
+  _score: 0

@@ -12,14 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf2bbc8600952d54a946b97ecbb36eee, type: 3}
   m_Name: Straight
   m_EditorClassIdentifier: 
-  _displayName: Straight
-  _rank: 40
-  _rankingCardsCount: 5
-  _example: 10-;J-;Q-;K-;A-
-  _score: 8
-  sequences:
-  - 18;19;20;21;J;Q;K;A
-  - 7;8;9;10;J;Q;K;A
-  - 2;3;4;5;6;7;8;9;10;11;12;13;14;15;16;17;18;19;20;21
-  - A;2;3;4;5
-  - 1;2;3;4;5
+  _displayName: 
+  _rank: 0
+  _rankingCardsCount: 0
+  _example: 
+  _score: 0
+  sequences: []

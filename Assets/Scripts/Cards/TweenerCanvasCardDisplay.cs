@@ -83,7 +83,9 @@ public class TweenerCanvasCardDisplay : MonoBehaviour
 
     public void OnValidate()
     {
+        SetNumeralSpriteDict();
         Set(_value, _suit, _face, true);
+        _pipSprites = transform.Find("Pips").GetComponentsInChildren<Image>();
     }
 
     private void OnDrawGizmos()

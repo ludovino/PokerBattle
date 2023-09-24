@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyController : EntityController
@@ -54,7 +53,7 @@ public class EnemyController : EntityController
 
         // fish for sequences and flushes
 
-        var sequential = _straight.HasStraight(enemy.played.Cast<ICard>().AsReadOnlyCollection(), enemy.played.Count);
+        var sequential = _straight.HasStraight(enemy.played.Cast<ICard>().ToList(), enemy.played.Count);
         yield return new WaitForEndOfFrame();
 
         var flushSuit = enemy.played.Suited() ? enemy.played.First().suit : null;

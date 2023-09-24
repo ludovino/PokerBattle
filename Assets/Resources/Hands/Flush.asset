@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1bc1bae5ed136f478110cf638c4e508, type: 3}
   m_Name: Flush
   m_EditorClassIdentifier: 
-  _displayName: Flush
-  _rank: 50
-  _rankingCardsCount: 5
-  _example: AH;3H;4H;7H;KH;
-  _score: 10
-  flushComparer: {fileID: 11400000, guid: 6113d7782ecd3f34987f3649b8902b9f, type: 2}
+  _displayName: 
+  _rank: 0
+  _rankingCardsCount: 0
+  _example: 
+  _score: 0
+  flushComparer: {fileID: 0}

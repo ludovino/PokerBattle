@@ -21,19 +21,7 @@ public class DropTarget : MonoBehaviour
         this.enabled = false;
         _col.enabled = false;
     }
-    public void OnTriggerEnter2D(Collider2D collider)
-    {
-        Debug.Log("ENTER");
-        var draggable = collider.attachedRigidbody.GetComponent<Draggable>();
-        draggable.SetDropTarget(this);
-    }
 
-    public void OnTriggerExit2D(Collider2D collider)
-    {
-        var draggable = collider.attachedRigidbody.GetComponent<Draggable>();
-        draggable.ClearDropTarget(this);
-    }
-
-    public void Drop(Draggable draggable) => onDrop.Invoke(draggable);
-    public class OnDrop : UnityEvent<Draggable>{}
+    public void Drop(GameObject draggable) => onDrop.Invoke(draggable);
+    public class OnDrop : UnityEvent<GameObject>{}
 }

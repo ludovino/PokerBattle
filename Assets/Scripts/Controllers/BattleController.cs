@@ -1,13 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class BattleController : MonoBehaviour
 {
-    private StateMachine _sm;
     [SerializeField]
     private Entity player;
     [SerializeField]
@@ -25,6 +23,7 @@ public class BattleController : MonoBehaviour
     public OnEvaluate onEvaluate;
     public UnityEvent playerWin;
     public UnityEvent playerLose;
+    public OnCoinToss onCoinToss;
     public UnityEvent boss;
     [SerializeField]
     private OnChangeChips onChangePot;
@@ -45,10 +44,11 @@ public class BattleController : MonoBehaviour
 
     private void Awake()
     {
-        onEvaluate = onEvaluate ?? new OnEvaluate();
-        playerWin = playerWin ?? new UnityEvent();
-        playerLose = playerLose ?? new UnityEvent();
-        onChangePot = onChangePot ?? new OnChangeChips();
+        onEvaluate ??= new OnEvaluate();
+        playerWin ??= new UnityEvent();
+        playerLose ??= new UnityEvent();
+        onChangePot ??= new OnChangeChips();
+        onCoinToss ??= new OnCoinToss();
     }
     void ChangePot(int change)
     {
@@ -96,7 +96,6 @@ public class BattleController : MonoBehaviour
         onChangePot.Invoke(startingAmount, currentAmount, change);
         player.ChangeChips(half);
         enemy.ChangeChips(half);
-
     }
 
     public void Init()
@@ -106,10 +105,6 @@ public class BattleController : MonoBehaviour
 
     public void Init(EntityData playerData, EnemyData enemyData, List<RewardGenerator> rewards)
     {
-        _sm = new StateMachine(new StartBattle());
-        _sm.RegisterTransition<StartBattle, PlayerTurn>();
-        _sm.RegisterTransition<PlayerTurn, PlayerTurn>();
-
         _rewardScreen.Init(rewards);
 
         startingBlind = GameController.GetBlind();
@@ -127,23 +122,24 @@ public class BattleController : MonoBehaviour
         }
     }
 
-    private void MoveToState(IState state)
-    {
-        StartCoroutine(CR_MoveToState(state));
-    }
-
-    private IEnumerator CR_MoveToState(IState state)
-    {
-        yield return new WaitForEndOfFrame();
-        _sm.MoveToState(state);
-    }
-
     public void StartRound()
     {
         var result = Random.Range(0, 2) == 1;
         active = result ? player : enemy;
         idle = result ? enemy : player;
-        MoveToState(new PlayerTurn(this));
+        StartTurn();
+    }
+
+    public void StartTurn()
+    {
+        cardsPlayed = 0;
+        active.Draw();
+        var pay = Mathf.Min(active.blind, active.chips);
+        idle.OnOpponentTurnStart();
+        active.OnTurnStart();
+        AddToPot(active, pay);
+        if (active.chips <= 0) active.AllIn();
+        active.controller.StartTurn();
     }
 
     private void Evaluate()
@@ -201,18 +197,12 @@ public class BattleController : MonoBehaviour
 
     public void Win()
     {
-        if (GameController.Instance.currentAct.IsBossLevel)
-        {
-            GameController.Instance.PlayerWins();
-            return;
-        }
-        GameController.Instance.GoToNextLevel();
+        playerWin.Invoke();
     }
 
     public void Lose()
     {
         playerLose.Invoke();
-        GameController.Instance.GameOver();
     }
 
     private void IncreaseBlinds()
@@ -247,6 +237,7 @@ public class BattleController : MonoBehaviour
         }
         return true;
     }
+
     public bool EndTurn()
     {
         var opponentFull = idle.slotsRemaining == 0;
@@ -269,44 +260,14 @@ public class BattleController : MonoBehaviour
             idle = swap;
         }
 
-        MoveToState(new PlayerTurn(this));
+        StartTurn();
         return true;
-    }
-
-    private class StartBattle : IState
-    {
-        public void OnEnter(){}
-        public void OnExit(){}
-    }
-
-    private class PlayerTurn : IState
-    {
-        private BattleController _bc;
-        private Entity _player;
-        public PlayerTurn(BattleController battleController)
-        {
-            _bc = battleController;
-        }
-        public void OnEnter()
-        {
-            _bc.cardsPlayed = 0;
-            _player = _bc.active;
-            _player.Draw();
-            var pay = Mathf.Min(_player.blind, _player.chips);
-            _bc.idle.OnOpponentTurnStart();
-            _bc.active.OnTurnStart();
-            _bc.AddToPot(_player, pay);
-            if (_player.chips <= 0) _player.AllIn();
-            _player.controller.StartTurn();
-        }
-        public void OnExit()
-        {
-        }
     }
 }
 
 [System.Serializable]
 public class OnEvaluate : UnityEvent<Evaluation>{}
+public class OnCoinToss : UnityEvent<int>{}
 
 public class CardEffectContext
 {

@@ -1,87 +1,88 @@
-using System.Collections;
-using System.Collections.Generic;
+using NaughtyAttributes;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
 public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-    private Vector3 targetPosition;
+    private bool dragging = false;
+    private float dragStartTime;
     [SerializeField]
     private AnimationCurve _returnCurve;
     [SerializeField]
-    private float _returnTime;
+    private float _animateTime;
     private DropTarget dropTarget;
+    
+    [Foldout("events")]
+    [SerializeField]
+    private UnityEvent dragStart;
+    [Foldout("events")]
+    [SerializeField]
+    private UnityEvent dragEnd;
+    [Foldout("events")]
+    [SerializeField]
+    private UnityEvent drop;
+    private Vector3 startPos;
+    private Quaternion startRot;
 
+    private void Awake() {
+        dragStart ??= new UnityEvent();
+        dragEnd ??= new UnityEvent();
+        drop ??= new UnityEvent();
+    }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
         if (!enabled) return;
-        targetPosition = transform.position;
+        dragStart.Invoke();
+        dragStartTime = Time.time;
+        dragging = true;
+        startPos = transform.position;
+        startRot = transform.rotation;
+    }
+
+    public void OnEndDrag(PointerEventData eventData)
+    {
+        if (!enabled) return;
+        dragging = false;
+        if (dropTarget != null)
+        {
+            drop.Invoke();
+            dropTarget.Drop(this.gameObject);
+        }
+        else
+        {
+            dragEnd.Invoke();
+        }
+    }
+    
+    public void OnTriggerEnter2D(Collider2D collider)
+    {
+        var target = collider.attachedRigidbody.GetComponent<DropTarget>();
+        dropTarget = target;
+    }
+
+    public void OnTriggerExit2D(Collider2D collider)
+    {
+        var target = collider.attachedRigidbody.GetComponent<DropTarget>();
+        if (dropTarget == target) dropTarget = null;
+    }
+
+    private void Update()
+    {
+        if (!dragging) return;
+        
+        var pos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10));
+        pos.z = 0;
+        var time = (Time.time - dragStartTime) / _animateTime;
+
+        //lerp to animate the card toward the mouse
+        transform.position = Vector3.Lerp(startPos, pos, time);
+        transform.rotation = Quaternion.Lerp(startRot, Quaternion.identity, time);
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        if (!enabled) return;
-        var pos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10));
-        pos.z = 0;
-        this.transform.position = pos;
-    }
-    public void OnEndDrag(PointerEventData eventData)
-    {
-        if (!enabled) return;
-        if (dropTarget != null)
-        {
-            dropTarget.Drop(this);
-        }
-        else
-        {
-            Return();
-        }
-    }
-    //public void OnMouseDown()
-    //{
-    //}
-
-    //public void OnMouseDrag()
-    //{
-    //}
-
-    //public void OnMouseUp()
-    //{
-    //}
-    public void SetDropTarget(DropTarget target)
-    {
-        Debug.Log("SetDrop");
-        dropTarget = target;
-    }
-    public void ClearDropTarget(DropTarget target)
-    {
-        if (dropTarget == target) dropTarget = null;
-    }
-    public void Return(){
-        StartCoroutine(ReturnCr());
-    }
-    private IEnumerator ReturnCr(){
-        float startTime = _returnCurve[0].time;
-        float endTime = _returnCurve[_returnCurve.length - 1].time;
-        float returnTimeRecip = 1f / _returnTime;
-        Vector3 startPos = this.transform.position;
-        for(float t = startTime; t < endTime; t += Time.deltaTime * returnTimeRecip)
-        {
-            var value = _returnCurve.Evaluate(t);
-            this.transform.position = Vector3.LerpUnclamped(startPos, targetPosition, value);
-            yield return null;
-        }
-        this.transform.position = targetPosition;
-    }
-
-    public void Start()
-    {
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        dragging = true;
     }
 }

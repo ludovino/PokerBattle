@@ -5,6 +5,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class PlayerController : EntityController
 {
@@ -14,6 +15,11 @@ public class PlayerController : EntityController
     protected Button _endTurnButton;
     [SerializeField]
     private CardSlot[] _cardSlots;
+    [SerializeField]
+    private CardFan _cardFan;
+    private GameObject _highlighted;
+    private GameObject _selected;
+    
     public override void ChooseCards(List<Card> cards, int count, Action<List<Card>> selectCallback)
     {
         StartCoroutine(CR_ChooseCard(cards, count, selectCallback));
@@ -43,8 +49,16 @@ public class PlayerController : EntityController
     public virtual bool Play(CardSlot cardSlot, CardScript card)
     {
         if(!enabled) return false;
-        var result = battle.Play(cardSlot.SlotNumber, card);
-        if (result) card.Draggable = false;
+        var result = battle == null || battle.Play(cardSlot.SlotNumber, card);
+        if (result)
+        {
+            card.Draggable = false;
+            _cardFan.RemoveCard(card.gameObject);
+        }
+        else
+        {
+            _cardFan.ReturnCard(card.gameObject);    
+        }
         _endTurnButton.interactable = battle.CanEndTurn();
         return result;
     }

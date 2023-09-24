@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System;
 using System.Linq;
 using UnityEngine.Events;
-using Unity.VisualScripting;
-using UnityEngine.XR;
+using NaughtyAttributes;
 
 public class Entity : MonoBehaviour
 {
@@ -13,44 +12,46 @@ public class Entity : MonoBehaviour
     public int blind;
     public int chips;
     public EntityData entityData;
-    [SerializeField]
-    private DrawPile _drawPile;
     private List<CardScript> _drawPileCards;
     public GameObject cardPrefab;
     public List<CardScript> hand;
-    [SerializeField]
-    private DiscardPile _discardPile;
     private List<CardScript> _discardPileCards;
     public List<CardScript> removePile;
     public CardScript[] fieldOfPlay;
+
+    #region events
+    [Foldout("Events")]
     public OnDraw onDraw;
+    [Foldout("Events")]
     public OnPlay onPlay;
+    [Foldout("Events")]
     public OnDiscard onDiscard;
+    [Foldout("Events")]
     public OnFieldClear onFieldClear;
+    [Foldout("Events")]
     public OnChangeChips onChangeChips;
+    [Foldout("Events")]
     public UnityEvent allIn;
+    #endregion
+
     public List<Card> played => fieldOfPlay.Where(c => c != null).Select(c => c.card).ToList();
     private BattleController _battleController;
 
     public void Awake()
     {
         InitializeCollections();
-        InitializeEvents();
+        onDraw ??= new OnDraw();
+        onPlay ??= new OnPlay();
+        onDiscard ??= new OnDiscard();
+        onFieldClear ??= new OnFieldClear();
+        onChangeChips ??= new OnChangeChips();
+        allIn ??= new UnityEvent();
     }
     public void Start()
     {
         _battleController = FindObjectOfType<BattleController>();
     }
-    private void InitializeEvents()
-    {
-        onDraw = onDraw ?? new OnDraw();
-        onPlay = onPlay ?? new OnPlay();
-        onDiscard = onDiscard ?? new OnDiscard();
-        onFieldClear = onFieldClear ?? new OnFieldClear();
-        onChangeChips = onChangeChips ?? new OnChangeChips();
-        allIn = allIn ?? new UnityEvent();
-    }
-
+    
     public void Init()
     {
         InitializeCollections();
@@ -62,16 +63,24 @@ public class Entity : MonoBehaviour
         {
             var cardObj = Instantiate(cardPrefab).GetComponent<CardScript>();
             cardObj.SetCard(card, entityData);
+            cardObj.gameObject.SetActive(false);
             _drawPileCards.Add(cardObj);
         }
-
-        _drawPile.Init(_drawPileCards);
     }
+
     internal void Init(EntityData entityData, int blind)
     {
         this.entityData = entityData ?? this.entityData;
         this.blind = blind;
         Init();
+    }
+    
+    private void InitializeCollections()
+    {
+        fieldOfPlay = new CardScript[5];
+        _drawPileCards = new List<CardScript>();
+        _discardPileCards = new List<CardScript>();
+        removePile = new List<CardScript>();
     }
 
     public RankedHand Evaluate()
@@ -84,13 +93,6 @@ public class Entity : MonoBehaviour
         return entityData.HandList.Evaluate(cards);
     }
 
-    private void InitializeCollections()
-    {
-        fieldOfPlay = new CardScript[5];
-        _drawPileCards = new List<CardScript>();
-        _discardPileCards = new List<CardScript>();
-        removePile = new List<CardScript>();
-    }
 
     public void OnTurnStart()
     {
@@ -162,7 +164,6 @@ public class Entity : MonoBehaviour
             toDraw -= _drawPileCards.Count;
             Draw(_drawPileCards.Count);
             _drawPileCards = _discardPileCards;
-            _drawPile.AddCards(_drawPileCards);
             _discardPileCards = new List<CardScript>();
             _drawPileCards.Shuffle();
         }
@@ -172,7 +173,6 @@ public class Entity : MonoBehaviour
             _drawPileCards.Remove(card);
             hand.Add(card);
         }
-        _drawPile.RemoveCards(drawn);
         onDraw.Invoke(drawn);
     }
 
@@ -180,7 +180,6 @@ public class Entity : MonoBehaviour
     {
         if (!hand.Any()) return;
         _discardPileCards.AddRange(hand);
-        _discardPile.AddCards(hand);
         foreach(var card in hand)
         {
             card.Discard();
@@ -188,18 +187,21 @@ public class Entity : MonoBehaviour
         onDiscard.Invoke(hand);
         hand.Clear();
     }
+    
     public void ClearField()
     {
         onFieldClear.Invoke(fieldOfPlay);
         var toDiscard = fieldOfPlay.Where(c => c != null).ToList();
         _discardPileCards.AddRange(toDiscard);
-        _discardPile.AddCards(toDiscard); 
         foreach (var card in toDiscard)
         {
             card.Discard();
         }
         onDiscard.Invoke(fieldOfPlay.ToList());
-        fieldOfPlay = new CardScript[5];
+        for (int i = 0; i < fieldOfPlay.Length; i++)
+        {
+            fieldOfPlay[i] = null;
+        }
     }
 
     internal void AllIn()
