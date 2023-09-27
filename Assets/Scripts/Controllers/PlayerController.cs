@@ -17,8 +17,9 @@ public class PlayerController : EntityController
     private CardSlot[] _cardSlots;
     [SerializeField]
     private CardFan _cardFan;
-    private GameObject _highlighted;
-    private GameObject _selected;
+    private CardScript _highlightedCard;
+    private CardScript _selectedCard;
+    private CardSlot _highlightedSlot;
     
     public override void ChooseCards(List<Card> cards, int count, Action<List<Card>> selectCallback)
     {

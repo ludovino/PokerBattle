@@ -45,7 +45,7 @@ public class CardScript : MonoBehaviour, ICard
     public int valueDifference => _tempCard.highCardRank - _card.highCardRank;
     private SimpleTooltip _tooltip;
     private CardBackScript _cardBack;
-
+    private List<GameObject> _previewEffects = new List<GameObject>();
     void Awake()
     {
         onPlay = onPlay ?? new UnityEvent();
@@ -78,6 +78,12 @@ public class CardScript : MonoBehaviour, ICard
         _playContext = context;
         onPlay.Invoke();
         DoPlayEffects();
+    }
+
+    public void Preview(CardEffectContext context)
+    {
+        _playContext = context;
+        DoPreviewEffects();
     }
 
     public void Draw(CardEffectContext context)
@@ -212,5 +218,25 @@ public class CardScript : MonoBehaviour, ICard
                 e.OnOpponentPlay(_playContext);
             }
         }
+    }
+
+    public void DoPreviewEffects()
+    {
+        foreach (var effect in _cardEffects)
+        {
+            if (effect is IOnHoverEnter e)
+            {
+                _previewEffects.Add(e.OnHoverEnter(_playContext));
+            }
+        }
+    }
+
+    public void ClearPreviews()
+    {
+        for (var i = _previewEffects.Count - 1; i >= 0; i--)
+        {
+            Destroy(_previewEffects[i]);
+        }
+        _previewEffects.Clear();
     }
 }

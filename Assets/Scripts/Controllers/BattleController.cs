@@ -228,6 +228,10 @@ public class BattleController : MonoBehaviour
         card.Play(new CardEffectContext(this, active, idle, card, slotNumber));
         return played;
     }
+    public void BeginPreview(int slotNumber, CardScript card)
+    {
+        card.Preview(new CardEffectContext(this, active, idle, card, slotNumber));
+    }
     public bool CanEndTurn()
     {
         if(player != active) return false;

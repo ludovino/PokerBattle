@@ -1,7 +1,8 @@
 ﻿using System.Collections;
+using Ink.Parsed;
 using UnityEngine;
 
-public class SpadeEffect : SuitEffect, IOnPlay, IOnHoverEnter, IOnHoverExit
+public class SpadeEffect : SuitEffect, IOnPlay, IOnHoverEnter
 {
     public int damage;
     public static string indicatorName = "spade";
@@ -21,14 +22,16 @@ public class SpadeEffect : SuitEffect, IOnPlay, IOnHoverEnter, IOnHoverExit
         yield return changeCR;
     }
 
-    void OnHoverEnter(CardEffectContext context) 
+    public GameObject OnHoverEnter(CardEffectContext context) 
     {
-        if(context.OpposingCard is null) return;
+        if(context.OpposingCard is null) return null;
         var indicator = Instantiate(indicatorPrefab);
-
+        return indicator;
     }
-    void OnHoverExit(CardEffectContext context){}
+
+    public void OnHoverExit(CardEffectContext context){}
 
     public override void Trigger(CardEffectContext context) {}
 }
 
+ 
