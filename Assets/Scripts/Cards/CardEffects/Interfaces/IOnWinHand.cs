@@ -1,1 +1,4 @@
-﻿public interface IOnWinHand : ICardEffect {}
+﻿public interface IOnWinHand : ICardEffect 
+{
+    void OnWinHand(CardEffectContext context);
+}

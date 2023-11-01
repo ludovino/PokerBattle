@@ -4,6 +4,8 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 
+//TODO Remove this
+
 public class StyledGuiText : MonoBehaviour
 {
     private TextMeshProUGUI _text;
@@ -25,7 +27,7 @@ public class StyledGuiText : MonoBehaviour
         triggered = true;
         var textComponent = obj.textComponent;
         var text = textComponent.text;
-        _style.Apply(ref text);
+        //_style.Apply(ref text);
         _text.text = text;
         _text.ForceMeshUpdate(false, true);
     }

@@ -1,1 +1,4 @@
-﻿public interface IOnPlay : ICardEffect {}
+﻿public interface IOnPlay : ICardEffect 
+{
+    void OnPlay(CardEffectContext context);
+}

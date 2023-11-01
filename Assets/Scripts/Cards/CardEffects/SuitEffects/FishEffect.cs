@@ -1,7 +1,12 @@
 ﻿
 public class FishEffect : SuitEffect, IOnPlay
 {
-    public override void Execute(CardEffectContext context)
+    public void OnPlay(CardEffectContext context)
+    {
+        Trigger(context);
+    }
+
+    public override void Trigger(CardEffectContext context)
     {
         DoEffect(context);
         context.Owner.Draw(1);

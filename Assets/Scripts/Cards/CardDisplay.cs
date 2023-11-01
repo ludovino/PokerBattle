@@ -1,4 +1,3 @@
-using Animancer;
 using DG.Tweening;
 using Mono.Cecil;
 using System.Collections;
@@ -11,8 +10,10 @@ using UnityEngine.UI;
 public class CardDisplay : MonoBehaviour
 {
     private ICard _card;
-    [SerializeField]
-    private AnimancerComponent _animancer;
+
+    //TODO delete card display
+
+    //private AnimancerComponent _animancer;
     [SerializeField]
     private TextMeshPro[] _numeralText;
     [SerializeField]
@@ -54,12 +55,12 @@ public class CardDisplay : MonoBehaviour
     {
         SetSprites();
         SetText();
-        if(isActiveAndEnabled) _animancer.Play(GetClip(_card), 0f);
+        //if(isActiveAndEnabled) _animancer.Play(GetClip(_card), 0f);
     }
 
     private void OnEnable()
     {
-        if(_card != null) _animancer.Play(GetClip(_card), 0f);
+        //if(_card != null) _animancer.Play(GetClip(_card), 0f);
     }
     public void AnimateCardDisplay(ICard card)
     {
@@ -71,7 +72,7 @@ public class CardDisplay : MonoBehaviour
         if (!FaceUp) SetSprites();
         else yield return AnimateSprites(card);
         SetText(card);
-        yield return _animancer.Play(GetClip(card), FaceUp ? 0.25f : 0f);
+        //yield return _animancer.Play(GetClip(card), FaceUp ? 0.25f : 0f);
     }
 
     private AnimationClip GetClip(ICard card)

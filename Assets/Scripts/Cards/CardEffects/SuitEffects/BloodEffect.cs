@@ -2,12 +2,18 @@
 {
     public int damage;
 
-    public override void Execute(CardEffectContext context)
+    public void OnPlay(CardEffectContext context)
     {
-        var enemyCard = context.Opponent.fieldOfPlay[context.PlayIndex];
-        if (enemyCard is null || enemyCard.highCardRank == 0) return;
+        
+        if (context.OpposingCard is null) return;
+        Trigger(context);
+    }
+
+    public override void Trigger(CardEffectContext context)
+    {
+        if (context.OpposingCard.highCardRank == 0) return;
         DoEffect(context);
-        enemyCard.ChangeValue(-damage);
+        context.OpposingCard.ChangeValue(-damage);
         context.Card.ChangeValue(damage);
     }
 }

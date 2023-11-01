@@ -14,7 +14,6 @@ public class STController : MonoBehaviour
     private RectTransform rect;
     private int showInFrames = -1;
     private bool showNow = false;
-    private Coroutine _showTooltip;
     
     private void Awake()
     {
@@ -36,10 +35,13 @@ public class STController : MonoBehaviour
         // Hide at the start
         HideTooltip();
     }
-    private void Update()
+
+    void Update()
     {
-        if (showNow) rect.anchoredPosition = Input.mousePosition;
+        ResizeToMatchText();
+        UpdateShow();
     }
+
     private void ResizeToMatchText()
     {
         // Find the biggest height between both text layers
@@ -55,6 +57,23 @@ public class STController : MonoBehaviour
         // Update the height of the tooltip panel
         rect.sizeDelta = new Vector2(rect.sizeDelta.x, biggestY + margins);
     }
+
+    private void UpdateShow()
+    {
+        if (showInFrames == -1)
+            return;
+
+        if (showInFrames == 0)
+            showNow = true;
+
+        if (showNow)
+        {
+            rect.anchoredPosition = Input.mousePosition;
+        }
+
+        showInFrames -= 1;
+    }
+
     public void SetRawText(string text, TextAlign align = TextAlign.Left)
     {
         // Doesn't change style, just the text
@@ -68,15 +87,27 @@ public class STController : MonoBehaviour
     public void SetCustomStyledText(string text, SimpleTooltipStyle style, TextAlign align = TextAlign.Left)
     {
         // Update the panel sprite and color
-        style.Apply(panel);
+        panel.sprite = style.slicedSprite;
+        panel.color = style.color;
 
         // Update the font asset, size and default color
-        style.Apply(toolTipTextLeft); 
-        style.Apply(toolTipTextRight);
+        toolTipTextLeft.font = style.fontAsset;
+        toolTipTextLeft.color = style.defaultColor;
+        toolTipTextRight.font = style.fontAsset;
+        toolTipTextRight.color = style.defaultColor;
 
         // Convert all tags to TMPro markup
-        style.Apply(ref text);
-
+        var styles = style.fontStyles;
+        for(int i = 0; i < styles.Length; i++)
+        {
+            string addTags = "</b></i></u></s>";
+            addTags += "<color=#" + ColorToHex(styles[i].color) + ">";
+            if (styles[i].bold) addTags += "<b>";
+            if (styles[i].italic) addTags += "<i>";
+            if (styles[i].underline) addTags += "<u>";
+            if (styles[i].strikethrough) addTags += "<s>";
+            text = text.Replace(styles[i].tag, addTags);
+        }
         if (align == TextAlign.Left)
             toolTipTextLeft.text = text;
         if (align == TextAlign.Right)
@@ -84,32 +115,26 @@ public class STController : MonoBehaviour
         ResizeToMatchText();
     }
 
-    public void ShowTooltip(float delayInSeconds)
+    public string ColorToHex(Color color)
     {
-        if(_showTooltip != null) StopCoroutine(_showTooltip);
-        _showTooltip = StartCoroutine(CR_ShowTooltip(delayInSeconds));
+        int r = (int)(color.r * 255);
+        int g = (int)(color.g * 255);
+        int b = (int)(color.b * 255);
+        return r.ToString("X2") + g.ToString("X2") + b.ToString("X2");
     }
 
-
-    private IEnumerator CR_ShowTooltip(float delayInSeconds)
+    public void ShowTooltip()
     {
-        yield return new WaitForSeconds(delayInSeconds);
-        if (this == null) yield break;
-        ResizeToMatchText();
-        showNow = true;
+        // After 2 frames, showNow will be set to TRUE
+        // after that the frame count wont matter
+        if (showInFrames == -1)
+            showInFrames = 2;
     }
 
     public void HideTooltip()
     {
-        if (this == null) return;
-        if (_showTooltip != null) StopCoroutine(_showTooltip);
         showInFrames = -1;
         showNow = false;
         rect.anchoredPosition = new Vector2(Screen.currentResolution.width, Screen.currentResolution.height);
-    }
-
-    private void OnDestroy()
-    {
-        if (_showTooltip != null) StopCoroutine(_showTooltip);
     }
 }

@@ -2,6 +2,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+// TODO suit select rework
+
 public class SuitDisplay : MonoBehaviour
 {
     [SerializeField]
@@ -37,8 +39,8 @@ public class SuitDisplay : MonoBehaviour
         _suitImage.sprite = suit.sprite;
         _suitImage.color = suit.Color.Value;
         _text.text = $"~{suit.longName}" + "\n@" + _effectList.SuitEffectDescription(_suit);
-        _style.Apply(_text);
-        _style.Apply(_background);
+        //_style.Apply(_text);
+        //_style.Apply(_background);
     }
 
     private void SetDisplay()
@@ -46,7 +48,7 @@ public class SuitDisplay : MonoBehaviour
         _suit = null;
         _suitImage.enabled = false;
         _text.text = _blankText;
-        _style.Apply(_text);
-        _style.Apply(_background);
+        //_style.Apply(_text);
+        //_style.Apply(_background);
     }
 }

@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
+// TODO inky
+
 public class OutcomeSelector : MonoBehaviour
 {
     [SerializeField]
@@ -46,7 +48,7 @@ public class OutcomeSelector : MonoBehaviour
             var button = Instantiate(_buttonPrefab, transform);
             var text = button.GetComponentInChildren<TextMeshProUGUI>();
             var desc = outcome.Description;
-            _style.Apply(ref desc);
+            //_style.Apply(ref desc);
             text.text = desc;
             button.onClick.AddListener(() => outcome.Execute(Complete));
             button.onClick.AddListener(OptionSelected);

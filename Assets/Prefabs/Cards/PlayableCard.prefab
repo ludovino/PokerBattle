@@ -86,7 +86,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93665f417f295d74ea0e84f34c37ee15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cardDisplay: {fileID: 338335748771662561}
+  _spriteRenderer: {fileID: 8448465470200262924}
+  _image: {fileID: 0}
+  _spriteCollection: {fileID: 11400000, guid: cdf6f7a0fde2d8d4d84d57be12588589, type: 2}
   onPlay:
     m_PersistentCalls:
       m_Calls:
@@ -156,7 +158,6 @@ MonoBehaviour:
   simpleTooltipStyle: {fileID: 11400000, guid: b60656fad1664684d8fb0085c2c6ccbb, type: 2}
   infoLeft: PlayableCardDefaultTooltip
   infoRight: 
-  delayInSeconds: 0.3
 --- !u!61 &1749366785108308325
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -181,7 +182,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.6, y: 0.84}
   m_EdgeRadius: 0
 --- !u!1001 &1646728423001426621
 PrefabInstance:
@@ -247,6 +248,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2063275115407400454, guid: 349e7734d511e5648b2cd65705265c6e, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2063275115407400454, guid: 349e7734d511e5648b2cd65705265c6e, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2063275115407400454, guid: 349e7734d511e5648b2cd65705265c6e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -292,19 +301,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 349e7734d511e5648b2cd65705265c6e, type: 3}
---- !u!114 &338335748771662561 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1326407210457350236, guid: 349e7734d511e5648b2cd65705265c6e, type: 3}
-  m_PrefabInstance: {fileID: 1646728423001426621}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3961054c7db881d44b5bf40a80702478, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &754461855829251259 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2063275115407400454, guid: 349e7734d511e5648b2cd65705265c6e, type: 3}
+  m_PrefabInstance: {fileID: 1646728423001426621}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &8448465470200262924 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 7198054386931252145, guid: 349e7734d511e5648b2cd65705265c6e, type: 3}
   m_PrefabInstance: {fileID: 1646728423001426621}
   m_PrefabAsset: {fileID: 0}

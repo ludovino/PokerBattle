@@ -101,18 +101,34 @@ public class BattleController : MonoBehaviour
 
     public void Init()
     {
-        Init(player.entityData, (EnemyData)enemy.entityData, new List<RewardGenerator>() { _rewardGenerator });
+        Init(
+            player.entityData, 
+            (EnemyData)enemy.entityData, 
+            new List<RewardGenerator>() { _rewardGenerator },
+            false,
+            10,
+            null,
+            null);
     }
 
-    public void Init(EntityData playerData, EnemyData enemyData, List<RewardGenerator> rewards)
+    public void Init(
+        EntityData playerData, 
+        EnemyData enemyData, 
+        List<RewardGenerator> rewards,
+        bool isBoss,
+        int initialBlind,
+        UnityAction onWin,
+        UnityAction onLose)
     {
         _sm = new StateMachine(new StartBattle());
         _sm.RegisterTransition<StartBattle, PlayerTurn>();
         _sm.RegisterTransition<PlayerTurn, PlayerTurn>();
 
         _rewardScreen.Init(rewards);
+        playerWin.AddListener(onWin);
+        playerLose.AddListener(onLose);
 
-        startingBlind = GameController.GetBlind();
+        startingBlind = initialBlind;
 
         blind = startingBlind;
         player.Init(playerData, blind);
@@ -121,7 +137,7 @@ public class BattleController : MonoBehaviour
         _houseCutText.text = $"{houseCut * 100}% house cut";
         _blindText.text = $"{blind} blind";
         StartRound();
-        if(GameController.Instance?.currentAct?.IsBossLevel ?? false)
+        if(isBoss)
         {
             boss.Invoke();
         }
@@ -175,7 +191,7 @@ public class BattleController : MonoBehaviour
         }
         else
         {
-            eval.winningHand.rankingCards.ForEach(c =>  winner.entityData.EffectList.DoCardEffects<IOnWinHand>(c, c.playContext));
+            eval.winningHand.rankingCards.ForEach(c => c.DoWinEffects());
             TakeHouseCut();
             TakePot(winner);
         }
@@ -201,18 +217,14 @@ public class BattleController : MonoBehaviour
 
     public void Win()
     {
-        if (GameController.Instance.currentAct.IsBossLevel)
-        {
-            GameController.Instance.PlayerWins();
-            return;
-        }
-        GameController.Instance.GoToNextLevel();
+       playerWin.Invoke();
+       playerWin.RemoveAllListeners();
     }
 
     public void Lose()
     {
         playerLose.Invoke();
-        GameController.Instance.GameOver();
+        playerLose.RemoveAllListeners();
     }
 
     private void IncreaseBlinds()
@@ -236,7 +248,6 @@ public class BattleController : MonoBehaviour
         if (!played) return played;
         cardsPlayed++;
         card.Play(new CardEffectContext(this, active, idle, card, slotNumber));
-        active.entityData.EffectList.DoCardEffects<IOnPlay>(card, card.playContext);
         return played;
     }
     public bool CanEndTurn()
@@ -328,6 +339,7 @@ public class CardEffectContext
 
     public Entity Owner => _owner;
     public Entity Opponent => _opponent;
+    public CardScript OpposingCard => Opponent.fieldOfPlay[PlayIndex];
     public CardScript Card => _card;
     public BattleController Battle => _battle;
     public int PlayIndex  => _playIndex;

@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ed59579b70a2a04db53028828cfe9f4, type: 3}
   m_Name: Player
   m_EditorClassIdentifier: 
-  _deckString: AH;KH;4H;3H;7H;
+  _deckString: 'KH;5C;5H;5S;7H;Q-;Q-;AD;2D;3D;4C;
+
+    2-;3-;12D;13C;12S;0-;0S;1S;7C;'
   _chips: 50
   _drawBonus: 0
   _handList: {fileID: 11400000, guid: c07dc61121ce8d0438dbc38fc2d08e99, type: 2}
@@ -21,3 +23,4 @@ MonoBehaviour:
   _onChangeChips:
     m_PersistentCalls:
       m_Calls: []
+  _relics: []

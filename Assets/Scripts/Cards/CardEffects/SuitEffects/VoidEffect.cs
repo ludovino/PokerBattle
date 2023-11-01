@@ -1,10 +1,15 @@
 
-public class VoidEffect : SuitEffect, IAfterOpponentPlay
+public class VoidEffect : SuitEffect, IOnOpponentPlay
 {
-    public override void Execute(CardEffectContext context)
+    public void OnOpponentPlay(CardEffectContext context)
     {
-        var card = context.Opponent.fieldOfPlay[context.PlayIndex];
-        if (card.suit is null) return;
+        Trigger(context);
+    }
+
+    public override void Trigger(CardEffectContext context)
+    {
+        if (context.OpposingCard is null) return;
+        if (context.OpposingCard.suit is null) return;
         DoEffect(context);
         context.Opponent.fieldOfPlay[context.PlayIndex].ChangeSuit(null);
     }

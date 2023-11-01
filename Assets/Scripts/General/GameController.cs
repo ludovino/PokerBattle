@@ -103,7 +103,14 @@ public class GameController : MonoBehaviour
         _sm.MoveToState(new Lose());
         yield return null;
     }
-
+    public void WinBattle()
+    {
+        if(currentAct.IsBossLevel){
+            PlayerWins();
+            return;
+        }
+        GoToNextLevel();
+    }
     internal void PlayerWins()
     {
         scoreKeeper.EndGame();
@@ -195,7 +202,14 @@ public class GameController : MonoBehaviour
 
         void StartBattle()
         {
-            FindObjectOfType<BattleController>().Init(_player, _enemy, _rewardGenerator);
+            FindObjectOfType<BattleController>().Init(
+                _player, 
+                _enemy, 
+                _rewardGenerator, 
+                GameController.Instance.currentAct.IsBossLevel,
+                GameController.GetBlind(), 
+                () => GameController.Instance.WinBattle(),
+                () => GameController.Instance.GameOver());
         }
         public void OnExit()
         {}
