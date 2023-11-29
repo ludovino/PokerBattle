@@ -10,9 +10,9 @@ public class CardEffectList : ScriptableObject
     private List<CardEffect> _initialCardEffects;
     private List<CardEffect> _cardEffects;
 
-    public IEnumerable<CardEffect> ForCard(ICard card)
+    public IEnumerable<T> ForCard<T>(ICard card) where T : ICardEffect
     {
-        return _cardEffects.Where(c => c.Condition(card));
+        return _cardEffects.Cast<ICardEffect>().OfType<T>().Where(c => c.Condition(card));
     }
 
     public void OnEnable()

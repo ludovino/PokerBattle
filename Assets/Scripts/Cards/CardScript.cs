@@ -24,7 +24,6 @@ public class CardScript : MonoBehaviour, ICard
     private CardEffectContext _playContext;
     private EntityData _owner;
     private EntityData _holder;
-    private List<CardEffect> _cardEffects = new List<CardEffect>(32);
     public bool Draggable { get { return _draggable.enabled; } set { _draggable.enabled = value; } }
     public void SetCard(Card card, EntityData owner)
     {
@@ -34,7 +33,6 @@ public class CardScript : MonoBehaviour, ICard
         _owner = owner;
         _holder = owner;
         UpdateSprite();
-        UpdateEffects();
         SetTooltip();
     }
     public Card card => _tempCard ?? _card;
@@ -56,7 +54,6 @@ public class CardScript : MonoBehaviour, ICard
         _draggable = GetComponent<Draggable>();
         _tooltip = GetComponent<SimpleTooltip>();
         _cardBack = GetComponent<CardBackScript>();
-        _cardEffects = new List<CardEffect>(32);
     }
 
     void LateUpdate()
@@ -73,18 +70,6 @@ public class CardScript : MonoBehaviour, ICard
             UpdateSprite();
         }
     }
-
-    public void UpdateEffects(ICard card = null)
-    {
-        if (card is null) card = _tempCard;
-        foreach(var cardEffect in _cardEffects)
-        {
-            if (!cardEffect.Condition(card)) cardEffect.OnEffectRemove(_playContext);
-        }
-        _cardEffects.Clear();
-        _cardEffects.AddRange(_holder.EffectList.ForCard(card));
-    }
-
     public void Play(CardEffectContext context)
     {
         _playContext = context;
@@ -95,7 +80,6 @@ public class CardScript : MonoBehaviour, ICard
     public void Preview(CardEffectContext context)
     {
         _playContext = context;
-        DoPreviewEffects();
     }
 
     public void Draw(CardEffectContext context)
@@ -115,14 +99,12 @@ public class CardScript : MonoBehaviour, ICard
     public void ResetCard()
     {
         _tempCard.Set(_card);
-        UpdateEffects();
         UpdateSprite();
         SetTooltip();
     }
     public Sprite ResetCardAnimated()
     {
         _tempCard.Set(_card);
-        UpdateEffects();
         var sprite = _spriteCollection.Get(_tempCard);
         SetTooltip();
         return sprite;
@@ -133,7 +115,6 @@ public class CardScript : MonoBehaviour, ICard
         if (change == 0) return null;
         _tempCard.Change(change); 
         var sprite = _spriteCollection.Get(_tempCard);
-        UpdateEffects();
         return sprite;
     }
 
@@ -142,7 +123,6 @@ public class CardScript : MonoBehaviour, ICard
         if (suit == this.suit) return null;
         _tempCard.SetSuit(suit);
         var sprite = _spriteCollection.Get(_tempCard);
-        UpdateEffects();
         return sprite;
     }
     public void SetSprite(Sprite sprite)
@@ -174,75 +154,49 @@ public class CardScript : MonoBehaviour, ICard
         _tooltip.infoLeft = $"~{name}" +
             $"\n@{effectDescription}";
     }
+
+    private IEnumerable<T> GetEffects<T>() where T : ICardEffect => _holder.EffectList.ForCard<T>(_tempCard);
+
     public void DoWinEffects()
     {
-        foreach (var effect in _cardEffects)
+        foreach (var effect in GetEffects<IOnWinHand>())
         {
-            if (effect is IOnWinHand e)
-            {
-                e.OnWinHand(_playContext);
-            }
+            effect.OnWinHand(_playContext);
         }
     }
     public void DoPlayEffects()
     {
-        foreach (var effect in _cardEffects)
+        foreach (var effect in GetEffects<IOnPlay>())
         {
-            if (effect is IOnPlay e)
-            {
-                e.OnPlay(_playContext);
-            }
+            effect.OnPlay(_playContext);
         }
     }
     public void DoDrawEffects()
     {
-        foreach (var effect in _cardEffects)
+        foreach (var effect in GetEffects<IOnDraw>())
         {
-            if (effect is IOnDraw e)
-            {
-                e.OnDraw(_playContext);
-            }
+            effect .OnDraw(_playContext);
         }
     }
     public void DoPlayerTurnEffects()
     {
-        foreach (var effect in _cardEffects)
+        foreach (var effect in GetEffects<IOnPlayerTurn>())
         {
-            if (effect is IOnPlayerTurn e)
-            {
-                e.OnPlayerTurn(_playContext);
-            }
+            effect.OnPlayerTurn(_playContext);
         }
     }
     public void DoOpponentTurnEffects()
     {
-        foreach (var effect in _cardEffects)
+        foreach (var effect in GetEffects<IOnOpponentTurn>())
         {
-            if (effect is IOnOpponentTurn e)
-            {
-                e.OnOpponentTurn(_playContext);
-            }
+            effect.OnOpponentTurn(_playContext);
         }
     }
     public void DoOpponentPlayEffects()
     {
-        foreach (var effect in _cardEffects)
+        foreach (var effect in GetEffects<IOnOpponentPlay>())
         {
-            if (effect is IOnOpponentPlay e)
-            {
-                e.OnOpponentPlay(_playContext);
-            }
-        }
-    }
-
-    public void DoPreviewEffects()
-    {
-        foreach (var effect in _cardEffects)
-        {
-            if (effect is IOnHoverEnter e)
-            {
-                _previewEffects.Add(e.OnHoverEnter(_playContext));
-            }
+            effect.OnOpponentPlay(_playContext);
         }
     }
 
