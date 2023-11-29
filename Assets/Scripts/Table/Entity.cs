@@ -106,7 +106,7 @@ public class Entity : MonoBehaviour
         var onStartCards = fieldOfPlay.Where(c => c != null);
         foreach (var card in onStartCards)
         {
-            card.DoOpponentPlayEffects();
+            card.DoOpponentTurnEffects();
         }
     }
 

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CoroutineQueue : MonoBehaviour
@@ -21,50 +22,60 @@ public class CoroutineQueue : MonoBehaviour
         private set => _instance = value;  
     }
     private Queue<IEnumerator> _queue;
-    private Coroutine _crHandler;
+    private Coroutine _executing;
+
     private void Awake()
     {
         _queue = new Queue<IEnumerator>();
     }
-    private void Start()
+
+    private void Update() 
     {
-        _crHandler = StartCoroutine(CR_Handler());
+        CheckQueue();
     }
-    private IEnumerator CR_Handler()
+
+    private IEnumerator CR_Execute(IEnumerator coroutine)
     {
-        while (true)
+        _executing = StartCoroutine(coroutine);
+        yield return _executing;
+        _executing = null;
+    }
+
+    private void CheckQueue()
+    {
+        if(_executing != null)
         {
-            if(_queue.TryDequeue(out var next))
-            {
-                yield return StartCoroutine(next);
-            }
-            yield return null;
+            return;
+        }
+        if(_queue.TryDequeue(out var next))
+        {
+            StartCoroutine(CR_Execute(next));
         }
     }
 
     public static void Defer(IEnumerator coroutine)
     {
         Instance._queue.Enqueue(coroutine);
+        Instance.CheckQueue();
     }
 
     public static void ClearQueue(bool stopCurrent)
     {
         Instance.Clear(stopCurrent);
     }
+
     private void Clear(bool stopCurrent)
     {
         _queue.Clear();
         if (stopCurrent)
         {
-            StopCoroutine(_crHandler);
-            _crHandler = StartCoroutine(CR_Handler());
+            StopCoroutine(_executing);
         }
     }
 
     private void OnDestroy()
     {
-        _queue.Clear();
-        StopCoroutine(_crHandler);
+        Clear(true);
     }
 
     private class Parallel

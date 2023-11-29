@@ -45,10 +45,10 @@ public class BattleController : MonoBehaviour
 
     private void Awake()
     {
-        onEvaluate = onEvaluate ?? new OnEvaluate();
-        playerWin = playerWin ?? new UnityEvent();
-        playerLose = playerLose ?? new UnityEvent();
-        onChangePot = onChangePot ?? new OnChangeChips();
+        onEvaluate ??= new OnEvaluate();
+        playerWin ??= new UnityEvent();
+        playerLose ??= new UnityEvent();
+        onChangePot ??= new OnChangeChips();
     }
     void ChangePot(int change)
     {

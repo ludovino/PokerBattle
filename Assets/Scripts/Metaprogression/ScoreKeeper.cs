@@ -52,7 +52,9 @@ public class ScoreKeeper : ScriptableObject, IOnInit
     {
         completedActs.Add(act);
     }
-
+    private void OnEnable() {
+        Init();
+    }
     public void Init()
     {
         var hands = Resources.LoadAll<PokerHand>("");
