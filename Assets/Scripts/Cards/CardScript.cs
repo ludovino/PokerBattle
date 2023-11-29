@@ -1,4 +1,5 @@
 using Assets.Scripts.Cards;
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,6 +17,7 @@ public class CardScript : MonoBehaviour, ICard
     public UnityEvent onPlay;
     public UnityEvent onDraw;
     public UnityEvent onDiscard;
+    [SerializeField]
     private Card _card;
     private Card _tempCard;
     private Draggable _draggable;
@@ -60,6 +62,16 @@ public class CardScript : MonoBehaviour, ICard
     void LateUpdate()
     {
         if (_cardBack && !_cardBack.faceUp) _tooltip.HideTooltip();
+    }
+
+    private void Start() {
+        if(_tempCard == null){
+            _tempCard = _card;
+        }
+
+        if(card != null){
+            UpdateSprite();
+        }
     }
 
     public void UpdateEffects(ICard card = null)
@@ -107,38 +119,41 @@ public class CardScript : MonoBehaviour, ICard
         UpdateSprite();
         SetTooltip();
     }
-    public IEnumerator ResetCardAnimated()
+    public Sprite ResetCardAnimated()
     {
         _tempCard.Set(_card);
         UpdateEffects();
         var sprite = _spriteCollection.Get(_tempCard);
         SetTooltip();
-        return CR_UpdateSprite(sprite);
+        return sprite;
     }
 
-    public IEnumerator ChangeValue(int change)
+    public Sprite ChangeValue(int change)
     {
         if (change == 0) return null;
         _tempCard.Change(change); 
         var sprite = _spriteCollection.Get(_tempCard);
         UpdateEffects();
-        return CR_UpdateSprite(sprite);
+        return sprite;
     }
 
-    public IEnumerator ChangeSuit(Suit suit)
+    public Sprite ChangeSuit(Suit suit)
     {
         if (suit == this.suit) return null;
         _tempCard.SetSuit(suit);
         var sprite = _spriteCollection.Get(_tempCard);
         UpdateEffects();
-        return CR_UpdateSprite(sprite);
+        return sprite;
     }
-
-
-    private IEnumerator CR_UpdateSprite(Sprite sprite)
+    public void SetSprite(Sprite sprite)
     {
         UpdateSprite(sprite);
-        yield return null;
+    }
+    public void SetSprite(Sprite sprite, Color hit, float fade)
+    {
+        UpdateSprite(sprite);
+        if(_spriteRenderer) _spriteRenderer.DOBlendableColor(hit, fade).From().SetEase(Ease.InCirc);
+        if(_image) _image.DOBlendableColor(hit, fade).From().SetEase(Ease.InCirc);
     }
 
     private void UpdateSprite(Sprite sprite = null)

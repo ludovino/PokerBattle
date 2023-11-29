@@ -8,7 +8,7 @@
     public override void Trigger(CardEffectContext context)
     {
         if (context.Card.valueDifference >= 0) return;
-        DoEffect(context);
-        context.Card.ResetCard();
+        var sprite = context.Card.ResetCardAnimated();
+        CoroutineQueue.Defer(() => context.Card.SetSprite(sprite));
     }
 }

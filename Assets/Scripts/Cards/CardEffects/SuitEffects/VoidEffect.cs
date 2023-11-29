@@ -10,7 +10,8 @@ public class VoidEffect : SuitEffect, IOnOpponentPlay
     {
         if (context.OpposingCard is null) return;
         if (context.OpposingCard.suit is null) return;
-        DoEffect(context);
-        context.Opponent.fieldOfPlay[context.PlayIndex].ChangeSuit(null);
+        var opponent = context.Opponent.fieldOfPlay[context.PlayIndex];
+        var sprite = opponent.ChangeSuit(null);
+        CoroutineQueue.Defer(() => opponent.SetSprite(sprite));
     }
 }

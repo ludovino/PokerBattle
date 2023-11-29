@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
@@ -59,6 +60,17 @@ public class CoroutineQueue : MonoBehaviour
         Instance.CheckQueue();
     }
 
+    public static void Defer(Action action)
+    {
+        Defer(Instance.DeferAction_CR(action));
+    }
+
+    public IEnumerator DeferAction_CR(Action action)
+    {
+        action();
+        yield return null;
+    }
+
     public static void ClearQueue(bool stopCurrent)
     {
         Instance.Clear(stopCurrent);
@@ -67,7 +79,7 @@ public class CoroutineQueue : MonoBehaviour
     private void Clear(bool stopCurrent)
     {
         _queue.Clear();
-        if (stopCurrent)
+        if (stopCurrent && _executing != null)
         {
             StopCoroutine(_executing);
         }

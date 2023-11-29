@@ -79,29 +79,7 @@ MonoBehaviour:
   _canvasPips: []
   _regularFont: {fileID: 11400000, guid: a13df58c05172bd48b0b61b4083724f2, type: 2}
   _narrowFont: {fileID: 11400000, guid: 6116549f1fae4544b817922df84f800e, type: 2}
-  _valueAnimations:
-  - {fileID: 7400000, guid: d59fe708f59b27f4d96efa183bd8705d, type: 2}
-  - {fileID: 7400000, guid: 8b73b0c28dd4dcb438bdd3c763ea8057, type: 2}
-  - {fileID: 7400000, guid: b84928e270e6cf54d8fd2fe8e68d3b45, type: 2}
-  - {fileID: 7400000, guid: f58a66fa022cbb24893e1eab28ab1cde, type: 2}
-  - {fileID: 7400000, guid: 6628e89a56530f0469babcb1b1ce1307, type: 2}
-  - {fileID: 7400000, guid: bf4d1078a742aec4e9153fbac070bfe9, type: 2}
-  - {fileID: 7400000, guid: 6bdb3d30f542c054eb06dc23486c577f, type: 2}
-  - {fileID: 7400000, guid: dc812609680b08e4ca50517930475da5, type: 2}
-  - {fileID: 7400000, guid: dd3457cd70ee66e47ae7ef225f81e81c, type: 2}
-  - {fileID: 7400000, guid: a08a113a10ecd3e4086de922ec1e3a2d, type: 2}
-  - {fileID: 7400000, guid: a0ab2d6aee4208741a714b58a9423d25, type: 2}
-  - {fileID: 7400000, guid: e450439c73cde7148b14518835373863, type: 2}
-  - {fileID: 7400000, guid: ff5a0f2fe93eb194a9db4b4d523d5fc7, type: 2}
-  - {fileID: 7400000, guid: 86fd88ba2b9f1c444bddad9d4fd58b39, type: 2}
-  - {fileID: 7400000, guid: 3115a05c060b9ad498d617d293fc2a5b, type: 2}
-  - {fileID: 7400000, guid: 075ebd9b6be1d4d4b893390ad0cc39b0, type: 2}
-  - {fileID: 7400000, guid: 6a66c804235910d4d80c3c8ff8a3d062, type: 2}
-  - {fileID: 7400000, guid: 8802ef7e9035b5d4bbac236b90ac9a15, type: 2}
-  - {fileID: 7400000, guid: 176d0fbe636d5d840bdb1b1e7deabf59, type: 2}
-  - {fileID: 7400000, guid: 176266ea02c6b4a45bf995eb66326580, type: 2}
-  - {fileID: 7400000, guid: b5084cda206085348bfa21ab46e25710, type: 2}
-  - {fileID: 7400000, guid: 2d2e61c1fd4c9e049b30a37344b41ff6, type: 2}
+  _valueAnimations: []
   _faceSprite: {fileID: 0}
   _canvasFace: {fileID: 0}
   _spareAnimations: []
@@ -202,7 +180,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -1
-  m_Sprite: {fileID: 21300000, guid: bea418cb1ffd128459dbc1a21ee6f44a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 38f208100ff38774da6372b1697bb5e7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

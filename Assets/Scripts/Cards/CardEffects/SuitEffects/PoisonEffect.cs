@@ -14,7 +14,7 @@ public class PoisonEffect : SuitEffect, IOnOpponentTurn
     {
         var enemyCard = context.OpposingCard;
         if (enemyCard is null) return;
-        DoEffect(context);
-        enemyCard.ChangeValue(-damage);
+        var sprite = enemyCard.ChangeValue(-damage);
+        CoroutineQueue.Defer(() => enemyCard.SetSprite(sprite));
     }
 }
